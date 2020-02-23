@@ -1,0 +1,24 @@
+{#
+    List taxonomy terms
+    -------------------------------
+
+    Example:
+    -------------------------------
+    <h1>Categories</h1>
+    <ul>
+        <li><a href="/categories/web-development">Web Development</a>
+        <li><a href="/categories/unix">Unix</a>
+    </ul>
+#}
+{% extends 'layouts/master' %}
+
+{% block title %}{{ taxonomy.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ taxonomy.name }}</h1>
+    <ul>
+        {% for term in taxonomy.terms %}
+            <li><a href="{{ skimpy.url(term.uri) }}">{{ term.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

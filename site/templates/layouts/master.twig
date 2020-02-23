@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+            <title>
+                {% block title %}
+                    {{ entry.seoTitle ?? skimpy.site.title }}
+                {% endblock title %}
+            </title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            {% block metaDescription %}
+            {% endblock metaDescription %}
+            <meta name="author" content="{{ skimpy.site.author }}">
+        {% endblock head %}
+    </head>
+    <body>
+        <header>
+            {% block header %}
+                <p><a href="{{ skimpy.url }}">{{ skimpy.site.title }}</a></p>
+                <p>{{ skimpy.site.tagline }}</p>
+            {% endblock header %}
+        </header>
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <footer>
+            {% block footer %}
+            {% endblock footer %}
+        </footer>
+        {% block scripts %}
+        {% endblock scripts %}
+    </body>
+</html>

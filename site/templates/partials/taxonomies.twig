@@ -1,0 +1,20 @@
+{% if entry.hasTaxonomy('categories') or entry.hasTaxonomy('tags') %}
+    <div class="taxonomies">
+        {% if entry.hasTaxonomy('categories') %}
+            <span class="categories">
+                Filed Under:
+                {% for cat in entry.categories %}
+                    <a href="{{ skimpy.url(cat.uri) }}">{{ cat.name }}</a>{{ loop.last ? '' : ',' }}
+                {% endfor %}
+            </span> <!-- .categories -->
+        {% endif %}
+        {% if entry.hasTaxonomy('tags') %}
+            <span class="tags">
+                Tagged With:
+                {% for tag in entry.tags %}
+                    <a href="{{ skimpy.url(tag.uri) }}">{{ tag.name }}</a>{{ loop.last ? '' : ',' }}
+                {% endfor %}
+            </span> <!-- .tags -->
+        {% endif %}
+    </div> <!-- .taxonomies -->
+{% endif %}
