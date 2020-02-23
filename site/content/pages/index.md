@@ -1,1 +1,0 @@
-The presence of this file indicates that your-site.com/pages/ is NOT a 404 and that it should display an index of all files inside this directory.

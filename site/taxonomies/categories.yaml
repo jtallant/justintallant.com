@@ -4,8 +4,5 @@ plural_name: Categories # Used in HTML
 has_public_terms_route: true
 terms:
   -
-    name: Web Development
-    slug: web-development
-  -
-    name: Unix
-    slug: unix
+    name: Ideas I Love
+    slug: ideas-i-love

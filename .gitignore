@@ -1,5 +1,7 @@
 vendor/
 storage/
+node_modules/
 .env
 .seeded
 composer.lock
+package-lock.json

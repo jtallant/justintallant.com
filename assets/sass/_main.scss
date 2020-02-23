@@ -1,0 +1,213 @@
+html {
+    background: #fff;
+    color: #333;
+    padding-top: 30px;
+    padding-bottom: 120px;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 16px;
+}
+
+body {
+    max-width: 600px;
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 100%;
+    font-size: 16px;
+}
+
+strong {
+    font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+h5,
+h6,
+ul,
+ol,
+img,
+p {
+    margin-bottom: 20px;
+}
+
+p {
+    line-height: 150%;
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 20px;
+    color: $primary;
+    line-height: 100%;
+    font-weight: 400;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 34px;
+    margin-top: 60px;
+}
+
+h4 {
+    font-size: 28px;
+}
+
+a {
+    color: $linkPrimary;
+    text-decoration: none;
+
+    &:hover {
+        color: $linkHover;
+    }
+}
+
+b {
+    font-weight: 700;
+}
+
+ol,
+ul {
+    padding-left: 20px;
+}
+
+ol {
+    list-style: decimal;
+}
+
+ul {
+    list-style: disc;
+}
+
+li {
+    line-height: 150%;
+}
+
+input {
+    padding: 8px;
+}
+
+img,
+embed,
+iframe {
+    max-width: 100%;
+}
+
+code,
+pre {
+    background: #EFEFEF;
+    padding: 2px 5px;
+    color: #333;
+    line-height: 150%;
+}
+
+pre {
+    overflow-x: scroll;
+}
+
+hr {
+    border: 1px solid #DDD;
+}
+
+table {
+    margin-top: 50px;
+    margin-bottom: 30px;
+
+    caption {
+        color: $primary;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    td,
+    th {
+        border: 1px solid #000;
+        padding: 8px;
+        line-height: 140%;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-light {
+    color: $textLight;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.hide {
+    display: none !important;
+}
+
+.btn {
+    background: $primary;
+    color: $onPrimary;
+    margin-bottom: 20px;
+    padding: 8px 10px;
+    text-align: center;
+    border-radius: 5px;
+    display: inline-block;
+
+    &:hover {
+        background: $secondary;
+        color: $onSecondary;
+    }
+}
+
+.btn-md {
+    font-size: 22px;
+    padding: 10px 12px;
+}
+
+#site-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#site-title {
+    font-size: 52px;
+    margin-bottom: 0;
+
+    a {
+        color: $primary;
+        &:hover {
+            color: $primary;
+        }
+    }
+}
+
+#site-image {
+    border-radius: 50%;
+    width: 200px;
+    margin-bottom: 0;
+}
+
+#site-tagline {
+    font-size: 32px;
+}
+
+.article-list {
+    h1 {
+        line-height: 120%;
+        font-size: 32px;
+    }
+}

@@ -9,6 +9,7 @@
                     {{ entry.seoTitle ?? skimpy.site.title }}
                 {% endblock title %}
             </title>
+            <link rel="stylesheet" type="text/css" href="/css/site.css" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             {% block metaDescription %}
             {% endblock metaDescription %}
@@ -16,17 +17,18 @@
         {% endblock head %}
     </head>
     <body>
-        <header>
+        <header id="site-header">
             {% block header %}
-                <p><a href="{{ skimpy.url }}">{{ skimpy.site.title }}</a></p>
-                <p>{{ skimpy.site.tagline }}</p>
+                <p id="site-title"><a href="{{ skimpy.url }}">{{ skimpy.site.title }}</a></p>
+                <p id="site-tagline">{{ skimpy.site.tagline }}</p>
+                <img id="site-image" src="/img/justin-and-lars.jpg" alt="Justin and Lars" />
             {% endblock header %}
         </header>
         <main>
             {% block content %}
             {% endblock content %}
         </main>
-        <footer>
+        <footer id="site-footer">
             {% block footer %}
             {% endblock footer %}
         </footer>

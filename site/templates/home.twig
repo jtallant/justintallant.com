@@ -11,10 +11,32 @@
 {% block header %}
     <h1 id="site-title"><a href="{{ skimpy.url }}">{{ skimpy.site.title }}</a></h1>
     <p id="site-tagline">{{ skimpy.site.tagline }}</p>
+    <img id="site-image" src="/img/justin-and-lars.jpg" alt="Justin and Lars" />
 {% endblock header %}
 
 {% block content %}
-    {% for entry in entries %}
-        {% include 'partials/article' %}
-    {% endfor %}
+    <p>
+        My name is Maximus Decimus Meridius, Commander of the Armies of the North, General of the
+        Felix Legions, loyal servant to the true emperor, Marcus Aurelius. Father to a murdered...
+    </p>
+
+    <p>
+        Wait! Wait!! Unfortunately (or fortunately?) this isn't Gladiator and I'm not Russell Crowe!
+    </p>
+
+    <p>
+        I'm <a href="https://twitter.com/jtallant" target="_blank">@jtallant</a>, a software engineer and entrepreneur.
+    </p>
+
+    <p>
+        I like to <a href="{{ skimpy.url('pages/projects') }}">build things</a> and write about <a href="{{ skimpy.url('categories/ideas-i-love') }}">ideas I love</a> from books that I have
+        read or general observations on life.
+    </p>
+
+    <p>
+        You may be wondering <a href="{{ skimpy.url('pages/projects') }}">how I'm an entrepreneur</a> exactly.
+        And I get it, I would wonder too. I feel like people throw that around a lot. Well I can certainly tell
+        you I have not reached the level of entrepreneurial success that I would like to be at but I have done a few things and
+        I am excited about the future.
+    </p>
 {% endblock content %}
