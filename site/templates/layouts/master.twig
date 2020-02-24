@@ -14,6 +14,14 @@
             {% block metaDescription %}
             {% endblock metaDescription %}
             <meta name="author" content="{{ skimpy.site.author }}">
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-21284240-1"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'UA-21284240-1');
+            </script>
         {% endblock head %}
     </head>
     <body>
