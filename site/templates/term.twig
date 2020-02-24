@@ -18,8 +18,10 @@
 {% block title %}{{ term.name }}{% endblock %}
 
 {% block content %}
-    <h1>{{ term.name }}</h1>
-    {% for entry in term.entries %}
-        {% include 'partials/article' %}
-    {% endfor %}
+    <h1 class="category-title">{{ term.name }}</h1>
+    <div class="category-articles">
+        {% for entry in term.entries %}
+            {% include 'partials/article' %}
+        {% endfor %}
+    </div>
 {% endblock content %}

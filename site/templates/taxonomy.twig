@@ -16,7 +16,7 @@
 
 {% block content %}
     <h1>{{ taxonomy.name }}</h1>
-    <ul>
+    <ul class="categories-list">
         {% for term in taxonomy.terms %}
             <li><a href="{{ skimpy.url(term.uri) }}">{{ term.name }}</a></li>
         {% endfor %}

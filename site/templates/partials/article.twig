@@ -4,7 +4,7 @@
         <p>Published: <time pubdate="pubdate">{{ entry.date }}</time></p>
     </header>
     <div class="excerpt">
-        <p>{{ entry.excerpt }}&hellip;</p>
+        <p>{{ entry.excerpt }}&hellip; <a href="{{ skimpy.url(entry.uri) }}">[Read More]</a></p>
         <p>{{ entry.meta('dog') }}
     </div> <!-- .excerpt -->
     <footer>

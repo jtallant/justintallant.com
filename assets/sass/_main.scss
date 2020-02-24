@@ -178,6 +178,12 @@ table {
     padding: 10px 12px;
 }
 
+article {
+    h1 {
+        line-height: 120%;
+    }
+}
+
 #site-header {
     text-align: center;
     margin-bottom: 40px;
@@ -186,6 +192,7 @@ table {
 #site-title {
     font-size: 52px;
     margin-bottom: 0;
+    line-height: 100%;
 
     a {
         color: $primary;
@@ -205,9 +212,39 @@ table {
     font-size: 32px;
 }
 
+#site-nav {
+    text-align: center;
+    margin-bottom: 30px;
+
+    a {
+        display: inline-block;
+        padding: 4px 8px;
+        text-transform: uppercase;
+    }
+}
+
 .article-list {
     h1 {
         line-height: 120%;
         font-size: 32px;
     }
+}
+
+.category-articles {
+    h1 {
+        font-size: 28px;
+    }
+
+    article {
+        padding-bottom: 30px;
+        border-bottom: 1px solid $textLight;
+
+        h1 {
+            margin-bottom: 40px;
+        }
+    }
+}
+
+.category-title {
+    margin-bottom: 60px;
 }

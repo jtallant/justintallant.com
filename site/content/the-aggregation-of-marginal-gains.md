@@ -17,13 +17,13 @@ Maybe just doing something for 10 or 15 minutes on a daily basis is more importa
 
 Well when you put it like that you can lose the "maybe", of course it's more productive to do something than nothing. And it sounds so damn obvious. But that ignorant mentality has held me back for so many years of my life it's **unbelievable**. Something so simple as just "shut up and put 10 minutes in and stop worrying about it being good enough" has become so powerful for me.
 
-I'm still have days where I don't even put my 10 minutes in on certain things, but like James Clear says in Atomic Habits, I try to "never miss twice". If I don't get my 10 minutes in toward something I really want and I have clearly defined why I want it, I don't miss my 10 two days in a row. And if I do, I reduce it to 5 or even 2 minutes. Who doesn't have 2 minutes? And if you can't give it two minutes, you should think long and hard about the story you told yourself about what you're working toward and why.
+I still have days where I don't even put my 10 minutes in on certain things, but like James Clear says in <a href="https://jamesclear.com/atomic-habits" target="_blank">Atomic Habits</a>, I try to "never miss twice". If I don't get my 10 minutes in toward something I really want and I have clearly defined why I want it, I don't miss my 10 two days in a row. And if I do, I reduce it to 5 or even 2 minutes. Who doesn't have 2 minutes? And if you can't give it two minutes, you should think long and hard about the story you told yourself about what you're working toward and why.
 
 Consistency and sustainably is what really gets you somewhere. I am amazed at how much those small blocks of time add up to be something big. In the past I'd still be at square one because I'd be hung up on some unrealistic idea of putting these huge blocks of time in when life would always get in the way.
 
 Small gains aggregate into something massive over a long enough period of time.
 
-Thank you James Clear for writing such a transformative book!
+Thank you James Clear for writing such <a href="https://jamesclear.com/atomic-habits" target="_blank">a transformative book!</a>
 
 
 
