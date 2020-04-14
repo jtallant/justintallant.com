@@ -35,7 +35,6 @@ Notice that I create composer scripts to name the commands just so it's more cle
 2. Create phpspec-coverage.yml
 3. Define composer scripts
 4. Configure circleci
-5. Make sure circle-ci is using a "user" key so it can access all repositories in your github account
 5. Make sure you circle-ci docker image includes xdebug
 
 ## composer packages
