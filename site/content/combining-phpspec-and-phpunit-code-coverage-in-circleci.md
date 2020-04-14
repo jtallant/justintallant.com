@@ -1,4 +1,5 @@
 categories: [Programming]
+title: Combining PHPSpec and PHPUnit Code Coverage in CircleCI
 ---
 
 I really like using [PHPSpec](http://www.phpspec.net/en/stable/) for unit testing but for integration tests we need to use PHPUnit or something similar. I prefer having code coverage combined for my unit and integration tests but to accomplish this we have to combine our phpunit coverage with our phpspec coverage. Luckily we can accomplish this with the [phpcov](https://github.com/sebastianbergmann/phpcov) package.
