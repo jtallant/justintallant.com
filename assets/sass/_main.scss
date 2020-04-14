@@ -4,7 +4,7 @@ html {
     padding-top: 30px;
     padding-bottom: 120px;
     font-family: "Trebuchet MS", sans-serif;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 body {
@@ -12,7 +12,7 @@ body {
     padding: 0 30px;
     margin: 0 auto;
     line-height: 100%;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 strong {
@@ -240,6 +240,7 @@ article {
 
     article {
         padding-bottom: 30px;
+        margin-bottom: 40px;
         border-bottom: 1px solid $textLight;
 
         h1 {
