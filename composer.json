@@ -1,0 +1,29 @@
+{
+    "name": "skimpy/cms",
+    "description": "Skimpy CMS",
+    "homepage": "https://github.com/skimpy/cms",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Justin Tallant",
+            "email": "jtallant07@gmail.com",
+            "homepage": "http://justintallant.com"
+        },
+        {
+            "name": "Casey McLaughlin",
+            "homepage": "https://github.com/caseyamcl"
+        }
+    ],
+    "keywords": [
+        "cms",
+        "blog",
+        "flat file cms",
+        "flat file blog",
+        "skimpy"
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "skimpy/engine": "^0.2.1"
+    },
+    "minimum-stability": "dev"
+}

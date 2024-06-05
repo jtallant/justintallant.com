@@ -1,0 +1,13 @@
+<article>
+    <header>
+        <h1><a href="{{ skimpy.url(entry.uri) }}">{{ entry.title }}</a></h1>
+        <p>Published: <time pubdate="pubdate">{{ entry.date }}</time></p>
+    </header>
+    <div class="excerpt">
+        <p>{{ entry.excerpt }}&hellip;</p>
+        <p>{{ entry.meta('dog') }}
+    </div> <!-- .excerpt -->
+    <footer>
+        {% include 'partials/taxonomies' %}
+    </footer>
+</article>

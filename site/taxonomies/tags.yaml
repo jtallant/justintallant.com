@@ -1,0 +1,11 @@
+# The slug is the name of the file w/o extension
+name: Tag
+plural_name: Tags
+has_public_terms_route: true
+terms:
+  -
+    name: Tag 1
+    slug: tag-1
+  -
+    name: Tag 2
+    slug: tag-2

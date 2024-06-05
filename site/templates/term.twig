@@ -1,0 +1,25 @@
+{#
+    List entries assigned to a particular Term
+    -------------------------------
+    Taxonomy = categories
+    Term = Web Development
+
+    Example:
+    -------------------------------
+    # <h1>Web Development</h1>
+    #
+    # <a href="#">Some Web Dev Post</a>
+    # <a href="#">Some Web Dev Post</a>
+    # <a href="#">Some Web Dev Post</a>
+#}
+
+{% extends 'layouts/master' %}
+
+{% block title %}{{ term.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ term.name }}</h1>
+    {% for entry in term.entries %}
+        {% include 'partials/article' %}
+    {% endfor %}
+{% endblock content %}

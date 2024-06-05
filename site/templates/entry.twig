@@ -1,0 +1,22 @@
+{% extends 'layouts/master' %}
+
+{% block metaDescription %}
+    {% if entry.description %}
+        <meta name="description" content="{{ entry.description }}">
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <header>
+            <h1>{{ entry.title }}</h1>
+            <p>Published: <time pubdate="pubdate">{{ entry.date }}</time></p>
+        </header>
+
+        {{ entry.content | raw }}
+
+        <footer>
+            {% include 'partials/taxonomies' %}
+        </footer>
+    </article>
+{% endblock content %}

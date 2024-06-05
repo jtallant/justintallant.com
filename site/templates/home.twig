@@ -1,0 +1,28 @@
+{% extends 'layouts/master' %}
+
+{% block title %}
+    {{ skimpy.site.title }} - {{ skimpy.site.tagline }}
+{% endblock title %}
+
+{% block styles %}
+    <style>
+        .justin-photo {
+            display:none;
+        }
+    </style>
+{% endblock styles %}
+
+{% block metaDescription %}
+    <meta name="description" content="{{ skimpy.site.meta_description }}">
+{% endblock metaDescription %}
+
+{% block content %}
+    <div class="mt-20 rounded-full overflow-hidden h-24 w-24 bg-gray-300"></div>
+    <p class="mt-10 font-bold text-zinc-400 tracking-wider">Justin Tallant</p>
+    <h1 class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">Software engineer with expertise in Laravel, Vue.js, and AI Agent Development.</h1>
+    <p class="text-zinc>{{ skimpy.site.tagline }}</p>
+    {% include 'partials/socials.twig' %}
+    {% for entry in entries %}
+        {% include 'partials/article' %}
+    {% endfor %}
+{% endblock content %}
