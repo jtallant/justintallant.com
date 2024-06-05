@@ -352,6 +352,7 @@ html {
 body {
   background: #FFF;
   padding: 24px 30px 80px;
+  min-height: 100vh;
 }
 
 .wrap {
@@ -453,6 +454,61 @@ main {
 #home #home-photos img:last-child {
   display: none;
 }
+#home .work-section {
+  border-radius: 20px;
+  padding: 10px 20px 0;
+  border: 1px solid #EEE;
+}
+#home .work-section h2 {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  color: #000;
+}
+#home .work-section h2 svg, #home .work-section h2 span {
+  display: block;
+}
+#home .work-section h2 svg {
+  width: 24px;
+}
+#home .work-section svg {
+  stroke: rgb(193, 193, 193);
+  fill: #EEE;
+}
+#home .work-section .company-img-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #EEE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#home .work-section img,
+#home .work-section .company-img-placeholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #db97d1;
+}
+#home .work-section .work-list-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+#home .work-section .work-list-item .company-name {
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+#home .work-section .work-list-item .company-info {
+  flex-grow: 1;
+}
+#home .work-section .work-list-item .company-role,
+#home .work-section .work-list-item .company-dates {
+  color: rgb(153, 153, 161);
+}
 
 .socials a {
   margin-top: 24px;
@@ -478,12 +534,34 @@ main {
 
 .article {
   max-width: 600px;
-  margin: 60px auto 0;
-  font-size: 14px;
+  margin-top: 80px;
+  font-size: 16px;
+}
+.article .time {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.article time {
+  color: #b2b2b2;
+  display: block;
+  margin-bottom: 15px;
 }
 .article h1 {
   margin-top: 10px;
   font-size: 16px;
+}
+.article h1 a {
+  color: #000;
+}
+.article .excerpt {
+  line-height: 1.75;
+}
+.article a {
+  color: #57cccc;
+}
+.article a:hover {
+  color: #38b8b8;
 }
 
 .pipe {
@@ -509,17 +587,27 @@ html.dark #site-header svg {
     font-size: 46px;
   }
 }
-@media (min-width: 960px) {
+@media (min-width: 1040px) {
   #home-bottom {
     display: flex;
     flex-wrap: wrap;
   }
   #home-bottom .articles {
-    flex: 2 1 66%;
-    padding-right: 60px;
+    flex: 2 1 60%;
+    box-sizing: border-box;
+    padding-right: 40px;
   }
   #home-bottom .sidebar {
-    flex: 1 1 33%;
+    flex: 1 1 40%;
+  }
+  #home-bottom .work-section .work-list-item {
+    gap: 15px;
+  }
+  #home-bottom .work-section .company-info {
+    font-size: 12px;
+  }
+  #home-bottom .work-section .company-dates {
+    font-size: 12px;
   }
 }
 @media (min-width: 1400px) {

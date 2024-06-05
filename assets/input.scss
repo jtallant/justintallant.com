@@ -5,6 +5,8 @@ $bgHtml: #EEE;
 $bgBody: #FFF;
 $textPrimary: #646464;
 $textSecondary: #000;
+$teal: #57cccc;
+$lightGrey: #b2b2b2;
 
 $darkBgHtml: #000;
 $darkBgBody: #333;
@@ -26,6 +28,7 @@ html {
 body {
     background: $bgBody;
     padding: 24px 30px 80px;
+    min-height: 100vh;
 }
 
 .wrap {
@@ -55,7 +58,7 @@ body {
         display: flex;
         gap: 20px;
         justify-content: center;
-        width: 260px; // Adjust width as necessary
+        width: 260px;
         background: #fff;
         padding: 5px 5px;
         box-shadow: 0 5px 5px -4px rgba(0, 0, 0, 0.1), 0 2px 2px -1px rgba(0, 0, 0, 0.05);
@@ -72,7 +75,7 @@ body {
         }
 
         a:hover {
-            color: #57cccc;
+            color: $teal;
         }
     }
 
@@ -124,15 +127,15 @@ main {
 
     #home-photos {
         display: flex;
-        gap: 30px; // Adjust the gap as needed
+        gap: 30px;
         margin-top: 60px;
 
         img {
-            width: 50%; // Set the width to half of the parent div
+            width: 50%;
             margin-left: -10px;
-            max-width: none; // Remove the max-width constraint
+            max-width: none;
             border-radius: 40px;
-            margin-bottom: 0; // Remove bottom margin since images are in a row
+            margin-bottom: 0;
             transform: rotate(-1deg);
         }
 
@@ -142,6 +145,72 @@ main {
 
         img:last-child {
             display: none;
+        }
+    }
+
+    .work-section {
+        h2 {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            color: $textSecondary;
+
+            svg, span {
+                display: block;
+            }
+
+            svg {
+                width: 24px;
+            }
+        }
+
+        border-radius: 20px;
+        padding: 10px 20px 0;
+        border: 1px solid #EEE;
+
+        svg {
+            stroke: rgb(193, 193, 193);
+            fill: #EEE;
+        }
+
+        .company-img-wrapper {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid #EEE;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        img,
+        .company-img-placeholder {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #db97d1;
+        }
+
+        .work-list-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: space-between;
+            margin-bottom: 25px;
+
+            .company-name {
+                font-weight: 600;
+                margin-bottom: 3px;
+            }
+
+            .company-info {
+                flex-grow: 1;
+            }
+
+            .company-role,
+            .company-dates {
+                color: rgb(153, 153, 161);
+            }
         }
     }
 }
@@ -175,12 +244,40 @@ main {
 
 .article {
     max-width: 600px;
-    margin: 60px auto 0;
-    font-size: 14px;
+    margin-top: 80px;
+    font-size: 16px;
+
+    .time {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    time {
+        color: $lightGrey;
+        display: block;
+        margin-bottom: 15px;
+    }
 
     h1 {
         margin-top: 10px;
         font-size: 16px;
+
+        a {
+            color: $textSecondary;
+        }
+    }
+
+    .excerpt {
+        line-height: 1.75;
+    }
+
+    a {
+        color: $teal;
+
+        &:hover {
+            color: darken($teal, 10%);
+        }
     }
 }
 
@@ -207,10 +304,6 @@ html.dark {
     @include dark-mode;
 }
 
-@media (prefers-color-scheme: dark) {
-    // @include dark-mode;
-}
-
 @media (min-width: 780px) {
     body {
         padding-left: 90px;
@@ -218,27 +311,41 @@ html.dark {
     }
 
     #home {
-        #bio {
-            h1 {
-                font-size: 46px;
-            }
+        #bio h1 {
+            font-size: 46px;
         }
     }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1040px) {
+
     #home-bottom {
         display: flex;
         flex-wrap: wrap;
     }
 
     #home-bottom .articles {
-        flex: 2 1 66%;
-        padding-right: 60px;
+        flex: 2 1 60%;
+        box-sizing: border-box;
+        padding-right: 40px;
     }
 
     #home-bottom .sidebar {
-        flex: 1 1 33%;
+        flex: 1 1 40%;
+    }
+
+    #home-bottom .work-section {
+        .work-list-item {
+            gap: 15px;
+        }
+
+        .company-info {
+            font-size: 12px;
+        }
+
+        .company-dates {
+            font-size: 12px;
+        }
     }
 }
 

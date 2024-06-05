@@ -1,16 +1,18 @@
 <article class="article">
     <header>
-        <span class="pipe">|</span>
-        <time pubdate="pubdate" class="text-gray-400 text-sm mb-2">{{ entry.date }}</time>
+        <div class="time">
+            <span class="pipe">|</span>
+            <time pubdate="pubdate">{{ entry.date }}</time>
+        </div>
 
-        <h1 class="text-xl font-semibold mb-2 dark:text-white">
+        <h1>
             <a href="{{ skimpy.url(entry.uri) }}">{{ entry.title }}</a>
         </h1>
     </header>
 
-    <div class="excerpt mb-4">
+    <div class="excerpt">
         <p>{{ entry.excerpt }}&hellip;</p>
     </div>
 
-    <a href="{{ skimpy.url(entry.uri) }}" class="text-teal-400 hover:text-teal-600">Read article &rsaquo;</a>
+    <a href="{{ skimpy.url(entry.uri) }}">Read article &rsaquo;</a>
 </article>

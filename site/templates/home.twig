@@ -3,31 +3,31 @@
 set companies = [
     {
         'name': 'Freelance',
-        'start_year': 2022,
+        'start_year': 2023,
         'end_year': 'current',
         'title': 'Software Engineer',
         'img': ''
     },
     {
         'name': 'CCI.live',
-        'start_year': 2019,
-        'end_year': 2022,
+        'start_year': 2020,
+        'end_year': 2023,
         'title': 'Senior Software Engineer',
-        'img': ''
+        'img': '/img/cci-live.jpg'
     },
     {
         'name': 'Carbon Better',
-        'start_year': 2015,
-        'end_year': 2018,
+        'start_year': 2019,
+        'end_year': 2020,
         'title': 'Senior Software Engineer',
-        'img': ''
+        'img': '/img/carbon-better.jpg'
     },
     {
         'name': 'NYCDA',
-        'start_year': 2012,
-        'end_year': 2015,
+        'start_year': 2016,
+        'end_year': 2017,
         'title': 'Head Instructor',
-        'img': ''
+        'img': '/img/nycda.jpg'
     }
 ]
 
@@ -70,24 +70,22 @@ set companies = [
         </div>
 
         <div class="socials">
-            <a aria-label="Follow on GitHub" href="#">
+            <a aria-label="Follow on GitHub" href="https://github.com/jtallant" target="_blank">
                 {% include 'svg/github.twig' %}
             </a>
-            <a aria-label="Follow on LinkedIn" href="#">
+            <a aria-label="Follow on LinkedIn" href="https://www.linkedin.com/in/justintallant" target="_blank">
                 {% include 'svg/linkedin.twig' %}
             </a>
         </div>
 
+        {# PHOTOS #}
+        <div id="home-photos">
+            <img src="/img/justin.jpg" alt="Justin at White Sands National Park" loading="lazy">
+            <img src="/img/firepit.jpg" alt="Huckleberry cabin patio" loading="lazy">
+            <img src="/img/pickleball.jpg" alt="Justin playing pickleball" loading="lazy">
+        </div>
 
         <div id="home-bottom">
-
-            {# PHOTOS #}
-            <div id="home-photos">
-                <img src="/img/justin.jpg" alt="Justin at White Sands National Park" loading="lazy">
-                <img src="/img/firepit.jpg" alt="Huckleberry cabin patio" loading="lazy">
-                <img src="/img/pickleball.jpg" alt="Justin playing pickleball" loading="lazy">
-            </div>
-
             {# ARTICLES #}
             <div class="articles">
                 {% for entry in entries %}
@@ -102,27 +100,31 @@ set companies = [
                         {% include 'svg/suitcase.twig' %}
                         <span>Work</span>
                     </h2>
-                    <ol>
+
+                    <div class="work-list">
                         {% for company in companies %}
-                            <li class="company-item">
-                                <div class="company-logo">
-                                    <img alt="" loading="lazy" width="32" height="32" decoding="async" data-nimg="1" class="company-img" src="{{ company.img }}" />
+                            <div class="work-list-item">
+                                <div class="company-img-wrapper">
+                                    {% if company.img != '' %}
+                                        <img alt="{{ company.name }}" loading="lazy" width="32" height="32" decoding="async" data-nimg="1" class="company-img" src="{{ company.img }}" />
+                                    {% else %}
+                                        <div class="company-img-placeholder"></div>
+                                    {% endif %}
                                 </div>
-                                <dl>
-                                    <dt class="sr-only">{{ company.name }}</dt>
-                                    <dd>{{ company.name }}</dd>
-                                    <dt class="sr-only">Role</dt>
-                                    <dd>{{ company.title }}</dd>
-                                    <dd>
-                                        <time>{{ company.start_year }}</time> <span aria-hidden="true">—</span> <time>{{ company.end_year }}</time>
-                                    </dd>
-                                </dl>
-                            </li>
+                                <div class="company-info">
+                                    <div>
+                                        <div class="company-name">{{ company.name }}</div>
+                                        <div class="company-role">{{ company.title }}</div>
+                                    </div>
+                                </div>
+                                <div class="company-dates">
+                                    <time>{{ company.start_year }}</time> <span aria-hidden="true">—</span> <time>{{ company.end_year }}</time>
+                                </div>
+                            </div>
                         {% endfor %}
-                    </ol>
+                    </div> <!-- .work-list -->
                 </div> <!-- .work-section -->
-            </div> <!-- #sidebar -->
+            </div> <!-- .sidebar -->
         </div> <!-- #home-bottom -->
     </div> <!-- #home -->
 {% endblock content %}
-
