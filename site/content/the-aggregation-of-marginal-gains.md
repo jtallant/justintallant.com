@@ -1,0 +1,11 @@
+The concept comes from James Clear's book <a href="https://jamesclear.com/atomic-habits" target="_blank">Atomic Habits</a>. I read the book several years ago when it first came out and I think it's the only book I've ever read that I still use certain principles of on a daily basis.
+
+Often times we think about our lives and the things we want to achieve and then we make goals on paper to achieve them. For example, you want to get in better shape so you put on your calendar a one hour block of working out 5 times a week.
+
+You start off strong but life gets in the way and one hour is a lot of time so you miss a day here and then and then after a few weeks you aren't going at all. Then you look at the time slot on your calendar every day and feel guilty. The aggregation of marginal gains is the idea of doing a little bit each day even if it's almost nothing. These small blocks will aggregate into something big over time, but perhaps more importantly, they will reinforce the habit of doing the thing even if it's not for very much time. This makes it more probably that it continues to be a part of your schedule.
+
+The way that I found this most useful to me personally and where I apply it is in those exact times I mentioned before. Times where things just came up and you're really excited about something and want to keep working on it, or you're just too tired or busy. Instead of not doing the entire time slot of a thing I might just do 5 pushups or go to the gym and do a few sets of something, or just do 15 minutes of cardio. It seems a little dumb at first but it's actually super effective in the long run. I find myself not feeling as guilty when I do these little chunks and I find myself overall spending way more time on working out or whatever the thing may be than I would have if I didn't just do a little bit and move on without feeling guilty.
+
+I apply it to about everything, progress on small personal projects, journaling, anything.
+
+Small gains really do aggregate into something massive over a long enough period of time, but perhaps more importantly, they just keep you on track mentally.

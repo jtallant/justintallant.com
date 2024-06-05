@@ -1,20 +1,15 @@
-<article class="bg-zinc-50 dark:bg-zinc-900 p-6 rounded-lg max-w-md">
+<article>
     <header>
         <time pubdate="pubdate" class="text-gray-400 text-sm mb-2">{{ entry.date }}</time>
 
-        <h1 class="text-xl font-semibold mb-2">
+        <h1 class="text-xl font-semibold mb-2 dark:text-white">
             <a href="{{ skimpy.url(entry.uri) }}">{{ entry.title }}</a>
         </h1>
     </header>
 
-    <div class="excerpt text-gray-400 mb-4">
+    <div class="excerpt mb-4">
         <p>{{ entry.excerpt }}&hellip;</p>
-        <p>{{ entry.meta('dog') }}</p>
-    </div> <!-- .excerpt -->
-
-    <footer>
-        {% include 'partials/taxonomies' %}
-    </footer>
+    </div>
 
     <a href="#" class="text-teal-400 hover:text-teal-600">Read article &rsaquo;</a>
 </article>
