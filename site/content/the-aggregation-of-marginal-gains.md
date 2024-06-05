@@ -1,3 +1,6 @@
+title: The Aggregation of Marginal Gains
+date: "2024-06-03"
+---
 The concept comes from James Clear's book <a href="https://jamesclear.com/atomic-habits" target="_blank">Atomic Habits</a>. I read the book several years ago when it first came out and I think it's the only book I've ever read that I still use certain principles of on a daily basis.
 
 Often times we think about our lives and the things we want to achieve and then we make goals on paper to achieve them. For example, you want to get in better shape so you put on your calendar a one hour block of working out 5 times a week.
