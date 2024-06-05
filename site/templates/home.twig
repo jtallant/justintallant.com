@@ -17,12 +17,34 @@
 {% endblock metaDescription %}
 
 {% block content %}
-    <div class="mt-20 rounded-full overflow-hidden h-24 w-24 bg-gray-300"></div>
-    <p class="mt-10 font-bold text-zinc-400 tracking-wider">Justin Tallant</p>
-    <h1 class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">Software engineer with expertise in Laravel, Vue.js, and AI Agent Development.</h1>
-    <p class="text-zinc>{{ skimpy.site.tagline }}</p>
+    <img src="/img/justin.jpg" alt="Justin Tallant" class="mt-12 rounded-full w-16 h-16 md:w-18 md:h-18 object-cover">
+
+    <p class="text-xl sm:text-2xl mt-10 font-semibold tracking-wider hidden">
+        Justin Tallant
+    </p>
+
+    <h1 class="mt-6 text-4xl md:text-5xl font-bold tracking-tight text-zinc-800 dark:text-white max-w-screen-md">
+        <div class="leading-tight">
+            Software engineer with expertise in
+            <span class="bg-yellow-200 dark:bg-transparent px-2">Laravel</span>,
+            <span class="bg-cyan-200 dark:bg-transparent px-2">Vue</span>, and
+            <span class="bg-pink-200 dark:bg-transparent px-2">AI Agents</span>
+        </div>
+    </h1>
+
+    <p class="mt-6 leading-relaxed max-w-screen-sm">
+        I'm Justin, a seasoned developer specializing in AI agent development and Laravel web applications. With a strong background in Vue.js, I excel at creating innovative, user-centric solutions. I aim to contribute my expertise to forward-thinking projects in the AI and web development sectors.
+    </p>
+
     {% include 'partials/socials.twig' %}
+
+    <div class="flex justify-center space-x-10 mt-10">
+        <div class="w-48 h-48 bg-zinc-300"></div>
+        <div class="w-48 h-48 bg-zinc-300"></div>
+    </div>
+
     {% for entry in entries %}
         {% include 'partials/article' %}
     {% endfor %}
+
 {% endblock content %}

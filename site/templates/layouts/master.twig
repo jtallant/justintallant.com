@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" x-data="{ darkMode: false }" :class="{ 'dark': darkMode }" class="bg-zinc-50 dark:bg-zinc-800">
+<html lang="en" x-data="{ darkMode: false }" :class="{ 'dark': darkMode }">
     <head>
         {% block head %}
             <meta charset="utf-8">
@@ -17,23 +17,21 @@
             <script src="//unpkg.com/alpinejs" defer></script>
         {% endblock head %}
     </head>
-    <body class="bg-white dark:bg-zinc-900 container mx-auto px-12 md:px-30 lg:px-40 pt-10 pb-20 max-w-screen-xl">
-        <header>
-            {% include 'partials/nav.twig' %}
-            <svg @click="darkMode = !darkMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="cursor-pointer h-6 w-6 text-purple-500">
-                <path x-show="!darkMode" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.364 6.364l-1.414-1.414M6.364 6.364L5 5m12.364-1.414l-1.414 1.414M6.364 17.636l-1.414 1.414" />
-                <path x-show="darkMode" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 18a9 9 0 100-18 9 9 0 000 18z" />
-            </svg>
-        </header>
-        <main>
-            {% block content %}
-            {% endblock content %}
-        </main>
-        <footer>
-            {% block footer %}
-            {% endblock footer %}
-        </footer>
-        {% block scripts %}
-        {% endblock scripts %}
+    <body class="bg-zinc-100 dark:bg-black text-zinc-600 dark:text-zinc-400">
+        <div class="bg-white dark:bg-zinc-900 container mx-auto px-12 md:px-30 lg:px-28 pt-6 pb-20 max-w-screen-xl border-l-5 border-r-5 border-gray-100">
+            <header>
+                {% include 'partials/nav.twig' %}
+            </header>
+            <main>
+                {% block content %}
+                {% endblock content %}
+            </main>
+            <footer>
+                {% block footer %}
+                {% endblock footer %}
+            </footer>
+            {% block scripts %}
+            {% endblock scripts %}
+        </div>
     </body>
 </html>
