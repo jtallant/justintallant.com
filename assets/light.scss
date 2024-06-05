@@ -1,0 +1,78 @@
+html, p {
+    color: $grey;
+}
+
+a {
+    color: $teal;
+}
+
+.article header a,
+nav a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $black;
+}
+
+footer nav a {
+    &:hover {
+        color: $teal;
+    }
+}
+
+#nav {
+    background: $white;
+
+    a:hover {
+        color: $teal;
+    }
+}
+
+#site-header {
+    svg {
+        stroke: #57cccc;
+        &:hover {
+            stroke: #3a8888;
+            transition: stroke 0.3s ease;
+        }
+    }
+}
+
+#site-footer {
+    color: $faded;
+    border-top: 1px solid #eee;
+}
+
+.work-section {
+    border: 1px solid #eee;
+    svg {
+        stroke: rgb(193, 193, 193);
+        fill: #EEE;
+    }
+}
+
+.company-img-wrapper {
+    border: 1px solid #eee;
+}
+
+time,
+.company-role,
+.company-dates {
+    color: $faded;
+}
+
+.pipe {
+    color: lighten($faded, 25%);
+}
+
+.article a {
+    color: $teal;
+
+    &:hover {
+        color: darken($teal, 10%);
+    }
+}
+

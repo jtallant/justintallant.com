@@ -1,0 +1,156 @@
+.justin-photo {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+}
+
+#bio {
+    h1 {
+        margin-top: 15px;
+        max-width: 675px;
+        font-size: 34px;
+        font-weight: 700;
+        letter-spacing: -1px;
+        line-height: 1.25;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+        max-width: 675px;
+        line-height: 1.75;
+        margin-bottom: 0;
+    }
+}
+
+
+#home-photos {
+    display: flex;
+    gap: 30px;
+    margin-top: 60px;
+
+    img {
+        width: 50%;
+        margin-left: -10px;
+        max-width: none;
+        border-radius: 40px;
+        margin-bottom: 0;
+        transform: rotate(-1deg);
+    }
+
+    img:nth-child(even) {
+        transform: rotate(1deg);
+    }
+
+    img:last-child {
+        display: none;
+    }
+}
+
+.work-section {
+    h2 {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+
+        svg,
+        span {
+            display: block;
+        }
+
+        svg {
+            width: 24px;
+        }
+    }
+
+    border-radius: 20px;
+    padding: 10px 20px 0;
+
+
+    .company-img-wrapper {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    img,
+    .company-img-placeholder {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #db97d1;
+    }
+
+    .work-list-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: space-between;
+        margin-bottom: 25px;
+
+        .company-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .company-info {
+            flex-grow: 1;
+        }
+    }
+}
+
+.socials {
+    a {
+        margin-top: 24px;
+        display: inline-block;
+        margin-left: 24px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+
+    svg {
+        width: 24px;
+        height: 24px;
+        fill: #6f6f6f;
+        transition: fill 0.3s ease;
+
+        &:hover {
+            fill: black;
+        }
+    }
+}
+
+.sidebar {
+    margin-top: 60px;
+}
+
+.article {
+    max-width: 600px;
+    margin-top: 80px;
+    font-size: 16px;
+
+    .time {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    time {
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    h1 {
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
+    .excerpt {
+        line-height: 1.75;
+    }
+}

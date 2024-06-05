@@ -1,0 +1,82 @@
+$faded: lighten(black, 30%);
+
+html,
+p {
+    color: darken(white, 40%);
+}
+
+body {
+    background: lighten(black, 10%);
+    color: $grey;
+}
+
+a {
+    color: $teal;
+}
+
+.article header a,
+nav a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: darken(white, 10%);
+}
+
+footer nav a {
+    &:hover {
+        color: $teal;
+    }
+}
+
+#nav {
+    background: $white;
+
+    a:hover {
+        color: $teal;
+    }
+}
+
+#site-header {
+    svg {
+        stroke: #616161;
+    }
+}
+
+#site-footer {
+    color: $faded;
+    border-top: 1px solid $faded;
+}
+
+.work-section {
+    border: 1px solid black;
+
+    svg {
+        stroke: black;
+        fill: $faded;
+    }
+}
+
+.company-img-wrapper {
+    border: 1px solid black;
+}
+
+time,
+.company-role,
+.company-dates {
+    color: $faded;
+}
+
+.pipe {
+    color: lighten($faded, 25%);
+}
+
+.article a {
+    color: $teal;
+
+    &:hover {
+        color: darken($teal, 10%);
+    }
+}

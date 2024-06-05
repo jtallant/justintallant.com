@@ -1,0 +1,38 @@
+#home-bottom {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#home-bottom .articles {
+    flex: 2 1 60%;
+    box-sizing: border-box;
+    padding-right: 40px;
+}
+
+#home-bottom .sidebar {
+    flex: 1 1 40%;
+}
+
+#home-bottom .work-section {
+    .work-list-item {
+        gap: 15px;
+    }
+
+    .company-info {
+        font-size: 12px;
+    }
+
+    .company-dates {
+        font-size: 12px;
+    }
+}
+
+#site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div {
+        margin-top: 0px;
+    }
+}
