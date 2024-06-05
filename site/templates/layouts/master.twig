@@ -4,32 +4,53 @@
         {% block head %}
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
             <title>
                 {% block title %}{{ entry.seoTitle ?? skimpy.site.title }}{% endblock title %}
             </title>
+
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="author" content="{{ skimpy.site.author }}">
+
             {% block metaDescription %}
             {% endblock metaDescription %}
-            <meta name="author" content="{{ skimpy.site.author }}">
+
+
             <link rel="stylesheet" href="/css/output.css">
+
             {% block styles %}
             {% endblock styles %}
+
             <script src="//unpkg.com/alpinejs" defer></script>
         {% endblock head %}
     </head>
-    <body class="bg-zinc-100 dark:bg-black text-zinc-600 dark:text-zinc-400">
-        <div class="bg-white dark:bg-zinc-900 container mx-auto px-12 md:px-30 lg:px-28 pt-6 pb-20 max-w-screen-xl border-l-5 border-r-5 border-gray-100">
-            <header>
-                {% include 'partials/nav.twig' %}
+    <body class="wrap">
+        <div>
+            <header id="site-header">
+                <div id="header-photo">
+                    <img src="/img/justin-icon.jpg" alt="Justin Tallant" />
+                </div>
+                <nav id="nav">
+                    <a href="/home">Home</a>
+                    <a href="/about">About</a>
+                    <a href="/contact">Contact</a>
+                </nav>
+                <div @click="darkMode = !darkMode">
+                    <div id="sun" x-show="!darkMode">{% include 'svg/sun.twig' %}</div>
+                    <div id="moon" x-show="darkMode">{% include 'svg/moon.twig' %}</div>
+                </div>
             </header>
+
             <main>
                 {% block content %}
                 {% endblock content %}
             </main>
+
             <footer>
                 {% block footer %}
                 {% endblock footer %}
             </footer>
+
             {% block scripts %}
             {% endblock scripts %}
         </div>
