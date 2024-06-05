@@ -30,7 +30,7 @@
                 <div id="header-photo">
                     <img src="/img/justin-icon.jpg" alt="Justin Tallant" />
                 </div>
-                <nav id="nav">
+                <nav id="nav" aria-label="Main Navigation">
                     <a href="/">Home</a>
                     <a href="/about">About</a>
                     <a href="/contact">Contact</a>
@@ -46,9 +46,13 @@
                 {% endblock content %}
             </main>
 
-            <footer>
-                {% block footer %}
-                {% endblock footer %}
+            <footer id="site-footer">
+                <nav aria-label="Footer navigation">
+                    <a href="/">Home</a>
+                    <a href="/about">About</a>
+                    <a href="/contact">Contact</a>
+                </nav>
+                <div>Copyright &copy; {{ "now"|date("Y") }} Justin Tallant. All rights reserved</div>
             </footer>
 
             {% block scripts %}

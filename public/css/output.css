@@ -361,6 +361,23 @@ body {
   box-sizing: border-box;
 }
 
+#site-footer {
+  border-top: 1px solid #EEE;
+  padding-top: 40px;
+  margin-top: 80px;
+  text-align: center;
+}
+#site-footer nav {
+  justify-content: center;
+  display: flex;
+  font-size: 16px;
+  color: #000;
+  gap: 40px;
+}
+#site-footer div {
+  margin-top: 30px;
+}
+
 #site-header {
   display: flex;
   justify-content: space-between;
@@ -380,7 +397,7 @@ body {
   display: flex;
   gap: 20px;
   justify-content: center;
-  width: 260px;
+  width: 240px;
   background: #fff;
   padding: 5px 5px;
   box-shadow: 0 5px 5px -4px rgba(0, 0, 0, 0.1), 0 2px 2px -1px rgba(0, 0, 0, 0.05);
@@ -608,6 +625,14 @@ html.dark #site-header svg {
   }
   #home-bottom .work-section .company-dates {
     font-size: 12px;
+  }
+  #site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #site-footer div {
+    margin-top: 0px;
   }
 }
 @media (min-width: 1400px) {
