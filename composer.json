@@ -25,5 +25,10 @@
         "php": "^8.0.2",
         "skimpy/engine": "^0.2.1"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "JustinTallant\\": "src/"
+        }
+    }
 }
