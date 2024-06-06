@@ -7,10 +7,10 @@
 {% endblock %}
 
 {% block content %}
-    <article>
+    <article id="entry">
         <header>
             <h1>{{ entry.title }}</h1>
-            <p>Published: <time pubdate="pubdate">{{ entry.date }}</time></p>
+            <time pubdate="pubdate">{{ entry.date }}</time>
         </header>
 
         {{ entry.content | raw }}

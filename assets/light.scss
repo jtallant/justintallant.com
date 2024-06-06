@@ -77,3 +77,13 @@ time,
     }
 }
 
+.socials {
+    svg {
+        fill: #6f6f6f
+    }
+
+    &:hover {
+        fill: black;
+    }
+}
+

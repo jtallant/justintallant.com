@@ -1,7 +1,8 @@
 $faded: lighten(black, 30%);
 
 html,
-p {
+p,
+#entry {
     color: darken(white, 40%);
 }
 
@@ -79,5 +80,15 @@ time,
 
     &:hover {
         color: darken($teal, 10%);
+    }
+}
+
+.socials {
+    svg {
+        fill: #6f6f6f;
+
+        &:hover {
+            fill: white;
+        }
     }
 }

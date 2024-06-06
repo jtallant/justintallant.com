@@ -18,8 +18,26 @@ a {
     text-decoration: none;;
 }
 
-p {
+p, ul, ol, li {
     line-height: 150%;
+}
+
+li ul, li ol {
+    margin-top: 15px;
+}
+
+#entry {
+    font-size: 18px;
+}
+
+#entry  {
+    p, ul, li, ol {
+        line-height: 1.75;
+    }
+
+    li, ol {
+     margin-bottom: 15px;
+    }
 }
 
 .wrap {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" x-data="{ darkMode: false }" :class="{ 'dark': darkMode }">
+<html lang="en" x-data="themeSwitcher()" :class="{ 'dark': darkMode }">
     <head>
         {% block head %}
             <meta charset="utf-8">
@@ -15,13 +15,36 @@
             {% block metaDescription %}
             {% endblock metaDescription %}
 
+            <script>
+                function themeSwitcher() {
+                    return {
+                        darkMode: false,
+                        init() {
+                            try {
+                                this.darkMode = localStorage.getItem('darkMode') || false;
+                            } catch (e) {
+                                // do nothing
+                            }
+                        },
+                        toggleTheme() {
+                            this.darkMode = !this.darkMode;
+                            try {
+                                localStorage.setItem('darkMode', this.darkMode);
+                            } catch (e) {
+                                // do nothing
+                            }
+                        }
+                    }
+                }
+            </script>
+
 
             <link rel="stylesheet" href="/css/output.css">
 
             {% block styles %}
             {% endblock styles %}
 
-            <script src="//unpkg.com/alpinejs" defer></script>
+            <script src="//unpkg.com/alpinejs"></script>
         {% endblock head %}
     </head>
     <body class="wrap">
@@ -35,7 +58,7 @@
                     <a href="/about">About</a>
                     <a href="/contact">Contact</a>
                 </nav>
-                <div @click="darkMode = !darkMode">
+                <div @click="toggleTheme()">
                     <div id="sun" x-show="!darkMode">{% include 'svg/sun.twig' %}</div>
                     <div id="moon" x-show="darkMode">{% include 'svg/moon.twig' %}</div>
                 </div>
@@ -56,6 +79,7 @@
             </footer>
 
             {% block scripts %}
+
             {% endblock scripts %}
         </div>
     </body>

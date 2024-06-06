@@ -357,8 +357,23 @@ a {
   text-decoration: none;
 }
 
-p {
+p, ul, ol, li {
   line-height: 150%;
+}
+
+li ul, li ol {
+  margin-top: 15px;
+}
+
+#entry {
+  font-size: 18px;
+}
+
+#entry p, #entry ul, #entry li, #entry ol {
+  line-height: 1.75;
+}
+#entry li, #entry ol {
+  margin-bottom: 15px;
 }
 
 .wrap {
@@ -629,11 +644,19 @@ time,
   color: #38b8b8;
 }
 
+.socials svg {
+  fill: #6f6f6f;
+}
+.socials:hover {
+  fill: black;
+}
+
 html.dark {
   background: #000;
 }
 html.dark html,
-html.dark p {
+html.dark p,
+html.dark #entry {
   color: #999999;
 }
 html.dark body {
@@ -693,6 +716,12 @@ html.dark .article a {
 }
 html.dark .article a:hover {
   color: #38b8b8;
+}
+html.dark .socials svg {
+  fill: #6f6f6f;
+}
+html.dark .socials svg:hover {
+  fill: white;
 }
 
 @media (min-width: 780px) {
