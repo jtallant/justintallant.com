@@ -368,7 +368,9 @@ li ul, li ol {
 #entry {
   font-size: 18px;
 }
-
+#entry h2, #entry h4, #entry h5, #entry h6 {
+  letter-spacing: 0.5px;
+}
 #entry p, #entry ul, #entry li, #entry ol {
   line-height: 1.75;
 }
@@ -416,7 +418,7 @@ li ul, li ol {
   display: flex;
   gap: 20px;
   justify-content: center;
-  width: 240px;
+  width: 160px;
   padding: 5px 5px;
   box-shadow: 0 5px 5px -4px rgba(0, 0, 0, 0.1), 0 2px 2px -1px rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(40px);
@@ -609,6 +611,9 @@ footer nav a:hover {
 #site-header nav a:hover {
   color: #57cccc;
 }
+#site-header nav a.active {
+  color: #57cccc;
+}
 
 #site-footer {
   color: rgb(153, 153, 161);
@@ -651,6 +656,13 @@ time,
   fill: black;
 }
 
+#entry h2,
+#entry h4,
+#entry h5,
+#entry h6 {
+  color: #333333;
+}
+
 html.dark {
   background: #000;
 }
@@ -660,8 +672,10 @@ html.dark #entry {
   color: #999999;
 }
 html.dark body {
-  background: #1a1a1a;
   color: #595959;
+  background: #1a1a1a;
+  border-left: 1px solid #313131;
+  border-right: 1px solid #313131;
 }
 html.dark a {
   color: #dc6616;
@@ -682,11 +696,18 @@ html.dark footer nav a:hover {
 html.dark #site-header svg {
   stroke: #dc6616;
 }
+html.dark #site-header svg:hover {
+  transition: stroke 0.3s ease;
+  stroke: #96460f;
+}
 html.dark #site-header nav {
   border: 1px solid black;
   background: #1a1a1a;
 }
 html.dark #site-header nav a:hover {
+  color: #dc6616;
+}
+html.dark #site-header nav a.active {
   color: #dc6616;
 }
 html.dark #site-footer {
@@ -722,6 +743,12 @@ html.dark .socials svg {
 }
 html.dark .socials svg:hover {
   fill: #dc6616;
+}
+html.dark #entry h2,
+html.dark #entry h4,
+html.dark #entry h5,
+html.dark #entry h6 {
+  color: #bfbfbf;
 }
 
 @media (min-width: 780px) {

@@ -1,0 +1,19 @@
+{% extends 'layouts/master' %}
+
+{% block metaDescription %}
+    {% if entry.description %}
+        <meta name="description" content="{{ entry.description }}">
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <article id="entry">
+        <header>
+            <h1>{{ entry.title }}</h1>
+        </header>
+
+        {{ entry.content | raw }}
+
+
+    </article>
+{% endblock content %}

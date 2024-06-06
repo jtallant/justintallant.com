@@ -1,0 +1,9 @@
+title: "I'm Justin Tallant, a Web App and AI Solutions Engineer"
+---
+Throughout my career, I’ve honed my skills in frameworks like Laravel and Vue.js, building robust and scalable solutions for a diverse range of clients. While my journey in web development has been immensely rewarding, I’m now expanding my focus to include AI integration, exploring how intelligent systems can enhance productivity and drive business success.
+
+In addition to my technical expertise, I have a unique blend of skills and experiences that set me apart. I’m an independent thinker who thrives on working solo, which has allowed me to develop a strong sense of discipline and self-motivation. Whether it’s developing solo games or diving deep into complex coding projects, I bring creativity and precision to every task. My background in solo development has given me a comprehensive understanding of end-to-end project management, making me a versatile asset in any tech-driven project.
+
+Beyond the digital realm, I’ve ventured into the hospitality industry with great success. I own and manage short-term rentals in West Texas, including a popular off-grid cabin in Terlingua. This hands-on experience has provided me with valuable insights into property management, customer service, and the growing trend of sustainable living. My ability to balance these ventures while continually advancing my technical skills is a testament to my dedication and entrepreneurial spirit.
+
+I believe in the power of innovation and adaptability. As I pivot towards new opportunities in AI and web development, I’m eager to collaborate with like-minded individuals and organizations. Whether it’s developing cutting-edge AI tools, enhancing existing web applications, or integrating AI into business operations, I’m committed to delivering excellence and driving impactful results.

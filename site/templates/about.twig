@@ -1,0 +1,141 @@
+{% extends 'layouts/master' %}
+
+{% block styles %}
+<style>
+    .parent {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .child-1 {
+        flex: 0 0 60%;
+        padding-right: 40px;
+        box-sizing: border-box;
+    }
+
+    .child-2 {
+        flex: 0 0 40%;
+    }
+
+    #entry img {
+        width: 100%;
+        border-radius: 20px;
+
+    }
+
+    .child-2 .justin {
+        transform: rotate(1deg);
+    }
+
+    .social-icons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 40px;
+    }
+
+    .social-icon {
+        display: flex;
+        align-items: center;
+    }
+
+    .social-icon a {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .social-icon a:hover {
+        opacity: 0.8;
+    }
+
+    .social-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .social-icon span {
+        margin-left: 30px;
+    }
+
+    html img.dark,
+    html.dark img.light {
+        display: none;
+    }
+
+    html.dark img.dark,
+    html img.light {
+        display: block;
+    }
+
+    .child-2 svg {
+        fill: black;
+    }
+
+    .dark .child-2 svg {
+        fill: white;
+    }
+
+    .showcase {
+        margin-top: 60px;
+    }
+
+    .showcase img {
+        margin-top: 20px;
+    }
+
+    .showcase a:hover {
+        opacity: 0.8;
+    }
+
+    @media (max-width: 1000px) {
+        .child-1, .child-2 {
+            flex: 0 0 100%;
+            padding-right: 0;
+        }
+    }
+</style>
+{% endblock styles %}
+
+
+{% block content %}
+    <article id="entry">
+        <div class="parent">
+            <div class="child-1">
+                <header>
+                    <h1>{{ entry.title }}</h1>
+                </header>
+
+                {{ entry.content | raw }}
+            </div>
+            <div class="child-2">
+                <img class="light justin" src="/img/justin.jpg" alt="Justin Tallant" />
+                <img class="dark justin" src="/img/justin-bw.jpg" alt="Justin Tallant" />
+
+                <div class="social-icons">
+                    <div class="social-icon">
+                        <a href="https://www.linkedin.com/in/justin-tallant" target="_blank" aria-label="LinkedIn">
+                            {% include 'svg/linkedin.twig' %}
+                            <span style="margin-left: 8px;">Follow on LinkedIn</span>
+                        </a>
+                    </div>
+                    <div class="social-icon">
+                        <a href="https://github.com/justin-tallant" target="_blank" aria-label="GitHub">
+                            {% include 'svg/github.twig' %}
+                            <span style="margin-left: 8px;">Follow on GitHub</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="showcase">
+                    <h4 style="margin-bottom: 10px;">The Huckleberry</h4>
+                    <a href="https://airbnb.com/h/dustypickle" target="_blank"><img src="/img/cabin-exterior.jpg" alt="Cabin Exterior" loading="lazy" /></a>
+                    <a href="https://airbnb.com/h/dustypickle" target="_blank"><img src="/img/cabin-interior.jpg" alt="Cabin Interior" loading="lazy" /></a>
+                    <a href="https://airbnb.com/h/dustypickle" target="_blank"><img src="/img/firepit.jpg" alt="Firepit" loading="lazy" /></a>
+                    <a href="https://airbnb.com/h/dustypickle" target="_blank"><img src="/img/pickleball-court.jpg" alt="Pickleball Court" loading="lazy" /></a>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock content %}
