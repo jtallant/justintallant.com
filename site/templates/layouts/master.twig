@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" x-data="themeSwitcher()" :class="{ 'dark': darkMode }">
+<html lang="en">
     <head>
         {% block head %}
             <meta charset="utf-8">
@@ -16,26 +16,28 @@
             {% endblock metaDescription %}
 
             <script>
-                function themeSwitcher() {
-                    return {
-                        darkMode: false,
-                        init() {
-                            try {
-                                this.darkMode = localStorage.getItem('darkMode') || false;
-                            } catch (e) {
-                                // do nothing
-                            }
-                        },
-                        toggleTheme() {
-                            this.darkMode = !this.darkMode;
-                            try {
-                                localStorage.setItem('darkMode', this.darkMode);
-                            } catch (e) {
-                                // do nothing
-                            }
-                        }
+                function toggleTheme() {
+                    const html = document.documentElement;
+                    const isDark = html.classList.toggle('dark');
+                    try {
+                        localStorage.setItem('darkMode', isDark);
+                    } catch (e) {
+                        // do nothing
                     }
                 }
+
+                function initTheme() {
+                    try {
+                        const isDark = localStorage.getItem('darkMode') === 'true';
+                        if (isDark) {
+                            document.documentElement.classList.add('dark');
+                        }
+                    } catch (e) {
+                        // do nothing
+                    }
+                }
+
+                initTheme();
             </script>
 
 
@@ -43,8 +45,6 @@
 
             {% block styles %}
             {% endblock styles %}
-
-            <script src="//unpkg.com/alpinejs"></script>
         {% endblock head %}
     </head>
     <body class="wrap">
@@ -58,9 +58,9 @@
                     <a href="/about">About</a>
                     <a href="/contact">Contact</a>
                 </nav>
-                <div @click="toggleTheme()">
-                    <div id="sun" x-show="!darkMode">{% include 'svg/sun.twig' %}</div>
-                    <div id="moon" x-show="darkMode">{% include 'svg/moon.twig' %}</div>
+                <div onclick="toggleTheme()">
+                    <div id="sun">{% include 'svg/sun.twig' %}</div>
+                    <div id="moon" style="display: none;">{% include 'svg/moon.twig' %}</div>
                 </div>
             </header>
 

@@ -9,8 +9,8 @@
 {% block content %}
     <article id="entry">
         <header>
+            <time pubdate="pubdate"><span class="pipe">|</span>{{ entry.date }}</time>
             <h1>{{ entry.title }}</h1>
-            <time pubdate="pubdate">{{ entry.date }}</time>
         </header>
 
         {{ entry.content | raw }}
