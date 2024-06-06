@@ -23,7 +23,7 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "skimpy/engine": "^0.2.1"
+        "skimpy/engine": "dev-master"
     },
     "minimum-stability": "dev",
     "autoload": {
