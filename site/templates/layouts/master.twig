@@ -54,6 +54,8 @@
 
             {% block scripts %}
                 <script>
+                    initTheme();
+
                     function toggleTheme() {
                         const html = document.documentElement;
                         const isDark = html.classList.toggle('dark');
@@ -75,7 +77,11 @@
                         }
                     }
 
-                    initTheme();
+                    document.querySelectorAll('#site-header nav a').forEach(link => {
+                        if (link.href === window.location.href) {
+                            link.classList.add('active');
+                        }
+                    });
                 </script>
             {% endblock scripts %}
         </div>

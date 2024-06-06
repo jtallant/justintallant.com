@@ -15,7 +15,7 @@ main {
 }
 
 a {
-    text-decoration: none;;
+    text-decoration: none;
 }
 
 p, ul, ol, li {
@@ -26,11 +26,13 @@ li ul, li ol {
     margin-top: 15px;
 }
 
-#entry {
-    font-size: 18px;
-}
-
 #entry  {
+    font-size: 18px;
+
+    h2,h4,h5,h6 {
+        letter-spacing: 0.5px;
+    }
+
     p, ul, li, ol {
         line-height: 1.75;
     }

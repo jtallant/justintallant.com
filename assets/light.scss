@@ -39,6 +39,10 @@ footer nav a {
         a:hover {
             color: $teal;
         }
+
+        a.active {
+            color: $teal;
+        }
     }
 }
 
@@ -84,6 +88,15 @@ time,
 
     &:hover {
         fill: black;
+    }
+}
+
+#entry {
+    h2,
+    h4,
+    h5,
+    h6 {
+        color: $black;
     }
 }
 

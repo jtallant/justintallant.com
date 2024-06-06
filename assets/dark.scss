@@ -8,8 +8,10 @@ p,
 }
 
 body {
-    background: lighten(black, 10%);
     color: $grey;
+    background: lighten(black, 10%);
+    border-left: 1px solid #313131;
+    border-right: 1px solid #313131;
 }
 
 a {
@@ -36,6 +38,11 @@ footer nav a {
 #site-header {
     svg {
         stroke: $teal;
+
+        &:hover {
+            transition: stroke 0.3s ease;
+            stroke: darken($teal, 15%);
+        }
     }
 
     nav {
@@ -43,6 +50,10 @@ footer nav a {
         background: lighten(black, 10%);
 
         a:hover {
+            color: $teal;
+        }
+
+        a.active {
             color: $teal;
         }
     }
@@ -93,3 +104,13 @@ time,
         }
     }
 }
+
+#entry {
+    h2,
+    h4,
+    h5,
+    h6 {
+        color: darken(white, 25%);
+    }
+}
+
