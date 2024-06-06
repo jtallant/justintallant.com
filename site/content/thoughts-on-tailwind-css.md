@@ -15,4 +15,4 @@ Having said all of that, I still think Tailwind is great. Tailwind's ability to 
 
 In the end, it comes down to personal preference and the specific needs of each project. For me, I feel less confused and find it easier to work with my markup when it comes to page layouts, templating, and reactive JavaScript using traditional CSS. Now that coding assistants are so advanced, I believe that the ability to quickly understand and reason about my applications is more important than ever.
 
-While I certainly appreciate Tailwind and don't wish for it to go away, I've found that it's not always the best fit for my current workflow. Sometimes, the simplicity and control of writing traditional CSS with Sass outweigh the benefits of using a CSS framework like Tailwind.
+While I certainly appreciate Tailwind and don't wish for it to go away, I've found that it's not always the best fit for my current workflow. Sometimes, the simplicity of writing traditional CSS with sass outweighs the benefits of using a CSS framework like Tailwind.
