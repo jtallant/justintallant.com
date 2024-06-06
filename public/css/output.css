@@ -345,7 +345,7 @@ html {
 
 body {
   background: white;
-  padding: 24px 30px 80px;
+  padding: 24px 30px 60px;
   min-height: 100vh;
 }
 
@@ -357,6 +357,10 @@ a {
   text-decoration: none;
 }
 
+p {
+  line-height: 150%;
+}
+
 .wrap {
   max-width: 1216px;
   margin: 0 auto;
@@ -364,7 +368,7 @@ a {
 }
 
 #site-footer {
-  padding-top: 40px;
+  padding-top: 60px;
   margin-top: 80px;
   text-align: center;
 }
@@ -375,7 +379,7 @@ a {
   gap: 40px;
 }
 #site-footer div {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 #site-header {
@@ -393,7 +397,7 @@ a {
   height: 36px;
   border-radius: 50%;
 }
-#site-header #nav {
+#site-header nav {
   display: flex;
   gap: 20px;
   justify-content: center;
@@ -401,11 +405,10 @@ a {
   padding: 5px 5px;
   box-shadow: 0 5px 5px -4px rgba(0, 0, 0, 0.1), 0 2px 2px -1px rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(40px);
-  border: 1px solid #EEE;
   border-radius: 20px;
   font-weight: 500;
 }
-#site-header #nav a {
+#site-header nav a {
   text-decoration: none;
   padding: 5px 5px;
   transition: color 0.3s ease;
@@ -577,19 +580,19 @@ footer nav a:hover {
   color: #57cccc;
 }
 
-#nav {
-  background: white;
-}
-#nav a:hover {
-  color: #57cccc;
-}
-
 #site-header svg {
   stroke: #57cccc;
 }
 #site-header svg:hover {
   stroke: #3a8888;
   transition: stroke 0.3s ease;
+}
+#site-header nav {
+  background: white;
+  border: 1px solid #EEE;
+}
+#site-header nav a:hover {
+  color: #57cccc;
 }
 
 #site-footer {
@@ -653,18 +656,19 @@ html.dark h6 {
 html.dark footer nav a:hover {
   color: #57cccc;
 }
-html.dark #nav {
-  background: white;
-}
-html.dark #nav a:hover {
-  color: #57cccc;
-}
 html.dark #site-header svg {
   stroke: #616161;
 }
+html.dark #site-header nav {
+  border: 1px solid black;
+  background: #1a1a1a;
+}
+html.dark #site-header nav a:hover {
+  color: #57cccc;
+}
 html.dark #site-footer {
   color: #4d4d4d;
-  border-top: 1px solid #4d4d4d;
+  border-top: 1px solid black;
 }
 html.dark .work-section {
   border: 1px solid black;

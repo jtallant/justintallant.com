@@ -31,23 +31,24 @@ footer nav a {
     }
 }
 
-#nav {
-    background: $white;
-
-    a:hover {
-        color: $teal;
-    }
-}
-
 #site-header {
     svg {
         stroke: #616161;
+    }
+
+    nav {
+        border: 1px solid black;
+        background: lighten(black, 10%);
+
+        a:hover {
+            color: $teal;
+        }
     }
 }
 
 #site-footer {
     color: $faded;
-    border-top: 1px solid $faded;
+    border-top: 1px solid black;
 }
 
 .work-section {

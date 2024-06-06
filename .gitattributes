@@ -1,1 +1,3 @@
 output.css -diff
+database/skimpy.sqlite -diff
+public/css/output.css.map -diff

@@ -23,20 +23,21 @@ footer nav a {
     }
 }
 
-#nav {
-    background: $white;
-
-    a:hover {
-        color: $teal;
-    }
-}
-
 #site-header {
     svg {
         stroke: #57cccc;
         &:hover {
             stroke: #3a8888;
             transition: stroke 0.3s ease;
+        }
+    }
+
+    nav {
+        background: $white;
+        border: 1px solid #EEE;
+
+        a:hover {
+            color: $teal;
         }
     }
 }
