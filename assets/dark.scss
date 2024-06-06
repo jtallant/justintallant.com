@@ -1,4 +1,5 @@
 $faded: lighten(black, 30%);
+$teal: #dc6616;
 
 html,
 p,
@@ -34,7 +35,7 @@ footer nav a {
 
 #site-header {
     svg {
-        stroke: #616161;
+        stroke: $teal;
     }
 
     nav {
@@ -88,7 +89,7 @@ time,
         fill: #6f6f6f;
 
         &:hover {
-            fill: white;
+            fill: $teal;
         }
     }
 }

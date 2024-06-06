@@ -664,7 +664,7 @@ html.dark body {
   color: #595959;
 }
 html.dark a {
-  color: #57cccc;
+  color: #dc6616;
 }
 html.dark .article header a,
 html.dark nav a,
@@ -677,17 +677,17 @@ html.dark h6 {
   color: #e6e6e6;
 }
 html.dark footer nav a:hover {
-  color: #57cccc;
+  color: #dc6616;
 }
 html.dark #site-header svg {
-  stroke: #616161;
+  stroke: #dc6616;
 }
 html.dark #site-header nav {
   border: 1px solid black;
   background: #1a1a1a;
 }
 html.dark #site-header nav a:hover {
-  color: #57cccc;
+  color: #dc6616;
 }
 html.dark #site-footer {
   color: #4d4d4d;
@@ -712,16 +712,16 @@ html.dark .pipe {
   color: #4d4d4d;
 }
 html.dark .article a {
-  color: #57cccc;
+  color: #dc6616;
 }
 html.dark .article a:hover {
-  color: #38b8b8;
+  color: #ae5111;
 }
 html.dark .socials svg {
   fill: #6f6f6f;
 }
 html.dark .socials svg:hover {
-  fill: white;
+  fill: #dc6616;
 }
 
 @media (min-width: 780px) {
