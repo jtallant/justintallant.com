@@ -15,32 +15,6 @@
             {% block metaDescription %}
             {% endblock metaDescription %}
 
-            <script>
-                function toggleTheme() {
-                    const html = document.documentElement;
-                    const isDark = html.classList.toggle('dark');
-                    try {
-                        localStorage.setItem('darkMode', isDark);
-                    } catch (e) {
-                        // do nothing
-                    }
-                }
-
-                function initTheme() {
-                    try {
-                        const isDark = localStorage.getItem('darkMode') === 'true';
-                        if (isDark) {
-                            document.documentElement.classList.add('dark');
-                        }
-                    } catch (e) {
-                        // do nothing
-                    }
-                }
-
-                initTheme();
-            </script>
-
-
             <link rel="stylesheet" href="/css/output.css">
 
             {% block styles %}
@@ -79,7 +53,30 @@
             </footer>
 
             {% block scripts %}
+                <script>
+                    function toggleTheme() {
+                        const html = document.documentElement;
+                        const isDark = html.classList.toggle('dark');
+                        try {
+                            localStorage.setItem('darkMode', isDark);
+                        } catch (e) {
+                            // do nothing
+                        }
+                    }
 
+                    function initTheme() {
+                        try {
+                            const isDark = localStorage.getItem('darkMode') === 'true';
+                            if (isDark) {
+                                document.documentElement.classList.add('dark');
+                            }
+                        } catch (e) {
+                            // do nothing
+                        }
+                    }
+
+                    initTheme();
+                </script>
             {% endblock scripts %}
         </div>
     </body>
