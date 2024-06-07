@@ -1,19 +1,18 @@
 {
-    "name": "skimpy/cms",
-    "description": "Skimpy CMS",
-    "homepage": "https://github.com/skimpy/cms",
+    "name": "jtallant/justintallant.com",
+    "description": "Justin Tallant's personal website",
+    "homepage": "https://github.com/jtallant/justintallant.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Justin Tallant",
             "email": "jtallant07@gmail.com",
             "homepage": "http://justintallant.com"
-        },
-        {
-            "name": "Casey McLaughlin",
-            "homepage": "https://github.com/caseyamcl"
         }
     ],
+    "scripts": {
+        "serve": "./serve.sh"
+    },
     "keywords": [
         "cms",
         "blog",
