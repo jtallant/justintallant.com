@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "watch": "sass --watch assets/input.scss:public/css/output.css",
+        "build": "sass --style=compressed assets/input.scss public/css/output.css"
+    }
+}
