@@ -23,3 +23,4 @@ This blog is created with my own open source CMS called Skimpy. I think web deve
     * For me the ease of use is worth the extra time to set up automatic deployment on a server.
     * That means I also pay for hosting but I host other PHP sites anyway so there isn't a difference for me in cost.
 
+You can try Skimpy out by [viewing the readme](https://github.com/skimpy/cms) on Github.
