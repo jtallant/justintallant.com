@@ -114,3 +114,55 @@ On any small application, I would likely forgo form requests and events as much 
 I'd like to point out that for smaller apps, I will extract to classes when the controller method starts to look a little too big. And a little too big for me really isn't that big. I can't give you an exact line number, it's more of a feel.
 
 Another argument in favor of reasonable violation of SRP in controllers is that Laravel's testing tools are robust enough to account for these situations and testability isn't a problem here for either example.
+
+<div class="comments">
+    <h4>Comments</h4>
+    <p class="disclaimer">
+        Comments are fake and for entertainment purposes only.
+    </p>
+    <div class="comment">
+        <div class="comment-author">
+            <div class="author-img"></div>
+            <span class="author-name">AssHat1</span>
+        </div>
+        <div class="comment-content">
+            <p>
+                Wow, this is one of the dumbest posts I've ever read. You clearly have no idea what you're talking about. Ignoring SRP in controllers is a recipe for disaster, and anyone with half a brain knows that. You're just promoting bad practices and laziness. Do everyone a favor and stop giving advice you clearly don't understand.
+            </p>
+        </div>
+
+        <div class="comment">
+            <div class="comment-author">
+                <img class="author-img" src="/img/justin-icon.jpg" />
+                <span class="author-name">Author</span>
+            </div>
+            <div class="comment-content">
+                <p>
+                    Thank you for that insightful comment AssHat! I love your username.
+                </p>
+            </div>
+        </div> <!-- .comment -->
+    </div> <!-- .comment -->
+    <div class="comment">
+        <div class="comment-author">
+            <div class="author-img"></div>
+            <span class="author-name">NiceGuy7</span>
+        </div>
+        <div class="comment-content">
+            <p>
+                Hey there! Great post! 😊 I totally agree with your take on SRP in controllers. Sometimes, sticking strictly to SRP can add unnecessary complexity, especially for smaller projects. Your method definitely reduces cognitive overhead by keeping everything in one place. I appreciate how you highlighted the balance between maintainability and simplicity. Your examples were clear and made it easy to see the benefits of both approaches. Keep up the awesome work! Looking forward to more of your insightful posts. 👍
+            </p>
+        </div>
+    </div> <!-- .comment -->
+    <div class="comment">
+        <div class="comment-author">
+            <div class="author-img"></div>
+            <span class="author-name">I'mJustHere17</span>
+        </div>
+        <div class="comment-content">
+            <p>
+                Nice post.
+            </p>
+        </div>
+    </div> <!-- .comment -->
+</div>

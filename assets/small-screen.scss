@@ -8,3 +8,12 @@ body {
         font-size: 46px;
     }
 }
+
+.work-list .work-list-item {
+    gap: 20px;
+}
+
+code[class*=language-],
+pre[class*=language-] {
+    font-size: 12px;
+}

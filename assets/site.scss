@@ -28,6 +28,8 @@ li ul, li ol {
 
 #entry  {
     font-size: 18px;
+    margin: 0 auto;
+    max-width: 680px;
 
     h2,h4,h5,h6 {
         letter-spacing: 0.5px;
@@ -38,8 +40,9 @@ li ul, li ol {
     }
 
     li, ol {
-     margin-bottom: 15px;
+        margin-bottom: 15px;
     }
+
 }
 
 .wrap {
@@ -111,4 +114,51 @@ li ul, li ol {
 .pipe {
     margin-right: 10px;
     font-weight: 700;
+}
+
+.comments {
+    margin-top: 60px;
+    font-size: 15px;
+
+    h4 {
+        font-size: 18px;
+    }
+
+    .comment {
+        margin-top: 30px;
+
+        p {
+            margin-top: 10px;
+        }
+    }
+
+    .comment:nth-child(3n+1) .author-img {
+        background: lighten(blue, 20%);
+    }
+
+    .comment:nth-child(3n+2) .author-img {
+        background: lighten(green, 20%);
+    }
+
+    .comment:nth-child(3n+3) .author-img {
+        background: lighten(red, 20%);
+    }
+
+    .comment-author {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .author-img {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+    }
+
+    .comment .comment {
+        margin-left: 30px;
+    }
 }
