@@ -1,0 +1,66 @@
+<div class="comments">
+    <h4>Comments</h4>
+
+    <form id="comment-form" class="comment-form">
+        <div class="form-group">
+            <label for="author">Name:</label>
+            <input type="text" id="comment_author" name="author" required>
+            <input type="hidden" id="entry_uri" name="entry_uri" value="{{ entry.uri }}">
+        </div>
+        <div class="form-group">
+            <label for="content">Comment:</label>
+            <textarea id="content" name="content" rows="4" required></textarea>
+        </div>
+        <button type="submit">Submit Comment</button>
+    </form>
+
+    <script>
+        document.getElementById('comment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const authorName = document.getElementById('comment_author').value;
+            const content = document.getElementById('content').value;
+            const entryUri = document.getElementById('entry_uri').value;
+
+            const data = {
+                author: authorName,
+                content: content,
+                entry_uri: entryUri
+            };
+
+            fetch('/api/comments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Optionally, you can add code here to update the comments section with the new comment
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+
+    {% for comment in comments %}
+        <div class="comment">
+            <div class="comment-author">
+                {% if comment.is_author %}
+                    <img class="author-img" src="/img/justin-icon.jpg" alt="Justin Tallant" />
+                {% else %}
+                    <div class="author-img"></div>
+                {% endif %}
+                <span class="author-name">{{ comment.author_name }}</span>
+            </div>
+            <div class="comment-content">
+                <p>
+                    {{ comment.content }}
+                </p>
+            </div>
+        </div> <!-- .comment -->
+    {% endfor %}
+</div>
