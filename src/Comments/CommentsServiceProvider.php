@@ -12,8 +12,8 @@ class CommentsServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/config.php', 'comments');
 
-        $this->app->singleton('comments', function ($app) {
-            return new CommentsRepository(new Database(config('comments')));
+        $this->app->singleton(CommentsRepository::class, function ($app) {
+            return new CommentsRepository(new Database(config('comments'), $app['validator']));
         });
     }
 
