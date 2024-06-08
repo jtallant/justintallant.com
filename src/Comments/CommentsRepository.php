@@ -32,14 +32,15 @@ class CommentsRepository
     public function createEntryComment(array $data): ?string
     {
         $sql = <<<SQL
-            INSERT INTO comments (entry_uri, author, content, created_at)
-            VALUES (:entry_uri, :author, :content, :created_at)
+            INSERT INTO comments (entry_uri, author, content, is_author, created_at)
+            VALUES (:entry_uri, :author, :content, :is_author, :created_at)
         SQL;
 
         $this->pdo->prepare($sql)->execute([
             'entry_uri' => strip_tags($data['entry_uri']),
             'author' => strip_tags($data['author']),
             'content' => strip_tags($data['content']),
+            'is_author' => $data['is_author'] ? 1 : 0,
             'created_at' => date('Y-m-d H:i:s')
         ]);
 

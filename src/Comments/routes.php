@@ -28,6 +28,12 @@ $router->group(['prefix' => 'api/comments'], function () use ($router) {
             }
         }
 
+        $data['is_author'] = $data['author'] === config('comments.author_secret');
+
+        if ($data['is_author']) {
+            $data['author'] = config('comments.author_name');
+        }
+
         $newComment = app('comments')->createEntryComment($data);
 
         return response()

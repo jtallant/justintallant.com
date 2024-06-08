@@ -33,6 +33,7 @@ class Database
                 entry_uri TEXT NOT NULL,
                 author TEXT NOT NULL,
                 content TEXT NOT NULL,
+                is_author INTEGER NOT NULL DEFAULT 0,
                 created_at TEXT NOT NULL
             );
         ";

@@ -15,8 +15,6 @@ class CommentsServiceProvider extends ServiceProvider
         $this->app->singleton('comments', function ($app) {
             return new CommentsRepository(new Database(config('comments')));
         });
-
-        $comments = $this->app['comments'];
     }
 
     public function boot(): void
