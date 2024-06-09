@@ -90,9 +90,11 @@
                 </script>
             {% endblock scripts %}
 
-            <!-- 100% privacy-first analytics | SimpleAnalytics-->
-            <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-            <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+            {% if app.environment('production') %}
+                <!-- 100% privacy-first analytics | SimpleAnalytics-->
+                <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+                <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+            {% endif %}
         </div>
     </body>
 </html>
