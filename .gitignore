@@ -3,3 +3,4 @@
 .seeded
 composer.lock
 storage/
+.phpunit.result.cache
