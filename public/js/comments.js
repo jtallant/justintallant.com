@@ -1,9 +1,5 @@
-document.getElementById('comment-form').addEventListener('submit', function (event) {
+document.querySelector('.comment-form').addEventListener('submit', function (event) {
     event.preventDefault();
-
-    console.log('submit');
-
-    return;
 
     const authorName = document.querySelector('input[name="comment_author"]').value;
     const content = document.getElementById('content').value;
@@ -25,7 +21,7 @@ document.getElementById('comment-form').addEventListener('submit', function (eve
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
-        // Optionally, you can add code here to update the comments section with the new comment
+        // Put the comment on the page
     })
     .catch((error) => {
         console.error('Error:', error);
