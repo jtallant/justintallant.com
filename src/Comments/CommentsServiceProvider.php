@@ -10,11 +10,9 @@ class CommentsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/config.php', 'comments');
-
-        $this->app->singleton(CommentsRepository::class, function ($app) {
-            return new CommentsRepository(new Database(config('comments'), $app['validator']));
-        });
+        $this->loadAndMergeConfigFrom(__DIR__ . '/config/database.php', 'database');
+        $this->loadAndMergeConfigFrom(__DIR__ . '/config/doctrine.php', 'doctrine');
+        $this->loadAndMergeConfigFrom(__DIR__ . '/config/comments.php', 'comments');
 
         $twig = $this->app->get('twig');
 
@@ -27,5 +25,13 @@ class CommentsServiceProvider extends ServiceProvider
     {
         $router = $this->app->router;
         require __DIR__ . '/routes.php';
+    }
+
+    protected function loadAndMergeConfigFrom(string $path, string $key): void
+    {
+        $config = $this->app->make('config');
+        $original = $config->get($key, []);
+        $values = require $path;
+        $config->set($key, array_merge_recursive($original, $values));
     }
 }

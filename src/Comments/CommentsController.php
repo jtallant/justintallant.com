@@ -5,24 +5,30 @@ namespace JustinTallant\Comments;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Factory;
+use Doctrine\ORM\EntityManagerInterface;
+use Twig\Environment as TwigEnvironment;
 use JustinTallant\Comments\CommentsRepository;
 use Laravel\Lumen\Routing\Controller as BaseController;
+use LaravelDoctrine\ORM\IlluminateRegistry as Registery;
 
 class CommentsController extends BaseController
 {
-    private $comments;
     private $validator;
+    private $twig;
+    private $em;
 
-    public function __construct(CommentsRepository $comments, Factory $validator)
+    public function __construct(Factory $validator, TwigEnvironment $twig, Registery $registry)
     {
-        $this->comments = $comments;
         $this->validator = $validator;
+        $this->twig = $twig;
+        $this->em = $registry->getManager('comments')
+                            ->getRepository(Entities\Comment::class);
     }
 
-    public function index(Request $request): JsonResponse
+    public function index(Request $request, EntityManagerInterface $em): JsonResponse
     {
         return response()->json(
-            $this->comments->getEntryComments($request->get('entry_uri'))
+            $this->em->findBy(['entryUri' => $request->get('entry_uri')])
         );
     }
 
@@ -52,6 +58,13 @@ class CommentsController extends BaseController
                 'message' => 'Comment added successfully',
                 'data' => $newComment,
             ], 201);
+    }
+
+    private function renderCommentHtml(array $commentData): string
+    {
+        $loader = new \Twig\Loader\FilesystemLoader('/path/to/templates');
+        $twig = new \Twig\Environment($loader);
+        return $twig->render('partials/comment.twig', ['comment' => $commentData]);
     }
 
     private function indicateBlogAuthorIfBlogAuthor(array $data): array

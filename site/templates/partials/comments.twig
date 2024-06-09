@@ -25,23 +25,25 @@
         <button type="submit">Submit Comment</button>
     </form>
 
-    {% for comment in comments().getEntryComments(entry.uri) %}
-        <div class="comment">
-            <div class="comment-author">
-                {% if comment.is_author %}
-                    <img class="author-img" src="/img/justin-icon.jpg" alt="Justin Tallant" />
-                {% else %}
-                    <div class="author-img"></div>
-                {% endif %}
-                <span class="author-name">{{ comment.author }}</span>
-            </div>
-            <div class="comment-content">
-                <p>
-                    {{ comment.content }}
-                </p>
-            </div>
-        </div> <!-- .comment -->
-    {% endfor %}
+    <div class="comments-list">
+        {% for comment in comments().getEntryComments(entry.uri) %}
+            <div class="comment">
+                <div class="comment-author">
+                    {% if comment.is_author %}
+                        <img class="author-img" src="/img/justin-icon.jpg" alt="Justin Tallant" />
+                    {% else %}
+                        <div class="author-img"></div>
+                    {% endif %}
+                    <span class="author-name">{{ comment.author }}</span>
+                </div>
+                <div class="comment-content">
+                    <p>
+                        {{ comment.content }}
+                    </p>
+                </div>
+            </div> <!-- .comment -->
+        {% endfor %}
+    </div>
 </div>
 
 <script src="/js/comments.js"></script>
