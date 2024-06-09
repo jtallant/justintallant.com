@@ -611,7 +611,7 @@ button {
 .comments .comments-header svg {
   width: 22px;
   height: 22px;
-  fill: #8c8c8c;
+  fill: #1a1a1a;
 }
 .comments .comment {
   margin-top: 30px;
@@ -630,7 +630,7 @@ button {
   height: 24px;
 }
 .comments .new-comment a {
-  color: #bfbfbf;
+  color: #404040;
 }
 .comments .comment:nth-child(3n+1) .author-img {
   background: #6666ff;
@@ -647,7 +647,7 @@ button {
   gap: 10px;
   font-size: 16px;
   font-weight: 500;
-  color: #a6a6a6;
+  color: #1a1a1a;
 }
 .comments .author-img {
   width: 16px;
@@ -673,13 +673,13 @@ button {
 }
 .comments form input, .comments form textarea {
   margin-top: 10px;
-  border: 1px solid #404040;
   border-radius: 5px;
   padding: 10px;
-  background: #262626;
+  border: 1px solid #b3b3b3;
+  background: white;
 }
 .comments form input:active, .comments form input:focus, .comments form input:focus-visible, .comments form textarea:active, .comments form textarea:focus, .comments form textarea:focus-visible {
-  border: 1px solid #666666;
+  border: 1px solid #4d4d4d;
   outline: none;
 }
 .comments form .char-count {
@@ -690,13 +690,14 @@ button {
 .comments form button {
   margin-top: 25px;
   background: transparent;
-  border: 1px solid #666666;
   border-radius: 5px;
   padding: 10px 20px;
-  color: #cccccc;
+  border: 1px solid #b3b3b3;
+  color: #666666;
 }
 .comments form button:hover {
-  background: #262626;
+  background: #333333;
+  color: #d9d9d9;
 }
 
 html, p {
@@ -1096,6 +1097,32 @@ html.dark #entry h4,
 html.dark #entry h5,
 html.dark #entry h6 {
   color: #bfbfbf;
+}
+html.dark .comments .comments-header svg {
+  fill: #8c8c8c;
+}
+html.dark .comments .new-comment a {
+  color: #bfbfbf;
+}
+html.dark .comments .comment-author {
+  color: #a6a6a6;
+}
+html.dark .comments form input, html.dark .comments form textarea {
+  border: 1px solid #404040;
+  background: #262626;
+}
+html.dark .comments form input:active, html.dark .comments form input:focus, html.dark .comments form input:focus-visible, html.dark .comments form textarea:active, html.dark .comments form textarea:focus, html.dark .comments form textarea:focus-visible {
+  border: 1px solid #666666;
+}
+html.dark .comments form .char-count {
+  color: #666666;
+}
+html.dark .comments form button {
+  border: 1px solid #666666;
+  color: #cccccc;
+}
+html.dark .comments form button:hover {
+  background: #262626;
 }
 
 @media (min-width: 780px) {
