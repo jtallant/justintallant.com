@@ -3,6 +3,8 @@
          xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
+         stopOnFailure="true"
+         printerClass="PHPUnit\Util\TestDox\CliTestDoxPrinter"
 >
     <testsuites>
         <testsuite name="Application Test Suite">

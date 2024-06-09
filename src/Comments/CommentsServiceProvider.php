@@ -19,6 +19,8 @@ class CommentsServiceProvider extends ServiceProvider
         $twig->addFunction(new \Twig\TwigFunction('comments', function () {
             return $this->app->get(CommentsRepository::class);
         }));
+
+        $this->setupCommentsDatabase();
     }
 
     public function boot(): void
@@ -27,11 +29,29 @@ class CommentsServiceProvider extends ServiceProvider
         require __DIR__ . '/routes.php';
     }
 
-    protected function loadAndMergeConfigFrom(string $path, string $key): void
+    private function loadAndMergeConfigFrom(string $path, string $key): void
     {
         $config = $this->app->make('config');
         $original = $config->get($key, []);
         $values = require $path;
         $config->set($key, array_merge_recursive($original, $values));
+    }
+
+    private function setupCommentsDatabase(): void
+    {
+        if (! file_exists(base_path('database/comments.sqlite'))) {
+            touch(base_path('database/comments.sqlite'));
+        }
+
+        $entityManager = $this->app->make('registry')->getManager('comments');
+        $schemaTool = new \Doctrine\ORM\Tools\SchemaTool($entityManager);
+        $classes = $entityManager->getMetadataFactory()->getAllMetadata();
+
+        $schemaManager = $entityManager->getConnection()->getSchemaManager();
+        $tables = $schemaManager->listTableNames();
+
+        if (empty($tables)) {
+            $schemaTool->createSchema($classes);
+        }
     }
 }

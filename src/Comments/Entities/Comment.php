@@ -33,9 +33,9 @@ class Comment implements \JsonSerializable
     private $content;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": false})
      */
-    private $isAuthor;
+    private $isAuthor = false;
 
     /**
      * @ORM\Column(type="datetime")

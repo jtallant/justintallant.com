@@ -6,13 +6,34 @@ use JustinTallant\Tests\TestCase;
 
 class CommentsControllerTest extends TestCase
 {
-    // use DatabaseMigrations;
-
     /**
      * Test index method returns a JSON response.
      */
     public function testIndexReturnsJson()
     {
+        $commentsData = [
+            [
+                'entryUri' => 'example-uri',
+                'author' => 'John Doe',
+                'content' => 'This is a sample comment.'
+            ],
+            [
+                'entryUri' => 'example-uri',
+                'author' => 'Jane Smith',
+                'content' => 'This is another sample comment.'
+            ]
+        ];
+
+        foreach ($commentsData as $data) {
+            $comment = new \JustinTallant\Comments\Entities\Comment();
+            $comment->setEntryUri($data['entryUri']);
+            $comment->setAuthor($data['author']);
+            $comment->setContent($data['content']);
+            $comment->setCreatedAt(new \DateTime());
+            $this->em->persist($comment);
+        }
+
+        $this->em->flush();
         $response = $this->get('/api/comments?entry_uri=example-uri');
         $response->seeStatusCode(200);
         $response->seeJsonStructure([
