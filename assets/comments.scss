@@ -1,0 +1,137 @@
+.comments {
+    margin: 60px auto 0;
+    font-size: 15px;
+    max-width: 680px;
+
+    .comments-header {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+        h4 {
+            font-size: 18px;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+            line-height: 1;
+        }
+
+        svg {
+            width: 22px;
+            height: 22px;
+            fill: darken(white, 45%);
+        }
+    }
+
+    .comment {
+        margin-top: 30px;
+        p {
+            margin-top: 10px;
+        }
+    }
+
+    .new-comment {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        a {
+            color: darken(white, 25%);
+        }
+    }
+
+    .comment:nth-child(3n+1) .author-img {
+        background: lighten(blue, 20%);
+    }
+
+    .comment:nth-child(3n+2) .author-img {
+        background: lighten(green, 20%);
+    }
+
+    .comment:nth-child(3n+3) .author-img {
+        background: lighten(red, 20%);
+    }
+
+    .comment-author {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 500;
+        color: lighten(black, 65%);
+    }
+
+    .author-img {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+    }
+
+    .comment .comment {
+        margin-left: 30px;
+    }
+}
+
+.comments form {
+    margin-top: 30px;
+
+    label {
+        margin-top: 25px;
+        display: block;
+    }
+
+    input {
+        width: 200px;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    input, textarea {
+        margin-top: 10px;
+        border: 1px solid lighten(black, 25%);
+        border-radius: 5px;
+        padding: 10px;
+        background: lighten(black, 15%);
+
+        &:active, &:focus, &:focus-visible {
+            border: 1px solid lighten(black, 40%);
+            outline: none;
+        }
+    }
+
+    .char-count {
+        margin-top: 7px;
+        color: lighten(black, 40%);
+        font-size: 12px;
+    }
+
+    button {
+        margin-top: 25px;
+        background: transparent;
+        border: 1px solid lighten(black, 40%);
+        border-radius: 5px;
+        padding: 10px 20px;
+        color: darken(white, 20%);
+
+        &:hover {
+            background: lighten(black, 15%);
+        }
+    }
+}
+

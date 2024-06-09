@@ -31,7 +31,7 @@ class CommentsController extends BaseController
         $validator = $this->validator->make($request->all(), [
             'entry_uri' => 'required|string',
             'author' => 'required|string|max:70',
-            'content' => 'required|string|max:1200',
+            'content' => 'required|string|max:2400',
         ]);
 
         if ($validator->fails()) {

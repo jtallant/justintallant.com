@@ -15,6 +15,12 @@ class CommentsServiceProvider extends ServiceProvider
         $this->app->singleton(CommentsRepository::class, function ($app) {
             return new CommentsRepository(new Database(config('comments'), $app['validator']));
         });
+
+        $twig = $this->app->get('twig');
+
+        $twig->addFunction(new \Twig\TwigFunction('comments', function () {
+            return $this->app->get(CommentsRepository::class);
+        }));
     }
 
     public function boot(): void
