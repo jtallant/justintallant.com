@@ -1,10 +1,11 @@
 export default class CommentInserter {
-    constructor() {
-        this.commentTemplate = document.getElementById('comment-template');
+    constructor(domDoc) {
+        this.domDoc = domDoc;
+        this.commentTemplate = domDoc.getElementById('comment-template');
     }
 
     init() {
-        document.addEventListener('commentPosted', (event) => {
+        this.domDoc.addEventListener('commentPosted', (event) => {
             this.insertComment(event.detail);
         });
     }
@@ -32,7 +33,7 @@ export default class CommentInserter {
     }
 
     addCommentToDOM(commentClone, data) {
-        const commentsList = document.querySelector('.comments-list');
+        const commentsList = this.domDoc.querySelector('.comments-list');
 
         if (data.parent_id) {
             this.insertReply(data, commentClone, commentsList);
@@ -53,3 +54,4 @@ export default class CommentInserter {
         }
     }
 }
+

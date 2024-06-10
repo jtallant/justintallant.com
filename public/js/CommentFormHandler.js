@@ -1,6 +1,7 @@
 export default class CommentFormHandler {
-    constructor() {
-        this.form = document.getElementById('comment-form');
+    constructor(domDoc) {
+        this.domDoc = domDoc;
+        this.form = domDoc.getElementById('comment-form');
     }
 
     init() {
@@ -9,8 +10,16 @@ export default class CommentFormHandler {
 
     handleSubmit(event) {
         event.preventDefault();
-        const formData = new FormData(this.form);
-        this.postComment(Object.fromEntries(formData.entries()));
+        const formElements = event.target.elements;
+
+        const data = {
+            author: formElements['author'].value,
+            content: formElements['content'].value,
+            parent_id: formElements['parent_id'].value,
+            entry_uri: formElements['entry_uri'].value
+        }
+
+        this.postComment(data);
     }
 
     postComment(data) {
@@ -31,7 +40,7 @@ export default class CommentFormHandler {
     handleResponse(response) {
         const data = response.data;
 
-        document.dispatchEvent(
+        this.domDoc.dispatchEvent(
             new CustomEvent('commentPosted', { detail: data })
         );
 
