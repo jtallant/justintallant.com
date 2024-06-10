@@ -37,6 +37,11 @@ document.querySelectorAll('.comment-form').forEach(form => {
 
             const commentsList = document.querySelector('.comments-list');
             commentsList.insertBefore(commentTemplate, commentsList.firstChild);
+
+            // Clear the form fields
+            form.querySelector('input[name="comment_author"]').value = '';
+            form.querySelector('textarea[name="content"]').value = '';
+            form.querySelector('.char-count span').textContent = '2400';
         })
         .catch((error) => {
             console.error('Error:', error);
