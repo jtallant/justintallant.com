@@ -17,12 +17,23 @@ class CommentsServiceProvider extends ServiceProvider
 
         $twig = $this->app->get('twig');
 
-        $twig->addFunction(new \Twig\TwigFunction('comments', function ($entryUri) {
+        $comments = $this->app->make('registry')
+            ->getManager('comments')
+            ->getRepository(Comment::class);
+
+        $twig->addFunction(new \Twig\TwigFunction('comments', function ($entryUri) use ($comments) {
             $comments = $this->app->make('registry')
                 ->getManager('comments')
                 ->getRepository(Comment::class);
 
-            return $comments->findBy(['entryUri' => $entryUri], ['createdAt' => 'DESC']);
+            return $comments->findBy([
+                'entryUri' => $entryUri,
+                'parent' => null,
+            ], ['createdAt' => 'DESC']);
+        }));
+
+        $twig->addFunction(new \Twig\TwigFunction('childComments', function ($parentId) use ($comments) {
+            return $comments->findBy(['parent' => $parentId,], ['createdAt' => 'ASC']);
         }));
 
         $this->setupCommentsDatabase();

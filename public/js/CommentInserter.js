@@ -19,6 +19,7 @@ export default class CommentInserter {
     populateComment(commentClone, data) {
         commentClone.querySelector('.author-name').textContent = data.author;
         commentClone.querySelector('.comment-content p').innerHTML = data.content;
+        commentClone.setAttribute('data-comment-id', data.id);
         this.toggleAuthorImage(commentClone, data.is_author);
     }
 
@@ -50,7 +51,7 @@ export default class CommentInserter {
         const parentComment = commentsList.querySelector(`.comment[data-comment-id="${data.parent_id}"]`);
         if (parentComment) {
             const repliesDiv = parentComment.querySelector('.replies');
-            repliesDiv.insertBefore(commentClone, repliesDiv.firstChild);
+            repliesDiv.appendChild(commentClone);
         }
     }
 }

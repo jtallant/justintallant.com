@@ -37,19 +37,24 @@
                     {% endif %}
                     <span class="author-name">{{ comment.author }}</span>
                 </div>
+                <time>{{ comment.created_at|date("M jS g:ia") }}</time>
                 <div class="comment-content">
                     <p>
                         {{ comment.content|striptags('<br>')|raw }}
                     </p>
                 </div>
                 <button class="reply-button">Reply</button>
-                <div class="replies"></div>
+                <div class="replies">
+                    {% for childComment in childComments(comment.id) %}
+                        {% include 'partials/comment.twig' with {'comment': childComment} %}
+                    {% endfor %}
+                </div> <!-- .replies -->
             </div> <!-- .comment -->
         {% endfor %}
     </div>
 
     <div id="comment-template" style="display: none;">
-        <div class="comment">
+        <div class="comment" data-comment-id="0">
             <div class="comment-author">
                 <img class="author-img author-author-img" src="/img/justin-icon.jpg" alt="Justin Tallant" style="display: none;" />
                 <div class="author-img author-non-author-img"></div>

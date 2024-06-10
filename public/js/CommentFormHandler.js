@@ -30,11 +30,11 @@ export default class CommentFormHandler {
             },
             body: JSON.stringify(data)
         })
-            .then(response => response.json())
-            .then(response => this.handleResponse(response))
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        .then(response => response.json())
+        .then(response => this.handleResponse(response))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
     handleResponse(response) {

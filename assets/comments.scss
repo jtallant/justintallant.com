@@ -40,14 +40,49 @@
         padding-bottom: 25px;
         position: relative;
 
+        time {
+            display: block;
+            font-size: 14px;
+            color: lighten(black, 40%);
+            margin-top: 15px;
+        }
+
         p {
             margin-top: 10px;
         }
 
+        &:nth-child(3n+1) .author-img {
+            background: lighten(blue, 20%);
+        }
+
+        &:nth-child(3n+2) .author-img {
+            background: lighten(green, 20%);
+        }
+
+        &:nth-child(3n+3) .author-img {
+            background: lighten(red, 20%);
+        }
+
+        .comment-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            color: lighten(black, 10%);
+        }
+
+        .author-img {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+
+        .comment {
+            margin-left: 35px;
+        }
+
         .reply-button {
-            position: absolute;
-            left: 0;
-            bottom: 5px;
             background: transparent;
             border: 1px solid lighten(black, 30%);
             padding: 4px 12px;
@@ -66,6 +101,14 @@
         &:hover .reply-button {
             display: block;
         }
+
+        .replies .comment:first-child {
+            padding-top: 40px;
+        }
+
+        .replies .comment:last-child {
+            padding-bottom: 10px;
+        }
     }
 
     .new-comment {
@@ -82,37 +125,6 @@
         a {
             color: lighten(black, 25%);
         }
-    }
-
-    .comment:nth-child(3n+1) .author-img {
-        background: lighten(blue, 20%);
-    }
-
-    .comment:nth-child(3n+2) .author-img {
-        background: lighten(green, 20%);
-    }
-
-    .comment:nth-child(3n+3) .author-img {
-        background: lighten(red, 20%);
-    }
-
-    .comment-author {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 16px;
-        font-weight: 500;
-        color: lighten(black, 10%);
-    }
-
-    .author-img {
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-    }
-
-    .comment .comment {
-        margin-left: 30px;
     }
 
 }

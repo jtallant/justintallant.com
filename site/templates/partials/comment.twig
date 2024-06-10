@@ -1,0 +1,17 @@
+<div class="comment" data-comment-id="{{ comment.parent.id }}">
+    <div class="comment-author">
+        {% if comment.is_author %}
+            <img class="author-img" src="/img/justin-icon.jpg" alt="Justin Tallant" />
+        {% else %}
+            <div class="author-img"></div>
+        {% endif %}
+        <span class="author-name">{{ comment.author }}</span>
+    </div>
+    <time>{{ comment.created_at|date("M jS g:ia") }}</time>
+    <div class="comment-content">
+        <p>
+            {{ comment.content|striptags('<br>')|raw }}
+        </p>
+    </div>
+    <button class="reply-button">Reply</button>
+</div> <!-- .comment -->
