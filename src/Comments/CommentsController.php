@@ -8,7 +8,6 @@ use Illuminate\Validation\Factory;
 use Doctrine\ORM\EntityManagerInterface;
 use Twig\Environment as TwigEnvironment;
 use JustinTallant\Comments\Entities\Comment;
-use JustinTallant\Comments\CommentsRepository;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use LaravelDoctrine\ORM\IlluminateRegistry as Registery;
 
@@ -68,13 +67,6 @@ class CommentsController extends BaseController
                 'message' => 'Comment added successfully',
                 'data' => $comment,
             ], 201);
-    }
-
-    private function renderCommentHtml(array $commentData): string
-    {
-        $loader = new \Twig\Loader\FilesystemLoader('/path/to/templates');
-        $twig = new \Twig\Environment($loader);
-        return $twig->render('partials/comment.twig', ['comment' => $commentData]);
     }
 
     private function indicateBlogAuthorIfBlogAuthor(Comment $comment): void
