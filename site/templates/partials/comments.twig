@@ -9,10 +9,10 @@
         <a href="javascript:void(0)">New Comment</a>
     </div>
 
-    <form class="comment-form" style="display: none;">
+    <form id="comment-form" class="comment-form" style="display: none;">
         <div class="form-group">
             <label for="author">Name</label>
-            <input type="text" name="comment_author" required>
+            <input type="text" name="author" required>
             <input type="hidden" name="entry_uri" value="{{ entry.uri }}">
         </div>
         <div class="form-group">
@@ -64,4 +64,5 @@
     </div> <!-- .comment -->
 </div> <!-- .comments -->
 
-<script src="/js/comments.js"></script>
+<script src="/js/comments.js" type="module"></script>
+
