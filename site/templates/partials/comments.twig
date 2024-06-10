@@ -11,13 +11,13 @@
 
     <form id="comment-form" class="comment-form" style="display: none;">
         <div class="form-group">
-            <label for="author">Name</label>
-            <input type="text" name="author" required>
+            <label for="comment_author">Name</label>
+            <input type="text" id="comment_author" name="author" required>
             <input type="hidden" name="entry_uri" value="{{ entry.uri }}">
         </div>
         <div class="form-group">
-            <label for="content">Comment</label>
-            <textarea name="content" rows="4" required></textarea>
+            <label for="comment_content">Comment</label>
+            <textarea id="comment_content" name="content" rows="4" required></textarea>
         </div>
         <div class="char-count">
             <span>2400</span> characters remaining
