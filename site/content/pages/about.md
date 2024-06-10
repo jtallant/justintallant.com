@@ -1,5 +1,8 @@
 title: "I'm Justin Tallant, a Web App and AI Solutions Engineer"
 ---
+<style>
+#entry {max-width: 800px;}
+</style>
 Throughout my career, I’ve honed my skills in frameworks like Laravel and Vue.js, building robust and scalable solutions for a diverse range of clients. Recognizing the growing importance of AI as an essential tool, I am now expanding my expertise to include AI integration, exploring how intelligent systems can enhance productivity and drive business success. Programming has always fascinated me due to its inherent focus on automation. Recent advances in LLM APIs have opened up exciting new possibilities in this realm, providing us with unprecedented opportunities to push the boundaries of automation.
 
 In addition to my technical expertise, I have a unique blend of skills and experiences that set me apart. I’m an independent thinker with a strong sense of discipline and self-motivation. Whether tackling complex coding challenges or exploring the latest technological advancements, I bring creativity and precision to every task. I have guided projects from conception to completion, gaining a comprehensive understanding of end-to-end project management. This makes me a versatile asset in any tech-driven environment.

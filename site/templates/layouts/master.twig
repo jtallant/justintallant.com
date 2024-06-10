@@ -23,78 +23,73 @@
             <link rel="stylesheet" href="/css/output.css">
             <script src="/js/prism.js" defer></script>
 
-
             {% block styles %}
             {% endblock styles %}
         {% endblock head %}
     </head>
     <body class="wrap">
-        <div>
-            <header id="site-header">
-                <div id="header-photo">
-                    <a href="/" title="Home"><img src="/img/justin-icon.jpg" alt="Justin Tallant" /></a>
-                </div>
-                <nav aria-label="Main Navigation">
-                    <a href="/">Home</a>
-                    <a href="/pages/about">About</a>
-                </nav>
-                <div onclick="toggleTheme()">
-                    <div id="sun">{% include 'svg/sun.twig' %}</div>
-                    <div id="moon" style="display: none;">{% include 'svg/moon.twig' %}</div>
-                </div>
-            </header>
+        <header id="site-header">
+            <div id="header-photo">
+                <a href="/" title="Home"><img src="/img/justin-icon.jpg" alt="Justin Tallant" /></a>
+            </div>
+            <nav aria-label="Main Navigation">
+                <a href="/">Home</a>
+                <a href="/pages/about">About</a>
+            </nav>
+            <div id="theme-toggle">
+                <div id="sun">{% include 'svg/sun.twig' %}</div>
+                <div id="moon" style="display: none;">{% include 'svg/moon.twig' %}</div>
+            </div>
+        </header>
 
-            <main>
-                {% block content %}
-                {% endblock content %}
-            </main>
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
 
-            <footer id="site-footer">
-                <nav aria-label="Footer navigation">
-                    <a href="/">Home</a>
-                    <a href="/pages/about">About</a>
-                </nav>
-                <div>Copyright &copy; {{ "now"|date("Y") }} Justin Tallant. All rights reserved</div>
-            </footer>
-
-            {% block scripts %}
-                <script>
-                    initTheme();
-
-                    function toggleTheme() {
-                        const html = document.documentElement;
-                        const isDark = html.classList.toggle('dark');
-                        try {
-                            localStorage.setItem('darkMode', isDark);
-                        } catch (e) {
-                            // do nothing
+        <footer id="site-footer">
+            <nav aria-label="Footer navigation">
+                <a href="/">Home</a>
+                <a href="/pages/about">About</a>
+            </nav>
+            <div>Copyright &copy; {{ "now"|date("Y") }} Justin Tallant. All rights reserved</div>
+        </footer>
+        {% block scripts %}
+            <script>
+                (function(document, localStorage) {
+                    try {
+                        const isDark = localStorage.getItem('darkMode') === 'true';
+                        if (isDark) {
+                            document.documentElement.classList.add('dark');
                         }
+                    } catch (e) {
+                        // do nothing
                     }
+                })(document, localStorage);
 
-                    function initTheme() {
-                        try {
-                            const isDark = localStorage.getItem('darkMode') === 'true';
-                            if (isDark) {
-                                document.documentElement.classList.add('dark');
-                            }
-                        } catch (e) {
-                            // do nothing
-                        }
+
+                document.getElementById('theme-toggle').addEventListener('click', () => {
+                    const html = document.documentElement;
+                    const isDark = html.classList.toggle('dark');
+                    try {
+                        localStorage.setItem('darkMode', isDark);
+                    } catch (e) {
+                        // do nothing
                     }
+                });
 
-                    document.querySelectorAll('#site-header nav a').forEach(link => {
-                        if (link.href === window.location.href) {
-                            link.classList.add('active');
-                        }
-                    });
-                </script>
-            {% endblock scripts %}
+                document.querySelectorAll('#site-header nav a').forEach(link => {
+                    if (link.href === window.location.href) {
+                        link.classList.add('active');
+                    }
+                });
+            </script>
+        {% endblock scripts %}
 
-            {% if app.environment('production') %}
-                <!-- 100% privacy-first analytics | SimpleAnalytics-->
-                <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-                <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
-            {% endif %}
-        </div>
+        {% if app.environment('production') %}
+            <!-- 100% privacy-first analytics | SimpleAnalytics-->
+            <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+            <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+        {% endif %}
     </body>
 </html>

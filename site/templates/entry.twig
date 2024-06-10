@@ -1,5 +1,10 @@
 {% extends 'layouts/master' %}
 
+{% block scripts %}
+    {{ parent() }}
+    <script src="/js/comments.js" type="module"></script>
+{% endblock %}
+
 {% block metaDescription %}
     {% if entry.description %}
         <meta name="description" content="{{ entry.description }}">
