@@ -41,6 +41,9 @@ export default class CommentInserter {
         } else {
             this.insertNewComment(commentClone, commentsList);
         }
+
+        commentClone.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        commentClone.classList.add('comment-animate');
     }
 
     insertNewComment(commentClone, commentsList) {

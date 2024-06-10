@@ -28,6 +28,7 @@
     <div class="comments-list">
         {% for comment in comments(entry.uri) %}
             <div class="comment" data-comment-id="{{ comment.id }}">
+
                 <div class="comment-author">
                     {% if comment.is_author %}
                         <img class="author-img" src="/img/justin-icon.jpg" alt="Justin Tallant" />
@@ -36,7 +37,9 @@
                     {% endif %}
                     <span class="author-name">{{ comment.author }}</span>
                 </div>
+
                 <time>{{ comment.created_at|date("M jS g:ia") }}</time>
+
                 <div class="comment-content">
                     {{ comment.content|striptags('<br>')|raw }}
                 </div>
@@ -56,11 +59,14 @@
 
     <div id="comment-template" style="display: none;">
         <div class="comment" data-comment-id="0">
+
             <div class="comment-author">
                 <img class="author-img author-author-img" src="/img/justin-icon.jpg" alt="Justin Tallant" style="display: none;" />
                 <div class="author-img author-non-author-img"></div>
                 <span class="author-name"></span>
             </div>
+
+            <time>{{ comment.created_at|date("M jS g:ia") }}</time>
 
             <div class="comment-content">
             </div>
