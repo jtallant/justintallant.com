@@ -613,11 +613,36 @@ button {
   height: 22px;
   fill: #1a1a1a;
 }
+.comments .comments-list {
+  margin-top: 40px;
+}
 .comments .comment {
-  margin-top: 30px;
+  padding-top: 15px;
+  padding-bottom: 25px;
+  position: relative;
 }
 .comments .comment p {
   margin-top: 10px;
+}
+.comments .comment .reply-button {
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  background: transparent;
+  border: 1px solid #4d4d4d;
+  padding: 4px 12px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-transform: lowercase;
+  font-weight: 500;
+  color: #b3b3b3;
+}
+.comments .comment .reply-button:hover {
+  background: #262626;
+  color: #d9d9d9;
+}
+.comments .comment:hover .reply-button {
+  display: block;
 }
 .comments .new-comment {
   display: flex;
@@ -660,6 +685,7 @@ button {
 
 .comments form {
   margin-top: 30px;
+  margin-bottom: 60px;
 }
 .comments form label {
   margin-top: 25px;
@@ -700,6 +726,11 @@ button {
   color: #d9d9d9;
 }
 
+@media (min-width: 768px) {
+  .reply-button {
+    display: none;
+  }
+}
 html, p {
   color: #595959;
 }

@@ -31,6 +31,10 @@
         }
     }
 
+    .comments-list {
+        margin-top: 40px;
+    }
+
     .comment {
         padding-top: 15px;
         padding-bottom: 25px;
@@ -41,7 +45,6 @@
         }
 
         .reply-button {
-            display: none;
             position: absolute;
             left: 0;
             bottom: 5px;
@@ -55,8 +58,13 @@
             color: lighten(black, 70%);
         }
 
+        .reply-button:hover {
+            background: lighten(black, 15%);
+            color: darken(white, 15%);
+        }
+
         &:hover .reply-button {
-            display: block !important;
+            display: block;
         }
     }
 
@@ -160,3 +168,8 @@
     }
 }
 
+@media (min-width: 768px) {
+    .reply-button {
+        display: none;
+    }
+}
