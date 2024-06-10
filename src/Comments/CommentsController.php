@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Factory;
 use Doctrine\ORM\EntityManagerInterface;
 use Twig\Environment as TwigEnvironment;
+use JustinTallant\Comments\Entities\Comment;
 use JustinTallant\Comments\CommentsRepository;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use LaravelDoctrine\ORM\IlluminateRegistry as Registery;
@@ -16,19 +17,20 @@ class CommentsController extends BaseController
     private $validator;
     private $twig;
     private $em;
+    private $comments;
 
     public function __construct(Factory $validator, TwigEnvironment $twig, Registery $registry)
     {
         $this->validator = $validator;
         $this->twig = $twig;
-        $this->em = $registry->getManager('comments')
-                            ->getRepository(Entities\Comment::class);
+        $this->em = $registry->getManager('comments');
+        $this->comments = $this->em->getRepository(Entities\Comment::class);
     }
 
     public function index(Request $request, EntityManagerInterface $em): JsonResponse
     {
         return response()->json(
-            $this->em->findBy(['entryUri' => $request->get('entry_uri')])
+            $this->comments->findBy(['entryUri' => $request->get('entry_uri')])
         );
     }
 
@@ -49,14 +51,22 @@ class CommentsController extends BaseController
 
         $data = $validator->validated();
 
-        $data = $this->indicateBlogAuthorIfBlogAuthor($data);
+        $comment = new Comment(
+            $data['entry_uri'],
+            $data['author'],
+            $data['content'],
+            new \DateTime()
+        );
 
-        $newComment = $this->comments->createEntryComment($data);
+        $this->indicateBlogAuthorIfBlogAuthor($comment);
+
+        $this->em->persist($comment);
+        $this->em->flush();
 
         return response()
             ->json([
                 'message' => 'Comment added successfully',
-                'data' => $newComment,
+                'data' => $comment,
             ], 201);
     }
 
@@ -67,19 +77,10 @@ class CommentsController extends BaseController
         return $twig->render('partials/comment.twig', ['comment' => $commentData]);
     }
 
-    private function indicateBlogAuthorIfBlogAuthor(array $data): array
+    private function indicateBlogAuthorIfBlogAuthor(Comment $comment): void
     {
-        $data['is_author'] = false;
-
-        $isBlogAuthor = $data['author']  === config('comments.author_secret');
-
-        if ($isBlogAuthor) {
-            return array_merge($data, [
-                'is_author' => true,
-                'author' => config('comments.author_name'),
-            ]);
+        if ($comment->author() === config('comments.author_secret')) {
+            $comment->setAuthor(config('comments.author_name'));
         }
-
-        return $data;
     }
 }

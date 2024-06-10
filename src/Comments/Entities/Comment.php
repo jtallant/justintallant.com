@@ -42,6 +42,20 @@ class Comment implements \JsonSerializable
      */
     private $createdAt;
 
+    public function __construct(
+        string $entryUri,
+        string $author,
+        string $content,
+        \DateTime $createdAt,
+        bool $isAuthor = false
+    ) {
+        $this->entryUri = $entryUri;
+        $this->author = $author;
+        $this->content = $content;
+        $this->createdAt = $createdAt;
+        $this->isAuthor = $isAuthor;
+    }
+
     public function jsonSerialize(): array
     {
         return [
@@ -54,59 +68,39 @@ class Comment implements \JsonSerializable
         ];
     }
 
-    public function getId(): int
+    public function id(): int
     {
         return $this->id;
     }
 
-    public function getEntryUri(): string
+    public function entryUri(): string
     {
         return $this->entryUri;
     }
 
-    public function setEntryUri(string $entryUri): void
-    {
-        $this->entryUri = $entryUri;
-    }
-
-    public function getAuthor(): string
+    public function author(): string
     {
         return $this->author;
+    }
+
+    public function content(): string
+    {
+        return $this->content;
+    }
+
+    public function isAuthor(): bool
+    {
+        return $this->isAuthor;
     }
 
     public function setAuthor(string $author): void
     {
         $this->author = $author;
+        $this->isAuthor = true;
     }
 
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): void
-    {
-        $this->content = $content;
-    }
-
-    public function getIsAuthor(): bool
-    {
-        return $this->isAuthor;
-    }
-
-    public function setIsAuthor(bool $isAuthor): void
-    {
-        $this->isAuthor = $isAuthor;
-    }
-
-    public function getCreatedAt(): \DateTime
+    public function createdAt(): \DateTime
     {
         return $this->createdAt;
     }
-
-    public function setCreatedAt(\DateTime $createdAt): void
-    {
-        $this->createdAt = $createdAt;
-    }
 }
-
