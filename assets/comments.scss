@@ -32,9 +32,31 @@
     }
 
     .comment {
-        margin-top: 30px;
+        padding-top: 15px;
+        padding-bottom: 25px;
+        position: relative;
+
         p {
             margin-top: 10px;
+        }
+
+        .reply-button {
+            display: none;
+            position: absolute;
+            left: 0;
+            bottom: 5px;
+            background: transparent;
+            border: 1px solid lighten(black, 30%);
+            padding: 4px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            text-transform: lowercase;
+            font-weight: 500;
+            color: lighten(black, 70%);
+        }
+
+        &:hover .reply-button {
+            display: block !important;
         }
     }
 
@@ -84,10 +106,12 @@
     .comment .comment {
         margin-left: 30px;
     }
+
 }
 
 .comments form {
     margin-top: 30px;
+    margin-bottom: 60px;
 
     label {
         margin-top: 25px;

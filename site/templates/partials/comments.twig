@@ -38,9 +38,10 @@
                 </div>
                 <div class="comment-content">
                     <p>
-                        {{ comment.content }}
+                        {{ comment.content|striptags('<br>')|raw }}
                     </p>
                 </div>
+                <button class="reply-button">Reply</button>
             </div> <!-- .comment -->
         {% endfor %}
     </div>

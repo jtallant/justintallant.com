@@ -22,7 +22,7 @@ class CommentsServiceProvider extends ServiceProvider
                 ->getManager('comments')
                 ->getRepository(Comment::class);
 
-            return $comments->findBy(['entryUri' => $entryUri]);
+            return $comments->findBy(['entryUri' => $entryUri], ['createdAt' => 'DESC']);
         }));
 
         $this->setupCommentsDatabase();

@@ -25,7 +25,7 @@ document.querySelectorAll('.comment-form').forEach(form => {
             const commentTemplate = document.querySelector('#comment-template .comment').cloneNode(true);
 
             commentTemplate.querySelector('.author-name').textContent = data.author;
-            commentTemplate.querySelector('.comment-content p').textContent = data.content;
+            commentTemplate.querySelector('.comment-content p').innerHTML = data.content;
 
             if (data.is_author) {
                 commentTemplate.querySelector('.author-author-img').style.display = 'block';

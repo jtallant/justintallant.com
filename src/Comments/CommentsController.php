@@ -46,6 +46,9 @@ class CommentsController extends BaseController
 
         $data = $validator->validated();
 
+        $data['content'] = nl2br(e($data['content']));
+        $data['content'] = strip_tags($data['content'], '<br>');
+
         $comment = new Comment(
             $data['entry_uri'],
             $data['author'],
