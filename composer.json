@@ -11,7 +11,10 @@
         }
     ],
     "scripts": {
-        "serve": "./serve.sh"
+        "serve": "./serve.sh",
+        "test": "./vendor/bin/phpunit",
+        "watch": "npm run watch",
+        "compile": "npm run sass"
     },
     "keywords": [
         "cms",
