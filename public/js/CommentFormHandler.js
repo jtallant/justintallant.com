@@ -51,7 +51,6 @@ export default class CommentFormHandler {
         this.form.querySelector('input[name="author"]').value = '';
         this.form.querySelector('textarea[name="content"]').value = '';
         this.form.querySelector('input[name="parent_id"]').value = '';
-        // move to different class
-        // this.form.querySelector('.char-count span').textContent = '2400';
+        this.form.querySelector('.char-count span').textContent = '2400';
     }
 }

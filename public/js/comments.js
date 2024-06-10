@@ -4,40 +4,47 @@ import CommentInserter from './CommentInserter.js';
 document.addEventListener('DOMContentLoaded', () => {
     new CommentFormHandler(document).init();
     new CommentInserter(document).init();
-});
 
-document.querySelector('.comment-form textarea').addEventListener('input', function () {
-    const maxChars = 2400;
-    const currentLength = this.value.length;
-    const remainingChars = maxChars - currentLength;
-    document.querySelector('.char-count span').textContent = remainingChars;
-});
+    const commentFormTextarea = document.querySelector('.comment-form textarea');
+    const newCommentLink = document.querySelector('.new-comment a');
+    const commentsList = document.querySelector('.comments-list');
 
-document.querySelector('.new-comment a').addEventListener('click', function () {
-    const commentForm = document.querySelector('.comment-form');
-    const current = commentForm.style.display;
-    commentForm.style.display = (current === 'none' || current === '') ? 'block' : 'none';
-});
+    commentFormTextarea.addEventListener('input', updateCharCount);
+    newCommentLink.addEventListener('click', toggleCommentFormDisplay);
+    commentsList.addEventListener('click', handleReplyButtonClick);
 
-document.querySelector('.comments-list').addEventListener('click', function (event) {
-    if (event.target.classList.contains('reply-button')) {
-        const commentElement = event.target.closest('.comment');
-        const commentAuthor = commentElement.querySelector('.author-name').textContent;
-        const commentId = commentElement.getAttribute('data-comment-id');
+    function updateCharCount() {
+        const maxChars = 2400;
+        const currentLength = this.value.length;
+        const remainingChars = maxChars - currentLength;
+        document.querySelector('.char-count span').textContent = remainingChars;
+    }
+
+    function toggleCommentFormDisplay() {
         const commentForm = document.querySelector('.comment-form');
-        const textarea = commentForm.querySelector('textarea[name="content"]');
-        const parentIdInput = commentForm.querySelector('input[name="parent_id"]');
+        const current = commentForm.style.display;
+        commentForm.style.display = (current === 'none' || current === '') ? 'block' : 'none';
+    }
 
-        commentForm.style.display = 'block';
+    function handleReplyButtonClick(event) {
+        if (event.target.classList.contains('reply-button')) {
+            const commentElement = event.target.closest('.comment');
+            const commentAuthor = commentElement.querySelector('.author-name').textContent;
+            const commentId = commentElement.getAttribute('data-comment-id');
+            const commentForm = document.querySelector('.comment-form');
+            const textarea = commentForm.querySelector('textarea[name="content"]');
+            const parentIdInput = commentForm.querySelector('input[name="parent_id"]');
 
-        textarea.value = `@${commentAuthor} `;
-        parentIdInput.value = commentId;
-        textarea.focus();
+            commentForm.style.display = 'block';
 
-        window.scrollTo({
-            top: commentForm.getBoundingClientRect().top + window.scrollY - 100,
-            behavior: 'smooth'
-        });
+            textarea.value = `@${commentAuthor} `;
+            parentIdInput.value = commentId;
+            textarea.focus();
+
+            window.scrollTo({
+                top: commentForm.getBoundingClientRect().top + window.scrollY - 100,
+                behavior: 'smooth'
+            });
+        }
     }
 });
-
