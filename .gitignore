@@ -4,3 +4,4 @@
 composer.lock
 storage/
 .phpunit.result.cache
+database/comments.sqlite
