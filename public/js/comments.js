@@ -1,7 +1,9 @@
 import CommentFormHandler from './CommentFormHandler.js';
+import CommentInserter from './CommentInserter.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     new CommentFormHandler().init();
+    new CommentInserter().init();
 });
 
 document.querySelector('.comment-form textarea').addEventListener('input', function () {
