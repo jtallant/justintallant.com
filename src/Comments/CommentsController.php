@@ -35,6 +35,7 @@ class CommentsController extends BaseController
             'entry_uri' => 'required|string',
             'author' => 'required|string|max:70',
             'content' => 'required|string|max:2400',
+            'parent_id' => 'nullable|integer',
         ]);
 
         if ($validator->fails()) {
@@ -57,6 +58,13 @@ class CommentsController extends BaseController
             $data['content'],
             new \DateTime()
         );
+
+        if (!empty($data['parent_id'])) {
+            $parentComment = $this->comments->find($data['parent_id']);
+            if ($parentComment) {
+                $comment->setParent($parentComment);
+            }
+        }
 
         $this->indicateBlogAuthorIfBlogAuthor($comment);
 

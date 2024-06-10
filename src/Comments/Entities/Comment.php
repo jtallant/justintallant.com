@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustinTallant\Comments\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -16,6 +18,12 @@ class Comment implements \JsonSerializable
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Comment")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
+     */
+    private $parent;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -46,26 +54,35 @@ class Comment implements \JsonSerializable
         string $entryUri,
         string $author,
         string $content,
-        \DateTime $createdAt,
-        bool $isAuthor = false
+        \DateTime $createdAt
     ) {
         $this->entryUri = $entryUri;
         $this->author = $author;
         $this->content = $content;
         $this->createdAt = $createdAt;
-        $this->isAuthor = $isAuthor;
     }
 
     public function jsonSerialize(): array
     {
         return [
             'id' => $this->id,
+            'parent_id' => $this->parent ? $this->parent->id : null,
             'entry_uri' => $this->entryUri,
             'author' => $this->author,
             'content' => $this->content,
             'is_author' => $this->isAuthor,
             'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
         ];
+    }
+
+    public function parent(): ?Comment
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?Comment $parent): void
+    {
+        $this->parent = $parent;
     }
 
     public function id(): int
