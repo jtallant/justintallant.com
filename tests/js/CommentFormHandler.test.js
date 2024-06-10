@@ -14,6 +14,7 @@ describe('CommentFormHandler', () => {
                 <textarea name="content">Test Content</textarea>
                 <input name="parent_id" value="123">
                 <input name="entry_uri" value="test-entry-uri">
+                <div class="char-count"><span>2400</span></div>
             </form>
         `);
         const document = dom.window.document;
@@ -103,5 +104,6 @@ describe('CommentFormHandler', () => {
         expect(form.querySelector('input[name="author"]').value).toBe('');
         expect(form.querySelector('textarea[name="content"]').value).toBe('');
         expect(form.querySelector('input[name="parent_id"]').value).toBe('');
+        expect(form.querySelector('.char-count span').textContent).toBe('2400');
     });
 });
