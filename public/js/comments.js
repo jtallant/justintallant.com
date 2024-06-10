@@ -38,14 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             commentForm.style.display = 'block';
 
-            textarea.value = `@${commentAuthor} `;
-            parentIdInput.value = commentId;
-            textarea.focus();
+            commentForm.scrollIntoView({ behavior: 'smooth', block: 'center', duration: 1200 });
 
-            window.scrollTo({
-                top: commentForm.getBoundingClientRect().top + window.scrollY - 100,
-                behavior: 'smooth'
-            });
+            setTimeout(() => {
+                textarea.value = `@${commentAuthor} `;
+                parentIdInput.value = commentId;
+                textarea.focus();
+            }, 1200);
         }
     }
 });
