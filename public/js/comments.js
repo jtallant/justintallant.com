@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleReplyButtonClick(event) {
-        if (event.target.classList.contains('reply-button')) {
+        if (event.target.closest('a.reply-button')) {
+            event.preventDefault();
             const commentElement = event.target.closest('.comment');
             const commentAuthor = commentElement.querySelector('.author-name').textContent;
             const commentId = commentElement.getAttribute('data-comment-id');

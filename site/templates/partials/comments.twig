@@ -1,7 +1,6 @@
 <div class="comments">
     <div class="comments-header">
         <h4>Comments</h4>
-        <a href="javascript:void(0)">{% include 'svg/plus.twig' %}</a>
     </div>
 
     <div class="new-comment">
@@ -39,11 +38,13 @@
                 </div>
                 <time>{{ comment.created_at|date("M jS g:ia") }}</time>
                 <div class="comment-content">
-                    <p>
-                        {{ comment.content|striptags('<br>')|raw }}
-                    </p>
+                    {{ comment.content|striptags('<br>')|raw }}
                 </div>
-                <button class="reply-button">Reply</button>
+
+                <a class="reply-button" href="javascript:void(0)">
+                    {% include 'svg/comment.twig' %}
+                </a>
+
                 <div class="replies">
                     {% for childComment in childComments(comment.id) %}
                         {% include 'partials/comment.twig' with {'comment': childComment} %}
@@ -60,10 +61,14 @@
                 <div class="author-img author-non-author-img"></div>
                 <span class="author-name"></span>
             </div>
+
             <div class="comment-content">
-                <p></p>
             </div>
-            <button class="reply-button">Reply</button>
+
+            <a class="reply-button" href="#">
+                {% include 'svg/comment.twig' %}
+            </a>
+
             <div class="replies"></div>
         </div> <!-- .comment -->
     </div> <!-- #comment-template -->

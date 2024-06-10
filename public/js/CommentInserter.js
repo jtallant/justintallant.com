@@ -18,7 +18,7 @@ export default class CommentInserter {
 
     populateComment(commentClone, data) {
         commentClone.querySelector('.author-name').textContent = data.author;
-        commentClone.querySelector('.comment-content p').innerHTML = data.content;
+        commentClone.querySelector('.comment-content').innerHTML = data.content;
         commentClone.setAttribute('data-comment-id', data.id);
         this.toggleAuthorImage(commentClone, data.is_author);
     }

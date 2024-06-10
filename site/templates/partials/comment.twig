@@ -9,9 +9,11 @@
     </div>
     <time>{{ comment.created_at|date("M jS g:ia") }}</time>
     <div class="comment-content">
-        <p>
-            {{ comment.content|striptags('<br>')|raw }}
-        </p>
+        {{ comment.content|striptags('<br>')|raw }}
     </div>
-    <button class="reply-button">Reply</button>
+
+    <a class="reply-button" href="javascript:void(0)">
+        {% include 'svg/comment.twig' %}
+    </a>
 </div> <!-- .comment -->
+
