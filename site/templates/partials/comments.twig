@@ -26,7 +26,7 @@
     </form>
 
     <div class="comments-list">
-        {% for comment in comments().getEntryComments(entry.uri) %}
+        {% for comment in comments(entry.uri) %}
             <div class="comment">
                 <div class="comment-author">
                     {% if comment.is_author %}
@@ -44,6 +44,19 @@
             </div> <!-- .comment -->
         {% endfor %}
     </div>
-</div>
+
+    <div id="comment-template" style="display: none;">
+        <div class="comment">
+            <div class="comment-author">
+                <img class="author-img author-author-img" src="/img/justin-icon.jpg" alt="Justin Tallant" style="display: none;" />
+                <div class="author-img author-non-author-img"></div>
+                <span class="author-name"></span>
+            </div>
+            <div class="comment-content">
+                <p></p>
+            </div>
+        </div> <!-- .comment -->
+    </div> <!-- .comment -->
+</div> <!-- .comments -->
 
 <script src="/js/comments.js"></script>

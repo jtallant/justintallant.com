@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace JustinTallant\Comments;
 
 use Illuminate\Support\ServiceProvider;
+use JustinTallant\Comments\Entities\Comment;
 
 class CommentsServiceProvider extends ServiceProvider
 {
@@ -16,8 +17,12 @@ class CommentsServiceProvider extends ServiceProvider
 
         $twig = $this->app->get('twig');
 
-        $twig->addFunction(new \Twig\TwigFunction('comments', function () {
-            return $this->app->get(CommentsRepository::class);
+        $twig->addFunction(new \Twig\TwigFunction('comments', function ($entryUri) {
+            $comments = $this->app->make('registry')
+                ->getManager('comments')
+                ->getRepository(Comment::class);
+
+            return $comments->findBy(['entryUri' => $entryUri]);
         }));
 
         $this->setupCommentsDatabase();

@@ -5,28 +5,24 @@ namespace JustinTallant\Comments;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Factory;
-use Doctrine\ORM\EntityManagerInterface;
-use Twig\Environment as TwigEnvironment;
 use JustinTallant\Comments\Entities\Comment;
 use Laravel\Lumen\Routing\Controller as BaseController;
-use LaravelDoctrine\ORM\IlluminateRegistry as Registery;
+use LaravelDoctrine\ORM\IlluminateRegistry as Registry;
 
 class CommentsController extends BaseController
 {
     private $validator;
-    private $twig;
     private $em;
     private $comments;
 
-    public function __construct(Factory $validator, TwigEnvironment $twig, Registery $registry)
+    public function __construct(Factory $validator, Registry $registry)
     {
         $this->validator = $validator;
-        $this->twig = $twig;
         $this->em = $registry->getManager('comments');
-        $this->comments = $this->em->getRepository(Entities\Comment::class);
+        $this->comments = $this->em->getRepository(Comment::class);
     }
 
-    public function index(Request $request, EntityManagerInterface $em): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         return response()->json(
             $this->comments->findBy(['entryUri' => $request->get('entry_uri')])
@@ -62,11 +58,10 @@ class CommentsController extends BaseController
         $this->em->persist($comment);
         $this->em->flush();
 
-        return response()
-            ->json([
-                'message' => 'Comment added successfully',
-                'data' => $comment,
-            ], 201);
+        return response()->json([
+            'message' => 'Comment added successfully',
+            'data' => $comment,
+        ], 201);
     }
 
     private function indicateBlogAuthorIfBlogAuthor(Comment $comment): void

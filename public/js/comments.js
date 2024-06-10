@@ -20,9 +20,23 @@ document.querySelectorAll('.comment-form').forEach(form => {
             body: JSON.stringify(data)
         })
         .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            // Put the comment on the page
+        .then(response => {
+            const data = response.data;
+            const commentTemplate = document.querySelector('#comment-template .comment').cloneNode(true);
+
+            commentTemplate.querySelector('.author-name').textContent = data.author;
+            commentTemplate.querySelector('.comment-content p').textContent = data.content;
+
+            if (data.is_author) {
+                commentTemplate.querySelector('.author-author-img').style.display = 'block';
+                commentTemplate.querySelector('.author-non-author-img').style.display = 'none';
+            } else {
+                commentTemplate.querySelector('.author-author-img').style.display = 'none';
+                commentTemplate.querySelector('.author-non-author-img').style.display = 'block';
+            }
+
+            const commentsList = document.querySelector('.comments-list');
+            commentsList.insertBefore(commentTemplate, commentsList.firstChild);
         })
         .catch((error) => {
             console.error('Error:', error);
