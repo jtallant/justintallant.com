@@ -21,9 +21,9 @@ class Comment implements \JsonSerializable
 
     /**
      * @ORM\ManyToOne(targetEntity="Comment")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="replies_to_id", referencedColumnName="id", nullable=true)
      */
-    private $parent;
+    private $repliesTo;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -39,11 +39,6 @@ class Comment implements \JsonSerializable
      * @ORM\Column(type="text")
      */
     private $content;
-
-    /**
-     * @ORM\Column(type="boolean", options={"default": false})
-     */
-    private $isAuthor = false;
 
     /**
      * @ORM\Column(type="datetime")
@@ -66,23 +61,22 @@ class Comment implements \JsonSerializable
     {
         return [
             'id' => $this->id,
-            'parent_id' => $this->parent ? $this->parent->id : null,
+            'replies_to_id' => $this->repliesTo ? $this->repliesTo->id : null,
             'entry_uri' => $this->entryUri,
             'author' => $this->author,
             'content' => $this->content,
-            'is_author' => $this->isAuthor,
             'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
         ];
     }
 
-    public function parent(): ?Comment
+    public function repliesTo(): ?Comment
     {
-        return $this->parent;
+        return $this->repliesTo;
     }
 
-    public function setParent(?Comment $parent): void
+    public function setRepliesTo(?Comment $repliesTo): void
     {
-        $this->parent = $parent;
+        $this->repliesTo = $repliesTo;
     }
 
     public function id(): int
@@ -103,17 +97,6 @@ class Comment implements \JsonSerializable
     public function content(): string
     {
         return $this->content;
-    }
-
-    public function isAuthor(): bool
-    {
-        return $this->isAuthor;
-    }
-
-    public function setAuthor(string $author): void
-    {
-        $this->author = $author;
-        $this->isAuthor = true;
     }
 
     public function createdAt(): \DateTime

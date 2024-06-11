@@ -6,39 +6,17 @@ namespace JustinTallant\Comments;
 
 use Illuminate\Support\ServiceProvider;
 use JustinTallant\Comments\Entities\Comment;
+use JustinTallant\Comments\CommentViewDecorator;
 
 class CommentsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->loadAndMergeConfigFrom(__DIR__ . '/config/database.php', 'database');
-        $this->loadAndMergeConfigFrom(__DIR__ . '/config/doctrine.php', 'doctrine');
-        $this->loadAndMergeConfigFrom(__DIR__ . '/config/comments.php', 'comments');
+        $this->mergeConfigs();
 
-        $twig = $this->app->get('twig');
+        $this->loadCommentTemplates();
 
-        $viewFactory = $this->app->get('view');
-        $newPath = base_path('src/Comments/templates');
-        $viewFactory->addLocation($newPath);
-
-        $comments = $this->app->make('registry')
-            ->getManager('comments')
-            ->getRepository(Comment::class);
-
-        $twig->addFunction(new \Twig\TwigFunction('comments', function ($entryUri) use ($comments) {
-            $comments = $this->app->make('registry')
-                ->getManager('comments')
-                ->getRepository(Comment::class);
-
-            return $comments->findBy([
-                'entryUri' => $entryUri,
-                'parent' => null,
-            ], ['createdAt' => 'DESC']);
-        }));
-
-        $twig->addFunction(new \Twig\TwigFunction('childComments', function ($parentId) use ($comments) {
-            return $comments->findBy(['parent' => $parentId,], ['createdAt' => 'ASC']);
-        }));
+        $this->addCommentsTwigFunctions();
 
         $this->setupCommentsDatabase();
     }
@@ -47,6 +25,13 @@ class CommentsServiceProvider extends ServiceProvider
     {
         $router = $this->app->router;
         require __DIR__ . '/routes.php';
+    }
+
+    private function mergeConfigs()
+    {
+        $this->loadAndMergeConfigFrom(__DIR__ . '/config/database.php', 'database');
+        $this->loadAndMergeConfigFrom(__DIR__ . '/config/doctrine.php', 'doctrine');
+        $this->loadAndMergeConfigFrom(__DIR__ . '/config/comments.php', 'comments');
     }
 
     private function loadAndMergeConfigFrom(string $path, string $key): void
@@ -73,7 +58,47 @@ class CommentsServiceProvider extends ServiceProvider
         if (['comments', 'emails'] != $tables) {
             $schemaTool->createSchema($classes);
         }
+    }
 
-        $schemaTool->updateSchema($classes, true);
+    private function addCommentsTwigFunctions(): void
+    {
+        $twig = $this->app->get('twig');
+
+        $commentsRepo = $this->app->make('registry')
+            ->getManager('comments')
+            ->getRepository(Comment::class);
+
+        $config = $this->app->make('config');
+        $siteOwnerSecret = $config->get('comments.site_owner_secret');
+        $siteOwnerName = $config->get('comments.site_owner_name');
+
+        $getComments = function ($entryUri) use ($commentsRepo, $siteOwnerSecret, $siteOwnerName) {
+            $comments = $commentsRepo->findBy([
+                'entryUri' => $entryUri,
+                'repliesTo' => null,
+            ], ['createdAt' => 'DESC']);
+
+            return array_map(function ($comment) use ($siteOwnerSecret, $siteOwnerName) {
+                return new CommentViewDecorator($comment, $siteOwnerSecret, $siteOwnerName);
+            }, $comments);
+        };
+
+        $getChildren = function ($repliesToId) use ($commentsRepo, $siteOwnerSecret, $siteOwnerName) {
+            $comments =  $commentsRepo->findBy(['repliesTo' => $repliesToId,], ['createdAt' => 'ASC']);
+
+            return array_map(function ($comment) use ($siteOwnerSecret, $siteOwnerName) {
+                return new CommentViewDecorator($comment, $siteOwnerSecret, $siteOwnerName);
+            }, $comments);
+        };
+
+        $twig->addFunction(new \Twig\TwigFunction('comments', $getComments));
+        $twig->addFunction(new \Twig\TwigFunction('childComments', $getChildren));
+    }
+
+    private function loadCommentTemplates(): void
+    {
+        $viewFactory = $this->app->get('view');
+        $newPath = base_path('src/Comments/templates');
+        $viewFactory->addLocation($newPath);
     }
 }

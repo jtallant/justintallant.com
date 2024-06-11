@@ -21,7 +21,7 @@
         <div class="char-count">
             <span>2400</span> characters remaining
         </div>
-        <input type="hidden" name="parent_id" value="">
+        <input type="hidden" name="replies_to_id" value="">
         <button type="submit">Submit Comment</button>
     </form>
 
@@ -30,18 +30,18 @@
             <div class="comment" data-comment-id="{{ comment.id }}">
 
                 <div class="comment-author">
-                    {% if comment.is_author %}
+                    {% if comment.isSiteOwner %}
                         <img class="author-img" src="/img/justin-icon.jpg" alt="Justin Tallant" />
                     {% else %}
                         <div class="author-img"></div>
                     {% endif %}
-                    <span class="author-name">{{ comment.author }}</span>
+                    <span class="author-name">{{ comment.displayName }}</span>
                 </div>
 
-                <time>{{ comment.created_at|date("M jS g:ia") }}</time>
+                <time>{{ comment.date }}</time>
 
                 <div class="comment-content">
-                    {{ comment.content|striptags('<br>')|raw }}
+                    {{ comment.content|raw }}
                 </div>
 
                 <a class="reply-button" href="javascript:void(0)">
@@ -66,7 +66,7 @@
                 <span class="author-name"></span>
             </div>
 
-            <time>{{ comment.created_at|date("M jS g:ia") }}</time>
+            <time>{{ comment.date }}</time>
 
             <div class="comment-content">
             </div>

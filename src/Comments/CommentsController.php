@@ -11,20 +11,20 @@ use LaravelDoctrine\ORM\IlluminateRegistry as Registry;
 
 class CommentsController extends BaseController
 {
-    private $validator;
     private $em;
     private $comments;
+    private $validator;
 
     public function __construct(Factory $validator, Registry $registry)
     {
-        $this->validator = $validator;
         $this->em = $registry->getManager('comments');
         $this->comments = $this->em->getRepository(Comment::class);
+        $this->validator = $validator;
     }
 
     public function index(Request $request): JsonResponse
     {
-        return response()->json(
+        return new JsonResponse(
             $this->comments->findBy(['entryUri' => $request->get('entry_uri')])
         );
     }
@@ -35,7 +35,7 @@ class CommentsController extends BaseController
             'entry_uri' => 'required|string',
             'author' => 'required|string|max:70',
             'content' => 'required|string|max:2400',
-            'parent_id' => 'nullable|integer',
+            'replies_to_id' => 'nullable|integer',
         ]);
 
         if ($validator->fails()) {
@@ -59,28 +59,21 @@ class CommentsController extends BaseController
             new \DateTime()
         );
 
-        if (!empty($data['parent_id'])) {
-            $parentComment = $this->comments->find($data['parent_id']);
-            if ($parentComment) {
-                $comment->setParent($parentComment);
+        if (!empty($data['replies_to_id'])) {
+
+            $repliesTo = $this->comments->find($data['replies_to_id']);
+
+            if ($repliesTo) {
+                $comment->setRepliesTo($repliesTo);
             }
         }
-
-        $this->indicateBlogAuthorIfBlogAuthor($comment);
 
         $this->em->persist($comment);
         $this->em->flush();
 
-        return response()->json([
+        return new JsonResponse([
             'message' => 'Comment added successfully',
             'data' => $comment,
         ], 201);
-    }
-
-    private function indicateBlogAuthorIfBlogAuthor(Comment $comment): void
-    {
-        if ($comment->author() === config('comments.author_secret')) {
-            $comment->setAuthor(config('comments.author_name'));
-        }
     }
 }

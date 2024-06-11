@@ -36,7 +36,7 @@ export default class CommentInserter {
     addCommentToDOM(commentClone, data) {
         const commentsList = this.domDoc.querySelector('.comments-list');
 
-        if (data.parent_id) {
+        if (data.replies_to_id) {
             this.insertReply(data, commentClone, commentsList);
         } else {
             this.insertNewComment(commentClone, commentsList);
@@ -51,11 +51,10 @@ export default class CommentInserter {
     }
 
     insertReply(data, commentClone, commentsList) {
-        const parentComment = commentsList.querySelector(`.comment[data-comment-id="${data.parent_id}"]`);
+        const parentComment = commentsList.querySelector(`.comment[data-comment-id="${data.replies_to_id}"]`);
         if (parentComment) {
             const repliesDiv = parentComment.querySelector('.replies');
             repliesDiv.appendChild(commentClone);
         }
     }
 }
-

@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const commentId = commentElement.getAttribute('data-comment-id');
             const commentForm = document.querySelector('.comment-form');
             const textarea = commentForm.querySelector('textarea[name="content"]');
-            const parentIdInput = commentForm.querySelector('input[name="parent_id"]');
+            const repliesToIdInput = commentForm.querySelector('input[name="replies_to_id"]');
 
             commentForm.style.display = 'block';
 
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             setTimeout(() => {
                 textarea.value = `@${commentAuthor} `;
-                parentIdInput.value = commentId;
+                repliesToIdInput.value = commentId;
                 textarea.focus();
             }, 1200);
         }

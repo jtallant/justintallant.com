@@ -15,7 +15,7 @@ export default class CommentFormHandler {
         const data = {
             author: formElements['author'].value,
             content: formElements['content'].value,
-            parent_id: formElements['parent_id'].value,
+            replies_to_id: formElements['replies_to_id'].value,
             entry_uri: formElements['entry_uri'].value
         }
 
@@ -50,7 +50,7 @@ export default class CommentFormHandler {
     clearFormFields() {
         this.form.querySelector('input[name="author"]').value = '';
         this.form.querySelector('textarea[name="content"]').value = '';
-        this.form.querySelector('input[name="parent_id"]').value = '';
+        this.form.querySelector('input[name="replies_to_id"]').value = '';
         this.form.querySelector('.char-count span').textContent = '2400';
     }
 }

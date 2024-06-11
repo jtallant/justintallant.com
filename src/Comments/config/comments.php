@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'author_secret' => env('COMMENTS_AUTHOR_SECRET', null),
-    'author_name' => env('COMMENTS_AUTHOR_NAME', 'Author'),
+    'site_owner_secret' => env('COMMENTS_SITE_OWNER_SECRET', null),
+    'site_owner_name' => env('COMMENTS_SITE_OWNER_NAME', 'Author'),
 ];

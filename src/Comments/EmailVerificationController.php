@@ -4,7 +4,6 @@ namespace JustinTallant\Comments;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\View\View;
 use JustinTallant\Comments\Entities\Email;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use LaravelDoctrine\ORM\IlluminateRegistry as Registry;
@@ -27,7 +26,7 @@ class EmailVerificationController extends BaseController
         $email = $this->emails->findOneBy(['token' => $token]);
 
         if (empty($email)) {
-            return response('Invalid token', 400);
+            return new Response('Invalid token', 400);
         }
 
         $email->verify();
