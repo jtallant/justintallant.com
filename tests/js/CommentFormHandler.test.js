@@ -12,14 +12,17 @@ describe('CommentFormHandler', () => {
             <form id="comment-form">
                 <input name="author" value="Test Author">
                 <textarea name="content">Test Content</textarea>
-                <input name="parent_id" value="123">
-                <input name="entry_uri" value="test-entry-uri">
+                <input type="hidden" name="replies_to_id" value="123">
+                <input type="hidden" name="entry_uri" value="test-entry-uri">
                 <div class="char-count"><span>2400</span></div>
             </form>
         `);
         const document = dom.window.document;
         form = document.getElementById('comment-form');
         commentFormHandler = new CommentFormHandler(document);
+
+        vi.spyOn(console, 'error').mockImplementation(() => { });
+        vi.spyOn(console, 'warn').mockImplementation(() => { });
     });
 
     it('should initialize and add submit event listener', () => {
@@ -41,18 +44,19 @@ describe('CommentFormHandler', () => {
     });
 
     it('should post comment with form data', () => {
-        const fetchSpy = vi.spyOn(global, 'fetch').mockResolvedValue({
-            json: () => Promise.resolve({ data: { author: 'Test Author', content: 'Test Content', parent_id: '123', entry_uri: 'test-entry-uri' } })
-        });
-
-        const expectedData = {
+        const data = {
             author: form.querySelector('input[name="author"]').value,
             content: form.querySelector('textarea[name="content"]').value,
-            parent_id: form.querySelector('input[name="parent_id"]').value,
+            replies_to_id: form.querySelector('input[name="replies_to_id"]').value,
             entry_uri: form.querySelector('input[name="entry_uri"]').value
         };
 
+        const fetchSpy = vi.spyOn(global, 'fetch').mockResolvedValue({
+            json: () => Promise.resolve({ data: data })
+        });
+
         commentFormHandler.init();
+
         form.dispatchEvent(new dom.window.Event('submit'));
 
         expect(fetchSpy).toHaveBeenCalledWith('/api/comments', {
@@ -60,14 +64,13 @@ describe('CommentFormHandler', () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(expectedData)
+            body: JSON.stringify(data)
         });
 
         fetchSpy.mockRestore();
     });
 
     it('should handle response and dispatch custom event', () => {
-        // Mock the document and its methods
         const mockForm = {
             addEventListener: vi.fn(),
             querySelector: vi.fn().mockReturnValue({ value: 'test-value' })
@@ -78,10 +81,8 @@ describe('CommentFormHandler', () => {
             getElementById: vi.fn().mockReturnValue(mockForm)
         };
 
-        // Create an instance of the class with the mocked document
         const handler = new CommentFormHandler(mockDocument);
 
-        // Mock response data
         const mockResponse = {
             data: {
                 author: 'John Doe',
@@ -89,10 +90,8 @@ describe('CommentFormHandler', () => {
             }
         };
 
-        // Call the method under test
         handler.handleResponse(mockResponse);
 
-        // Assert that dispatchEvent was called correctly
         expect(mockDocument.dispatchEvent).toHaveBeenCalledWith(
             new CustomEvent('commentPosted', { detail: mockResponse.data })
         );
@@ -103,7 +102,7 @@ describe('CommentFormHandler', () => {
 
         expect(form.querySelector('input[name="author"]').value).toBe('');
         expect(form.querySelector('textarea[name="content"]').value).toBe('');
-        expect(form.querySelector('input[name="parent_id"]').value).toBe('');
+        expect(form.querySelector('input[name="replies_to_id"]').value).toBe('');
         expect(form.querySelector('.char-count span').textContent).toBe('2400');
     });
 });

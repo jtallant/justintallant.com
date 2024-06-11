@@ -28,21 +28,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleReplyButtonClick(event) {
         if (event.target.closest('a.reply-button')) {
+
             event.preventDefault();
-            const commentElement = event.target.closest('.comment');
-            const commentAuthor = commentElement.querySelector('.author-name').textContent;
-            const commentId = commentElement.getAttribute('data-comment-id');
-            const commentForm = document.querySelector('.comment-form');
+            const commentForm = document.getElementById('comment-form');
+            const commentReplyingTo = event.target.closest('.comment');
+
+            const replyingToAuthor = commentReplyingTo.querySelector('.author-name').textContent;
+
             const textarea = commentForm.querySelector('textarea[name="content"]');
-            const repliesToIdInput = commentForm.querySelector('input[name="replies_to_id"]');
+            textarea.value = `@${replyingToAuthor} `;
+
+            const repliesTo = commentForm.querySelector('input[name="replies_to_id"]');
 
             commentForm.style.display = 'block';
+            repliesTo.value = commentReplyingTo.getAttribute('data-root-comment-id');
 
             commentForm.scrollIntoView({ behavior: 'smooth', block: 'center', duration: 1200 });
 
             setTimeout(() => {
-                textarea.value = `@${commentAuthor} `;
-                repliesToIdInput.value = commentId;
                 textarea.focus();
             }, 1200);
         }

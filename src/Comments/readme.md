@@ -5,3 +5,6 @@
 1. Add the database to gitignore
 1. run a command on your server to create the file
 1. different db connection for local comments and production comments
+
+## Notes
+* Put your icon image in public/img/author.jpg

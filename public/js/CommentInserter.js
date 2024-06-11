@@ -20,16 +20,12 @@ export default class CommentInserter {
         commentClone.querySelector('.author-name').textContent = data.author;
         commentClone.querySelector('.comment-content').innerHTML = data.content;
         commentClone.setAttribute('data-comment-id', data.id);
-        this.toggleAuthorImage(commentClone, data.is_author);
-    }
+        commentClone.querySelector('time').textContent = data.created_at;
+        commentClone.setAttribute('data-root-comment-id', data.root_comment_id);
 
-    toggleAuthorImage(commentClone, isAuthor) {
-        if (isAuthor) {
-            commentClone.querySelector('.author-author-img').style.display = 'block';
-            commentClone.querySelector('.author-non-author-img').style.display = 'none';
-        } else {
-            commentClone.querySelector('.author-author-img').style.display = 'none';
-            commentClone.querySelector('.author-non-author-img').style.display = 'block';
+        if (data.image_html) {
+            const commentAuthorDiv = commentClone.querySelector('.comment-author');
+            commentAuthorDiv.insertAdjacentHTML('afterbegin', data.image_html);
         }
     }
 

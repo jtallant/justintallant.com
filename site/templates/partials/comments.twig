@@ -8,33 +8,14 @@
         <a href="javascript:void(0)">New Comment</a>
     </div>
 
-    <form id="comment-form" class="comment-form" style="display: none;">
-        <div class="form-group">
-            <label for="comment_author">Name</label>
-            <input type="text" id="comment_author" name="author" required>
-            <input type="hidden" name="entry_uri" value="{{ entry.uri }}">
-        </div>
-        <div class="form-group">
-            <label for="comment_content">Comment</label>
-            <textarea id="comment_content" name="content" rows="4" required></textarea>
-        </div>
-        <div class="char-count">
-            <span>2400</span> characters remaining
-        </div>
-        <input type="hidden" name="replies_to_id" value="">
-        <button type="submit">Submit Comment</button>
-    </form>
+    {% include 'partials/comments-form.twig' with {'entry': entry} %}
 
     <div class="comments-list">
         {% for comment in comments(entry.uri) %}
-            <div class="comment" data-comment-id="{{ comment.id }}">
+            <div class="comment" data-comment-id="{{ comment.id }}" data-root-comment-id="{{ comment.id }}">
 
                 <div class="comment-author">
-                    {% if comment.isSiteOwner %}
-                        <img class="author-img" src="/img/justin-icon.jpg" alt="Justin Tallant" />
-                    {% else %}
-                        <div class="author-img"></div>
-                    {% endif %}
+                    {{ comment.imgHtml()|raw }}
                     <span class="author-name">{{ comment.displayName }}</span>
                 </div>
 
@@ -50,7 +31,7 @@
 
                 <div class="replies">
                     {% for childComment in childComments(comment.id) %}
-                        {% include 'partials/comment.twig' with {'comment': childComment} %}
+                        {% include 'partials/child-comment.twig' with {'child': childComment, 'parent': comment} %}
                     {% endfor %}
                 </div> <!-- .replies -->
             </div> <!-- .comment -->
@@ -58,15 +39,14 @@
     </div>
 
     <div id="comment-template" style="display: none;">
-        <div class="comment" data-comment-id="0">
+        <div class="comment" data-comment-id="0" data-root-comment-id="0">
 
             <div class="comment-author">
-                <img class="author-img author-author-img" src="/img/justin-icon.jpg" alt="Justin Tallant" style="display: none;" />
-                <div class="author-img author-non-author-img"></div>
+                <!-- img will be added via JS -->
                 <span class="author-name"></span>
             </div>
 
-            <time>{{ comment.date }}</time>
+            <time></time>
 
             <div class="comment-content">
             </div>

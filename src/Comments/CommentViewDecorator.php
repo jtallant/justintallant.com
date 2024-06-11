@@ -38,6 +38,8 @@ class CommentViewDecorator implements \JsonSerializable
             'author' => $this->displayName(),
             'content' => $this->content(),
             'created_at' => $this->date(),
+            'image_html' => $this->imgHtml(),
+            'root_comment_id' => $this->rootCommentId(),
         ];
     }
 
@@ -60,6 +62,11 @@ class CommentViewDecorator implements \JsonSerializable
         return (string) $this->comment->repliesTo()->id();
     }
 
+    public function rootCommentId(): string
+    {
+        return (string) ($this->repliesToId() ?? $this->id());
+    }
+
     public function date(): string
     {
         return $this->comment->createdAt()->format('M jS g:ia');
@@ -80,5 +87,12 @@ class CommentViewDecorator implements \JsonSerializable
         return $this->isSiteOwner()
             ? $this->siteOwnerName
             : $this->comment->author();
+    }
+
+    public function imgHtml(): string
+    {
+        return $this->isSiteOwner()
+            ? '<img class="author-img" src="/img/author.jpg" alt="' . $this->siteOwnerName . '" />'
+            : '<div class="author-img"></div>';
     }
 }
