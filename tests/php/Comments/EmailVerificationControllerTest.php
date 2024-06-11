@@ -22,11 +22,13 @@ class EmailVerificationControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_success_if_token_is_valid(): void
+    public function it_shows_success_page_if_token_is_valid(): void
     {
         $email = new Email('Justin Tallant', 'test@test.com', 'example-entry-uri');
         $this->em->persist($email);
         $this->em->flush();
+
+        $this->assertFalse($email->verified());
 
         $response = $this->call(
             'GET',
@@ -34,6 +36,10 @@ class EmailVerificationControllerTest extends TestCase
             ['token' => $email->token()]
         );
 
-        $response->assertStatus(200);
+        $response
+            ->assertStatus(200)
+            ->assertSee('Email Verified');
+
+        $this->assertTrue($email->verified());
     }
 }

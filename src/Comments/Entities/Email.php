@@ -99,6 +99,11 @@ class Email implements \JsonSerializable
         $this->verifiedAt = new \DateTime();
     }
 
+    public function verified(): bool
+    {
+        return $this->verifiedAt instanceof \DateTime;
+    }
+
     public function createdAt(): \DateTime
     {
         return $this->createdAt;
