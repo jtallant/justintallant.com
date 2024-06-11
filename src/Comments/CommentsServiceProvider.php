@@ -17,6 +17,10 @@ class CommentsServiceProvider extends ServiceProvider
 
         $twig = $this->app->get('twig');
 
+        $viewFactory = $this->app->get('view');
+        $newPath = base_path('src/Comments/templates');
+        $viewFactory->addLocation($newPath);
+
         $comments = $this->app->make('registry')
             ->getManager('comments')
             ->getRepository(Comment::class);
@@ -66,8 +70,10 @@ class CommentsServiceProvider extends ServiceProvider
         $schemaManager = $entityManager->getConnection()->getSchemaManager();
         $tables = $schemaManager->listTableNames();
 
-        if (empty($tables)) {
+        if (['comments', 'emails'] != $tables) {
             $schemaTool->createSchema($classes);
         }
+
+        $schemaTool->updateSchema($classes, true);
     }
 }

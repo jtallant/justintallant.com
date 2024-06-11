@@ -210,3 +210,52 @@
         }
     }
 }
+
+.email-verification {
+    max-width: 500px;
+
+    h1 {
+        margin-bottom: 25px;
+    }
+
+    .ev-data {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+
+        svg {
+            width: 18px;
+            height: 18px;
+            stroke: green;
+        }
+
+        span {
+            color: lighten(black, 50%);
+            font-size: 16px;
+            margin-left: 10px;
+        }
+    }
+
+    .ev-message {
+        margin-top: 20px;
+        max-width: 400px;
+        line-height: 1.75;
+    }
+
+    .ev-button {
+        display: inline-block;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px 20px;
+        border-radius: 5px;
+        background: lighten(black, 12%);
+        color: darken(white, 15%);
+        border: 1px solid black;
+
+        &:hover {
+            background: lighten(black, 16%);
+        }
+    }
+}
+
