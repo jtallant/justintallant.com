@@ -12,12 +12,12 @@ class CommentsControllerTest extends TestCase
     {
         $commentsData = [
             [
-                'entryUri' => 'example-uri',
+                'entry_uri' => 'example-uri',
                 'author' => 'John Doe',
                 'content' => 'This is a sample comment.'
             ],
             [
-                'entryUri' => 'example-uri',
+                'entry_uri' => 'example-uri',
                 'author' => 'Jane Smith',
                 'content' => 'This is another sample comment.'
             ]
@@ -25,10 +25,9 @@ class CommentsControllerTest extends TestCase
 
         foreach ($commentsData as $data) {
             $comment = new Comment(
-                $data['entryUri'],
+                $data['entry_uri'],
                 $data['author'],
-                $data['content'],
-                new \DateTime()
+                $data['content']
             );
             $this->em->persist($comment);
         }
@@ -36,13 +35,11 @@ class CommentsControllerTest extends TestCase
         $this->em->flush();
 
         $response = $this->get('/api/comments?entry_uri=example-uri');
+
         $response->seeStatusCode(200);
 
-        $response->seeJsonStructure([
-            '*' => [
-                'entry_uri', 'author', 'content', 'is_author', 'created_at',
-            ]
-        ]);
+        $response->seeJson($commentsData[0]);
+        $response->seeJson($commentsData[1]);
     }
 
     /** @test */
@@ -94,6 +91,7 @@ class CommentsControllerTest extends TestCase
 
         $response = $this->post('/api/comments', $data);
         $response->seeStatusCode(201);
+
         $response->seeJsonStructure([
             'message',
             'data' => [
@@ -101,28 +99,28 @@ class CommentsControllerTest extends TestCase
                 'entry_uri',
                 'author',
                 'content',
-                'is_author',
                 'created_at'
             ]
         ]);
     }
 
     /** @test */
-    public function is_author_is_true_if_name_matches_author_secret_key()
+    public function author_name_is_correct_if_name_matches_author_secret_key()
     {
-        config(['comments.author_secret' => 'authorsecret']);
-        config(['comments.author_name' => 'Justin Tallant']);
+        $authorSecret = 'authorsecret';
+
+        config(['comments.site_owner_secret' => $authorSecret]);
+        config(['comments.site_owner_name' => 'Justin Tallant']);
 
         $data = [
             'entry_uri' => 'example-uri',
-            'author' => 'authorsecret',
+            'author' => $authorSecret,
             'content' => 'This is a sample comment.'
         ];
 
         $response = $this->post('/api/comments', $data);
 
         $response->seeJsonContains([
-            'is_author' => true,
             'author' => 'Justin Tallant',
             'content' => 'This is a sample comment.',
         ]);

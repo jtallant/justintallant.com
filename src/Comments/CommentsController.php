@@ -24,9 +24,19 @@ class CommentsController extends BaseController
 
     public function index(Request $request): JsonResponse
     {
-        return new JsonResponse(
-            $this->comments->findBy(['entryUri' => $request->get('entry_uri')])
-        );
+        $comments = $this->comments
+            ->findBy([
+                'entryUri' => $request->get('entry_uri')
+            ]);
+
+        $siteOwnerSecret = config('comments.site_owner_secret');
+        $siteOwnerName = config('comments.site_owner_name');
+
+        $comments = array_map(function ($comment) use ($siteOwnerSecret, $siteOwnerName) {
+            return new CommentViewDecorator($comment, $siteOwnerSecret, $siteOwnerName);
+        }, $comments);
+
+        return new JsonResponse($comments);
     }
 
     public function store(Request $request): JsonResponse
@@ -55,8 +65,7 @@ class CommentsController extends BaseController
         $comment = new Comment(
             $data['entry_uri'],
             $data['author'],
-            $data['content'],
-            new \DateTime()
+            $data['content']
         );
 
         if (!empty($data['replies_to_id'])) {
@@ -73,7 +82,11 @@ class CommentsController extends BaseController
 
         return new JsonResponse([
             'message' => 'Comment added successfully',
-            'data' => $comment,
+            'data' => new CommentViewDecorator(
+                $comment,
+                config('comments.site_owner_secret'),
+                config('comments.site_owner_name')
+            ),
         ], 201);
     }
 }

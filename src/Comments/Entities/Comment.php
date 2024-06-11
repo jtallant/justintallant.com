@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="comments", schema="")
  */
-class Comment implements \JsonSerializable
+class Comment
 {
     /**
      * @ORM\Id
@@ -48,25 +48,12 @@ class Comment implements \JsonSerializable
     public function __construct(
         string $entryUri,
         string $author,
-        string $content,
-        \DateTime $createdAt
+        string $content
     ) {
         $this->entryUri = $entryUri;
         $this->author = $author;
         $this->content = $content;
-        $this->createdAt = $createdAt;
-    }
-
-    public function jsonSerialize(): array
-    {
-        return [
-            'id' => $this->id,
-            'replies_to_id' => $this->repliesTo ? $this->repliesTo->id : null,
-            'entry_uri' => $this->entryUri,
-            'author' => $this->author,
-            'content' => $this->content,
-            'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
-        ];
+        $this->createdAt = new \DateTime();
     }
 
     public function repliesTo(): ?Comment

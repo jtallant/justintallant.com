@@ -6,7 +6,7 @@ namespace JustinTallant\Comments;
 
 use JustinTallant\Comments\Entities\Comment;
 
-class CommentViewDecorator
+class CommentViewDecorator implements \JsonSerializable
 {
     protected Comment $comment;
 
@@ -29,9 +29,35 @@ class CommentViewDecorator
         $this->siteOwnerName = $siteOwnerName;
     }
 
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id(),
+            'replies_to_id' => $this->repliesToId(),
+            'entry_uri' => $this->comment->entryUri(),
+            'author' => $this->displayName(),
+            'content' => $this->content(),
+            'created_at' => $this->date(),
+        ];
+    }
+
     public function __call($method, $arguments)
     {
         return $this->comment->$method(...$arguments);
+    }
+
+    public function id(): string
+    {
+        return (string) $this->comment->id();
+    }
+
+    public function repliesToId(): ?string
+    {
+        if (empty($this->comment->repliesTo())) {
+            return null;
+        }
+
+        return (string) $this->comment->repliesTo()->id();
     }
 
     public function date(): string
