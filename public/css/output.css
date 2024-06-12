@@ -645,6 +645,16 @@ button {
 .comments #verify-email #verify-email-form p {
   margin-top: 20px;
 }
+.comments #verify-email #verify-email-form .success,
+.comments #verify-email #verify-email-form .error {
+  margin-top: 15px;
+}
+.comments #verify-email .success {
+  color: green;
+}
+.comments #verify-email .error {
+  color: #cc0000;
+}
 @keyframes fadeIn {
   from {
     opacity: 0;

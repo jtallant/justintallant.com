@@ -92,13 +92,11 @@ class SendEmailVerificationController extends BaseController
         Hey $name,
 
         Thanks for checking out my blog. I'm looking forward to your comment contributions!
-        Please just click the link below to verify your email. Your data will be stored in
-        the browser's local storage instead of a cookie and there is no authentication
-        (sign in) on my blog so you are only validated with the browser you are using now
-        and if you clear your storage data on your browser, you'll have to verify again.
+        Please just click the link below to verify your email.
         Just click the link below to get commenting.
 
         The link below will expire in a few days.
+
         $verificationLink
 
         Best,

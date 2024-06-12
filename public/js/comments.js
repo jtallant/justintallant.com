@@ -31,15 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-                    alert('Verification email sent!');
-                } else {
-                    alert('Error sending verification email.');
-                }
+                const form = document.getElementById('verify-email');
+                const successMessage = form.querySelector('.success');
+                successMessage.style.display = 'block';
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('An error occurred while sending the verification email.');
+                const form = document.getElementById('verify-email');
+                const errorMessage = form.querySelector('.error');
+                errorMessage.style.display = 'block';
             });
     }
 

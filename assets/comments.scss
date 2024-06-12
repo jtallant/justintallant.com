@@ -111,6 +111,18 @@
                 margin-top: 20px;
             }
 
+            .success,
+            .error {
+                margin-top: 15px;
+            }
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: darken(red, 10%);
         }
 
         @keyframes fadeIn {

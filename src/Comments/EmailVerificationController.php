@@ -26,7 +26,7 @@ class EmailVerificationController extends BaseController
         $email = $this->emails->findOneBy(['token' => $token]);
 
         if (empty($email)) {
-            return new Response('Invalid token', 400);
+            return view('invalid-token');
         }
 
         $email->verify();
