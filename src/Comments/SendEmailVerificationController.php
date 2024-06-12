@@ -3,24 +3,26 @@
 namespace JustinTallant\Comments;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Factory as ValidatorFactory;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
-class EmailVerificationController extends BaseController
+class SendEmailVerificationController extends BaseController
 {
     private $validator;
+    private $mailer;
 
-    public function __construct(ValidatorFactory $validator)
+    public function __construct(ValidatorFactory $validator, MailerInterface $mailer)
     {
         $this->validator = $validator;
+        $this->mailer = $mailer;
     }
 
-    public function show(Request $request)
+    public function store(Request $request)
     {
         $validator = $this->validator->make($request->all(), [
             'email' => 'required|email',
+            'entry_uri' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -29,15 +31,24 @@ class EmailVerificationController extends BaseController
             ], 400);
         }
 
-        $emailAddress = $request->input('email');
+        // we need to create an email record here
 
-        $this->sendEmail($emailAddress);
+        $this->mailer->send(
+            $request->input('email'),
+            config('comments.mail_subject'),
+            $this->body()
+        );
 
-        return new Response('Verification email sent', 200);
+        return new JsonResponse([
+            'message' => 'Verification email sent',
+            'status' => 'success'
+        ], 200);
     }
 
-    private function sendEmail(string $emailAddress): void
+    private function body()
     {
-        return;
+        // This needs to include a link for them to verify their email
+        // the link needs to include a token that we can verify the user's email with
+        return 'content here';
     }
 }

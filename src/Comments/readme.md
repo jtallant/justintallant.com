@@ -8,3 +8,11 @@
 
 ## Notes
 * Put your icon image in public/img/author.jpg
+
+
+## Verify Email
+1. User types in email address and submits
+2. User receives email with token
+3. User clicks link
+4. User sees page verification success
+5. Link on the page says back to comments (routes to entry they were going to comment on)

@@ -10,6 +10,7 @@ $app = $site->bootstrap();
 # Register your own service providers here
 $app->register(\JustinTallant\HelloWorldProvider::class);
 $app->register(\JustinTallant\Comments\CommentsServiceProvider::class);
+$app->register(\JustinTallant\Comments\CommentsMailerProvider::class);
 
 # This has to come last because of the greedy routes
 $app->register(\Skimpy\Lumen\Providers\SkimpyRouteProvider::class);

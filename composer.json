@@ -25,7 +25,10 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "skimpy/engine": "dev-master"
+        "skimpy/engine": "dev-master",
+        "mailgun/mailgun-php": "^4.2",
+        "nyholm/psr7": "^1.8@dev",
+        "symfony/http-client": "7.2.x-dev"
     },
     "minimum-stability": "dev",
     "autoload": {
@@ -40,5 +43,10 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }
