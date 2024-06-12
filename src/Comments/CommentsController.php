@@ -49,7 +49,7 @@ class CommentsController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
+            return new JsonResponse([
                 'message' => 'Validation failed',
                 'errors' => $validator->errors(),
             ], 422);

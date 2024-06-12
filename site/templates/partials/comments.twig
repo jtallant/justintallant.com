@@ -8,6 +8,7 @@
         <a href="javascript:void(0)">New Comment</a>
     </div>
 
+    {% include 'partials/verify-email.twig' %}
     {% include 'partials/comments-form.twig' with {'entry': entry} %}
 
     <div class="comments-list">
