@@ -628,19 +628,22 @@ button {
 }
 .comments #verify-email p {
   margin-bottom: 0;
-  margin-top: 0;
+  margin-top: 15;
 }
 .comments #verify-email #verify-email-form {
   margin-top: 0px;
 }
-.comments #verify-email #verify-email-form input[type=email] {
+.comments #verify-email #verify-email-form input {
   width: 280px;
 }
 .comments #verify-email #verify-email-form button {
-  margin-top: 10px;
+  margin-top: 20px;
   display: block;
   padding: 8px 12px;
   font-size: 14px;
+}
+.comments #verify-email #verify-email-form p {
+  margin-top: 20px;
 }
 @keyframes fadeIn {
   from {

@@ -19,13 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleEmailVerification(event) {
         event.preventDefault();
         const email = document.getElementById('email').value;
+        const name = document.getElementById('name').value;
+        const entryUri = document.querySelector('input[name="entry_uri"]').value;
 
-        fetch('/api/comments/verify-email', {
+        fetch('/api/comments/send-email-verification', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email: email }),
+            body: JSON.stringify({ email: email, name: name, entry_uri: entryUri }),
         })
             .then(response => response.json())
             .then(data => {

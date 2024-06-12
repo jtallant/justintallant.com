@@ -9,7 +9,7 @@
     </div>
 
     {% include 'partials/verify-email.twig' %}
-    {% include 'partials/comments-form.twig' with {'entry': entry} %}
+    {% include 'partials/comments-form.twig' %}
 
     <div class="comments-list">
         {% for comment in comments(entry.uri) %}

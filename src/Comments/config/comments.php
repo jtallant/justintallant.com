@@ -6,5 +6,5 @@ return [
     'mail_domain' => env('COMMENTS_MAIL_DOMAIN', 'example.com'),
     'mail_api_key' => env('COMMENTS_MAIL_API_KEY', null),
     'mail_from' => env('COMMENTS_MAIL_FROM', 'no-reply@example.com'),
-    'mail_subject' => env('COMMENTS_MAIL_SUBJECT', 'Please verify your email address'),
+    'mail_subject' => 'Please verify your email address',
 ];

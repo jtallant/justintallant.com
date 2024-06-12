@@ -109,7 +109,18 @@ class Email implements \JsonSerializable
         return $this->createdAt;
     }
 
-    public function expiresAt(): ?\DateTime
+    public function updateName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function resetToken(): void
+    {
+        $this->token = bin2hex(random_bytes(16));
+        $this->expiresAt = (new \DateTime())->modify('+3 days');
+    }
+
+    public function expiration(): ?\DateTime
     {
         return $this->expiresAt;
     }

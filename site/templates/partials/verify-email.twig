@@ -3,6 +3,9 @@
     <p>Please verify your e-mail address to comment.</p>
     <form id="verify-email-form">
         <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        <p class="info">This name will show up as your username in comments.</p>
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <input type="hidden" name="entry_uri" value="{{ entry.uri }}">
         <button type="submit">Verify</button>
     </form>
 </div> <!-- #verify-email -->
