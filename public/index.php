@@ -10,5 +10,7 @@ $app = $site->bootstrap();
 # Register your own service providers here
 $app->register(\JustinTallant\HelloWorldProvider::class);
 
-return $app->run();
+# This has to come last because of greedy routes
+$app->register(\Skimpy\Lumen\Providers\SkimpyRouteProvider::class);
 
+return $app->run();
