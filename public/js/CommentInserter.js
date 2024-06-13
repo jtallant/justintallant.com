@@ -1,7 +1,7 @@
 export default class CommentInserter {
     constructor(domDoc) {
         this.domDoc = domDoc;
-        this.commentTemplate = domDoc.getElementById('comment-template');
+        this.commentTemplate = domDoc.getElementById('comment-template').content;
     }
 
     init() {
@@ -11,17 +11,20 @@ export default class CommentInserter {
     }
 
     insertComment(data) {
-        const commentClone = this.commentTemplate.querySelector('.comment').cloneNode(true);
+        const commentClone = document.importNode(this.commentTemplate, true);
         this.populateComment(commentClone, data);
         this.addCommentToDOM(commentClone, data);
     }
 
     populateComment(commentClone, data) {
+        const wrapper = commentClone.querySelector('.comment');
+        wrapper.setAttribute('data-comment-id', data.id);
+        wrapper.setAttribute('data-root-comment-id', data.root_comment_id);
+        wrapper.setAttribute('id', 'comments-' + data.id);
+
         commentClone.querySelector('.author-name').textContent = data.author;
         commentClone.querySelector('.comment-content').innerHTML = data.content;
-        commentClone.setAttribute('data-comment-id', data.id);
         commentClone.querySelector('time').textContent = data.created_at;
-        commentClone.setAttribute('data-root-comment-id', data.root_comment_id);
 
         if (data.image_html) {
             const commentAuthorDiv = commentClone.querySelector('.comment-author');
@@ -38,8 +41,10 @@ export default class CommentInserter {
             this.insertNewComment(commentClone, commentsList);
         }
 
-        commentClone.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        commentClone.classList.add('comment-animate');
+        const insertedComment = document.getElementById('comments-' + data.id);
+
+        insertedComment.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        insertedComment.classList.add('comment-animate');
     }
 
     insertNewComment(commentClone, commentsList) {

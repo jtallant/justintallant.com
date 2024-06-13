@@ -6,15 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     new CommentInserter(document).init();
 
     const commentFormTextarea = document.querySelector('.comment-form textarea');
-    const newCommentLink = document.querySelector('.new-comment a');
+    const newCommentLink = document.getElementById('btn-new-comment');
     const commentsList = document.querySelector('.comments-list');
     const verifyEmailForm = document.getElementById('verify-email-form');
 
     commentFormTextarea.addEventListener('input', updateCharCount);
-    newCommentLink.addEventListener('click', toggleCommentFormDisplay);
-    commentsList.addEventListener('click', handleReplyButtonClick);
     verifyEmailForm.addEventListener('submit', handleEmailVerification);
 
+    newCommentLink.addEventListener('click', toggleCommentFormDisplay);
+
+    commentsList.querySelectorAll('.reply-button').forEach(replyButton => {
+        replyButton.addEventListener('click', toggleCommentFormDisplay);
+    });
 
     function handleEmailVerification(event) {
         event.preventDefault();
@@ -43,8 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    document.getElementById('verify-email-form').addEventListener('submit', handleEmailVerification);
-
     function updateCharCount() {
         const maxChars = 2400;
         const currentLength = this.value.length;
@@ -52,55 +53,52 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.char-count span').textContent = remainingChars;
     }
 
-    function toggleCommentFormDisplay() {
-        const commentForm = document.querySelector('.comment-form');
+    function toggleCommentFormDisplay(event) {
         const verifyEmailContainer = document.getElementById('verify-email');
-
         const commentToken = localStorage.getItem('commentToken');
-        const commentName = localStorage.getItem('commentName');
 
         if (!commentToken) {
             verifyEmailContainer.classList.add('show-animate');
+            verifyEmailContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            console.log('no token');
             return;
         }
 
         verifyCommentToken(commentToken).then(data => {
-            verifyEmailContainer.classList.remove('show-animate');
-            commentForm.classList.add('show-animate');
-            document.getElementById('comment_author').value = commentName;
-
-            setTimeout(() => {
-                document.getElementById('comment_content').focus();
-            }, 600);
+            showCommentForm(verifyEmailContainer, event);
         })
         .catch(error => {
             // console.log(error);
         });
     }
 
-    function handleReplyButtonClick(event) {
-        if (event.target.closest('a.reply-button')) {
+    function showCommentForm(verifyEmailContainer, event) {
+        const commentName = localStorage.getItem('commentName');
+        const isReplyButtonClick = event.target.closest('.reply-button') !== null;
+        const commentForm = document.getElementById('comment-form');
 
-            event.preventDefault();
-            const commentForm = document.getElementById('comment-form');
+        verifyEmailContainer.classList.remove('show-animate');
+        commentForm.classList.add('show-animate');
+        document.getElementById('comment-author').value = commentName;
+
+        if (isReplyButtonClick) {
             const commentReplyingTo = event.target.closest('.comment');
-
-            const replyingToAuthor = commentReplyingTo.querySelector('.author-name').textContent;
-
-            const textarea = commentForm.querySelector('textarea[name="content"]');
-            textarea.value = `@${replyingToAuthor} `;
-
-            const repliesTo = commentForm.querySelector('input[name="replies_to_id"]');
-
-            commentForm.style.display = 'block';
-            repliesTo.value = commentReplyingTo.getAttribute('data-root-comment-id');
-
-            commentForm.scrollIntoView({ behavior: 'smooth', block: 'center', duration: 1200 });
-
-            setTimeout(() => {
-                textarea.focus();
-            }, 1200);
+            setReplyFormFields(commentForm, commentReplyingTo);
         }
+
+        commentForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        setTimeout(() => {
+            document.getElementById('comment-content').focus();
+        }, 500);
+    }
+
+    function setReplyFormFields(commentForm, commentReplyingTo) {
+        const repliesTo = commentForm.querySelector('input[name="replies_to_id"]');
+        const replyingToAuthor = commentReplyingTo.querySelector('.author-name').textContent;
+
+        repliesTo.value = commentReplyingTo.getAttribute('data-root-comment-id');
+        document.getElementById('comment-content').value = `@${replyingToAuthor} `;
     }
 
     function verifyCommentToken(commentToken) {
