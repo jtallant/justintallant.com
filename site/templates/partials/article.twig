@@ -10,9 +10,11 @@
         </h1>
     </header>
 
-    <div class="excerpt">
-        <p>{{ entry.excerpt }}&hellip;</p>
-    </div>
+    <p class="excerpt">
+        {{ entry.excerpt }}&hellip;
+    </p>
 
-    <a href="{{ skimpy.url(entry.uri) }}">Read article &rsaquo;</a>
+    <div class="excerpt-link">
+        <a href="{{ skimpy.url(entry.uri) }}">Read article &rsaquo;</a>
+    </div>
 </article>

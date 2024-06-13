@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace JustinTallant\Comments;
 
+use Doctrine\ORM\Tools\SchemaTool;
 use Illuminate\Support\ServiceProvider;
 use JustinTallant\Comments\Entities\Comment;
 use JustinTallant\Comments\CommentViewDecorator;
@@ -13,11 +14,8 @@ class CommentsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigs();
-
         $this->loadCommentTemplates();
-
         $this->addCommentsTwigFunctions();
-
         $this->setupCommentsDatabase();
     }
 
@@ -49,7 +47,7 @@ class CommentsServiceProvider extends ServiceProvider
         }
 
         $entityManager = $this->app->make('registry')->getManager('comments');
-        $schemaTool = new \Doctrine\ORM\Tools\SchemaTool($entityManager);
+        $schemaTool = new SchemaTool($entityManager);
         $classes = $entityManager->getMetadataFactory()->getAllMetadata();
 
         $schemaManager = $entityManager->getConnection()->getSchemaManager();
@@ -98,7 +96,6 @@ class CommentsServiceProvider extends ServiceProvider
     private function loadCommentTemplates(): void
     {
         $viewFactory = $this->app->get('view');
-        $newPath = base_path('src/Comments/templates');
-        $viewFactory->addLocation($newPath);
+        $viewFactory->addLocation(base_path('src/Comments/templates'));
     }
 }

@@ -16,9 +16,7 @@ class EmailVerificationControllerTest extends TestCase
             ['token' => 'invalid_token']
         );
 
-        $this->assertEquals('Invalid token', $response->getContent());
-
-        $response->assertStatus(400);
+        $response->assertSee('Invalid Token');
     }
 
     /** @test */

@@ -6,3 +6,4 @@ storage/
 .phpunit.result.cache
 database/comments.sqlite
 node_modules/
+.deployment

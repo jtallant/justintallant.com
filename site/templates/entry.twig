@@ -15,10 +15,12 @@
     <article id="entry">
         <header>
             <time pubdate="pubdate"><span class="pipe">|</span>{{ entry.date }}</time>
-            <h1>{{ entry.title }}</h1>
+            <h1 style="margin-top: 30px;">{{ entry.title }}</h1>
         </header>
 
-        {{ entry.content | raw }}
+        <div class="article-content">
+            {{ entry.content | raw }}
+        </div>
 
         <footer>
             {% include 'partials/taxonomies' %}
