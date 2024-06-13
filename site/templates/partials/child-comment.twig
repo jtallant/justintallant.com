@@ -1,10 +1,10 @@
 <article class="comment" data-comment-id="{{ child.id }}" data-root-comment-id="{{ parent.id }}">
     <header class="comment-author">
-        {{ comment.imgHtml()|raw }}
+        {{ child.imgHtml()|raw }}
         <h4 class="author-name">{{ child.displayName }}</h4>
     </header>
 
-    <time datetime="{{ child.date|date('c') }}">{{ child.date }}</time>
+    <time>{{ child.date }}</time>
 
     <div class="comment-content">
         {{ child.content|striptags('<br>')|raw }}
