@@ -19,6 +19,16 @@
         <p class="ev-message">
             You can now comment on posts. Your verification will eventually expire and it only applies to the current browser.
         </p>
-        <a href="{{ email.entryUri }}" class="ev-button">Return to Article</a>
+        <a href="/{{ email.entryUri }}" class="ev-button">Return to Article</a>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script>
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem('commentToken', '{{ email.token }}');
+            localStorage.setItem('commentName', '{{ email.name }}');
+        }
+    </script>
 {% endblock %}

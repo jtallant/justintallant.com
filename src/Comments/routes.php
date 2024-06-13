@@ -8,14 +8,11 @@ $router->group(['prefix' => 'api/comments'], function () use ($router) {
     $router->get('/', 'JustinTallant\Comments\CommentsController@index');
 
     $router->post('/', 'JustinTallant\Comments\CommentsController@store');
+
+    $router->post('send-email-verification', 'JustinTallant\Comments\SendEmailVerificationController@store');
+
+    $router->post('verify-comments-token', 'JustinTallant\Comments\VerifyCommentsTokenController@show');
 });
-
-$router->group(['prefix' => 'api/comments/send-email-verification'], function () use ($router) {
-
-    $router->post('/', 'JustinTallant\Comments\SendEmailVerificationController@store');
-
-});
-
 
 # =========================
 # HTML ROUTES

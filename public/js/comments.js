@@ -54,8 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function toggleCommentFormDisplay() {
         const commentForm = document.querySelector('.comment-form');
-        const commentToken = localStorage.getItem('commentToken');
         const verifyEmailContainer = document.getElementById('verify-email');
+
+        const commentToken = localStorage.getItem('commentToken');
+        const commentName = localStorage.getItem('commentName');
 
         if (!commentToken) {
             verifyEmailContainer.classList.add('show-animate');
@@ -65,10 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
         verifyCommentToken(commentToken).then(data => {
             verifyEmailContainer.classList.remove('show-animate');
             commentForm.classList.add('show-animate');
+            document.getElementById('comment_author').value = commentName;
+
+            setTimeout(() => {
+                document.getElementById('comment_content').focus();
+            }, 600);
         })
         .catch(error => {
-            console.log(error);
-            alert('error verifying token');
+            // console.log(error);
         });
     }
 
@@ -98,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function verifyCommentToken(commentToken) {
-        return fetch('/api/comments-email-verification', {
+        return fetch('/api/comments/verify-comments-token', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
