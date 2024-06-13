@@ -11,7 +11,10 @@
         }
     ],
     "scripts": {
-        "serve": "./serve.sh"
+        "serve": "./serve.sh",
+        "test": "./vendor/bin/phpunit",
+        "watch": "npm run watch",
+        "compile": "npm run sass"
     },
     "keywords": [
         "cms",
@@ -22,12 +25,28 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "skimpy/engine": "dev-master"
+        "skimpy/engine": "dev-master",
+        "mailgun/mailgun-php": "^4.2",
+        "nyholm/psr7": "^1.8@dev",
+        "symfony/http-client": "7.2.x-dev"
     },
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "JustinTallant\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JustinTallant\\Tests\\": "tests/php"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
         }
     }
 }

@@ -29,7 +29,7 @@ class UserController extends Controller
         ]);
 
         // Send a welcome email
-        Mail::to($user->email)->send(new WelcomeMail($user));
+        Mail::to($user->email)->send(new WelcomEmail($user));
 
         return response()->json([]);
     }
@@ -45,6 +45,7 @@ To adhere to the Single Responsibility Principle, we have to refactor our code b
 #### Refactored SRP Example
 
 <pre><code class="language-php">
+// app/Http/Requests/RegisterUserRequest.php
 class RegisterUserRequest extends FormRequest
 {
     public function rules()
@@ -57,6 +58,7 @@ class RegisterUserRequest extends FormRequest
     }
 }
 
+// app/Repositories/UserRepository.php
 class UserRepository
 {
     public function create(array $data)
@@ -65,6 +67,8 @@ class UserRepository
     }
 }
 
+
+// app/Providers/EventServiceProvider.php
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
@@ -74,15 +78,29 @@ class EventServiceProvider extends ServiceProvider
     ];
 }
 
+// app/Listeners/SendWelcomeEmail.php
 class SendWelcomeEmail
 {
     public function handle(UserRegistered $event)
     {
         Mail::to($event->user->email)
-            ->send(new WelcomeMail($event->user));
+            ->send(new WelcomeEmail($event->user));
     }
 }
 
+// app/Events/UserRegistered.php
+class UserRegistered
+{
+    public $user;
+
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+}
+
+
+// app/Http/Controllers/UserController.php
 class UserController extends Controller
 {
     protected $users;
@@ -107,62 +125,10 @@ class UserController extends Controller
 
 #### Conclusion
 
-Whew! Ok... That's a lot more code. We went from one class to 5 classes but we are now following SRP. For me personally, I think it's easier to reason about the application if we just violate SRP and stick with the first example. I prefer not having to switch between files if I don't have to. That doesn't mean I want giant procedural files and don't like to use classes. Let's not take it to the extreme.
+Whew! Ok... That's a lot more code. We went from one class to 6 classes but we are now following SRP. For me personally, I think it's easier to reason about the application if we just violate SRP and stick with the first example. I prefer not having to switch between files if I don't have to. That doesn't mean I want giant procedural files and don't like to use classes. Let's not take it to the extreme.
 
 On any small application, I would likely forgo form requests and events as much as I can and I wouldn't be using repositories either. However, on larger applications I will definitely be using the SRP conformant example. Yes I will have to move around between files but with larger apps that's going to be easier in the long run than having cluttered controllers.
 
-I'd like to point out that for smaller apps, I will extract to classes when the controller method starts to look a little too big. And a little too big for me really isn't that big. I can't give you an exact line number, it's more of a feel.
+I'd like to point out that for smaller apps, I will extract to classes when the controller method starts to look a little too big. I can't give you an exact line number, it's more of a feel.
 
 Another argument in favor of reasonable violation of SRP in controllers is that Laravel's testing tools are robust enough to account for these situations and testability isn't a problem here for either example.
-
-<div class="comments">
-    <h4>Comments</h4>
-    <p class="disclaimer">
-        Comments are fake and for entertainment purposes only.
-    </p>
-    <div class="comment">
-        <div class="comment-author">
-            <div class="author-img"></div>
-            <span class="author-name">AssHat1</span>
-        </div>
-        <div class="comment-content">
-            <p>
-                Wow, this is one of the dumbest posts I've ever read. You clearly have no idea what you're talking about. Ignoring SRP in controllers is a recipe for disaster, and anyone with half a brain knows that. You're just promoting bad practices and laziness. Do everyone a favor and stop giving advice you clearly don't understand.
-            </p>
-        </div>
-
-        <div class="comment">
-            <div class="comment-author">
-                <img class="author-img" src="/img/justin-icon.jpg" />
-                <span class="author-name">Author</span>
-            </div>
-            <div class="comment-content">
-                <p>
-                    Thank you for that insightful comment AssHat! I love your username.
-                </p>
-            </div>
-        </div> <!-- .comment -->
-    </div> <!-- .comment -->
-    <div class="comment">
-        <div class="comment-author">
-            <div class="author-img"></div>
-            <span class="author-name">NiceGuy7</span>
-        </div>
-        <div class="comment-content">
-            <p>
-                Hey there! Great post! 😊 I totally agree with your take on SRP in controllers. Sometimes, sticking strictly to SRP can add unnecessary complexity, especially for smaller projects. Your method definitely reduces cognitive overhead by keeping everything in one place. I appreciate how you highlighted the balance between maintainability and simplicity. Your examples were clear and made it easy to see the benefits of both approaches. Keep up the awesome work! Looking forward to more of your insightful posts. 👍
-            </p>
-        </div>
-    </div> <!-- .comment -->
-    <div class="comment">
-        <div class="comment-author">
-            <div class="author-img"></div>
-            <span class="author-name">I'mJustHere17</span>
-        </div>
-        <div class="comment-content">
-            <p>
-                Nice post.
-            </p>
-        </div>
-    </div> <!-- .comment -->
-</div>

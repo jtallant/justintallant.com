@@ -1,0 +1,63 @@
+<div class="comments">
+    <div class="comments-header">
+        <h4>Comments</h4>
+    </div>
+
+    <div class="new-comment">
+        {% include 'svg/comment.twig' %}
+        <a href="javascript:void(0)">New Comment</a>
+    </div>
+
+    {% include 'partials/verify-email-form.twig' %}
+    {% include 'partials/comments-form.twig' %}
+
+    <div class="comments-list">
+        {% for comment in comments(entry.uri) %}
+            <div class="comment" data-comment-id="{{ comment.id }}" data-root-comment-id="{{ comment.id }}">
+
+                <div class="comment-author">
+                    {{ comment.imgHtml()|raw }}
+                    <span class="author-name">{{ comment.displayName }}</span>
+                </div>
+
+                <time>{{ comment.date }}</time>
+
+                <div class="comment-content">
+                    {{ comment.content|raw }}
+                </div>
+
+                <a class="reply-button" href="javascript:void(0)">
+                    {% include 'svg/comment.twig' %}
+                </a>
+
+                <div class="replies">
+                    {% for childComment in childComments(comment.id) %}
+                        {% include 'partials/child-comment.twig' with {'child': childComment, 'parent': comment} %}
+                    {% endfor %}
+                </div> <!-- .replies -->
+            </div> <!-- .comment -->
+        {% endfor %}
+    </div>
+
+    <div id="comment-template" style="display: none;">
+        <div class="comment" data-comment-id="0" data-root-comment-id="0">
+
+            <div class="comment-author">
+                <!-- img will be added via JS -->
+                <span class="author-name"></span>
+            </div>
+
+            <time></time>
+
+            <div class="comment-content">
+            </div>
+
+            <a class="reply-button" href="#">
+                {% include 'svg/comment.twig' %}
+            </a>
+
+            <div class="replies"></div>
+        </div> <!-- .comment -->
+    </div> <!-- #comment-template -->
+</div> <!-- .comments -->
+

@@ -26,6 +26,10 @@ li ul, li ol {
     margin-top: 15px;
 }
 
+button {
+    cursor: pointer;
+}
+
 #entry  {
     font-size: 18px;
     margin: 0 auto;
@@ -114,51 +118,4 @@ li ul, li ol {
 .pipe {
     margin-right: 10px;
     font-weight: 700;
-}
-
-.comments {
-    margin-top: 60px;
-    font-size: 15px;
-
-    h4 {
-        font-size: 18px;
-    }
-
-    .comment {
-        margin-top: 30px;
-
-        p {
-            margin-top: 10px;
-        }
-    }
-
-    .comment:nth-child(3n+1) .author-img {
-        background: lighten(blue, 20%);
-    }
-
-    .comment:nth-child(3n+2) .author-img {
-        background: lighten(green, 20%);
-    }
-
-    .comment:nth-child(3n+3) .author-img {
-        background: lighten(red, 20%);
-    }
-
-    .comment-author {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 16px;
-        font-weight: 500;
-    }
-
-    .author-img {
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-    }
-
-    .comment .comment {
-        margin-left: 30px;
-    }
 }

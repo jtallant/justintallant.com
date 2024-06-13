@@ -1,0 +1,47 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use LaravelDoctrine\ORM\DoctrineServiceProvider;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
+(new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
+    dirname(__DIR__)
+))->bootstrap();
+
+$app = new Skimpy\Application(
+    dirname(__DIR__)
+);
+
+$app->singleton(
+    Illuminate\Contracts\Debug\ExceptionHandler::class,
+    \Skimpy\Lumen\Exceptions\Handler::class
+);
+
+$app->singleton(
+    Illuminate\Contracts\Console\Kernel::class,
+    \Skimpy\Lumen\Console\Kernel::class
+);
+
+$app->configure('database');
+$app->configure('doctrine');
+$app->register(DoctrineServiceProvider::class);
+
+/*
+|--------------------------------------------------------------------------
+| Run The Artisan Application
+|--------------------------------------------------------------------------
+|
+| When we run the console application, the current CLI command will be
+| executed in this console and the response sent back to a terminal
+| or another output device for the developers. Here goes nothing!
+|
+*/
+
+$kernel = $app->make(
+    'Illuminate\Contracts\Console\Kernel'
+);
+
+exit($kernel->handle(new ArgvInput, new ConsoleOutput));

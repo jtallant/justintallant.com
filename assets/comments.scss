@@ -1,0 +1,322 @@
+.show-animate {
+    display: block !important;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@mixin author-img-colors {
+    &:nth-child(10n+1) .author-img {
+        background: lighten(blue, 20%);
+    }
+
+    &:nth-child(10n+2) .author-img {
+        background: lighten(green, 20%);
+    }
+
+    &:nth-child(10n+3) .author-img {
+        background: lighten(red, 20%);
+    }
+
+    &:nth-child(10n+4) .author-img {
+        background: darken(yellow, 5%);
+    }
+
+    &:nth-child(10n+5) .author-img {
+        background: lighten(purple, 20%);
+    }
+
+    &:nth-child(10n+6) .author-img {
+        background: lighten(orange, 20%);
+    }
+
+    &:nth-child(10n+7) .author-img {
+        background: lighten(pink, 20%);
+    }
+
+    &:nth-child(10n+8) .author-img {
+        background: lighten(teal, 20%);
+    }
+
+    &:nth-child(10n+9) .author-img {
+        background: lighten(brown, 20%);
+    }
+
+    &:nth-child(10n+10) .author-img {
+        background: lighten(gray, 20%);
+    }
+}
+
+.comments {
+    margin: 60px auto 0;
+    font-size: 15px;
+    max-width: 680px;
+
+    .comments-header {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+        h4 {
+            font-size: 18px;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .new-comment {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        a {
+            color: lighten(black, 25%);
+        }
+    }
+
+    #verify-email {
+        display: none;
+        margin-top: 60px;
+
+        h4 {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 0;
+            margin-top: 15;
+        }
+
+        #verify-email-form {
+            margin-top: 0px;
+
+            input {
+                width: 280px;
+            }
+
+            button {
+                margin-top: 20px;
+                display: block;
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
+            p {
+                margin-top: 20px;
+            }
+
+            .success,
+            .error {
+                margin-top: 15px;
+            }
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: darken(red, 10%);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    }
+
+    .comments-list {
+        margin-top: 40px;
+    }
+
+    .comment {
+        padding-top: 15px;
+        padding-bottom: 25px;
+        position: relative;
+
+        time {
+            display: block;
+            font-size: 14px;
+            color: lighten(black, 40%);
+            margin-top: 15px;
+        }
+
+        @include author-img-colors;
+
+        .comment-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            color: lighten(black, 10%);
+        }
+
+        .author-img {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+
+        .comment-content {
+            color: lighten(black, 60%);
+            padding-top: 15px;
+            padding-bottom: 15px;
+            line-height: 1.75;
+        }
+
+        .reply-button {
+            svg {
+                width: 18px;
+                height: 18px;
+                fill: lighten(black, 30%);
+            }
+        }
+
+        .reply-button:hover {
+            svg {
+                fill: lighten(black, 65%);
+            }
+        }
+
+        .replies .comment:first-child {
+            padding-top: 40px;
+        }
+
+        .replies .comment:last-child {
+            padding-bottom: 10px;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .comment-animate {
+            animation: popIn 4s;
+        }
+
+        .comment {
+            margin-left: 35px;
+
+            @include author-img-colors;
+        }
+    }
+}
+
+.comments form {
+    margin-top: 30px;
+    margin-bottom: 60px;
+
+    label {
+        margin-top: 25px;
+        display: block;
+    }
+
+    input {
+        width: 200px;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    input, textarea {
+        margin-top: 10px;
+        border-radius: 5px;
+        padding: 10px;
+        border: 1px solid lighten(black, 70%);
+        background: white;
+
+        &:active, &:focus, &:focus-visible {
+            border: 1px solid lighten(black, 30%);
+            outline: none;
+        }
+    }
+
+    .char-count {
+        margin-top: 7px;
+        color: lighten(black, 40%);
+        font-size: 12px;
+    }
+
+    button {
+        margin-top: 25px;
+        background: transparent;
+        border-radius: 5px;
+        padding: 10px 20px;
+        border: 1px solid lighten(black, 70%);
+        color: lighten(black, 40%);
+
+        &:hover {
+            background: lighten(black, 20%);
+            color: darken(white, 15%);
+        }
+    }
+}
+
+.email-verification {
+    max-width: 500px;
+
+    h1 {
+        margin-bottom: 25px;
+    }
+
+    .ev-data {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+
+        svg {
+            width: 18px;
+            height: 18px;
+            stroke: green;
+        }
+
+        span {
+            color: lighten(black, 50%);
+            font-size: 16px;
+            margin-left: 10px;
+        }
+    }
+
+    .ev-message {
+        margin-top: 20px;
+        max-width: 400px;
+        line-height: 1.75;
+    }
+
+    .ev-button {
+        display: inline-block;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px 20px;
+        border-radius: 5px;
+        background: lighten(black, 12%);
+        color: darken(white, 15%);
+        border: 1px solid black;
+
+        &:hover {
+            background: lighten(black, 16%);
+        }
+    }
+}
+
