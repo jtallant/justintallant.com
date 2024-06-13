@@ -92,10 +92,7 @@ class SendEmailVerificationController extends BaseController
         Hey $name,
 
         Thanks for checking out my blog. I'm looking forward to your comment contributions!
-        Please just click the link below to verify your email.
-        Just click the link below to get commenting.
-
-        The link below will expire in a few days.
+        Please click the link below to verify your email.
 
         $verificationLink
 
