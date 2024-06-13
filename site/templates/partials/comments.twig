@@ -1,4 +1,4 @@
-<div class="comments">
+<section class="comments">
     <div class="comments-header">
         <h4>Comments</h4>
         <p class="disclaimer">
@@ -8,7 +8,7 @@
 
     <div class="new-comment">
         {% include 'svg/comment.twig' %}
-        <a href="javascript:void(0)">New Comment</a>
+        <a id="btn-new-comment" href="javascript:void(0)">New Comment</a>
     </div>
 
     {% include 'partials/verify-email-form.twig' %}
@@ -16,12 +16,12 @@
 
     <div class="comments-list">
         {% for comment in comments(entry.uri) %}
-            <div class="comment" data-comment-id="{{ comment.id }}" data-root-comment-id="{{ comment.id }}">
+            <article class="comment" data-comment-id="{{ comment.id }}" data-root-comment-id="{{ comment.id }}">
 
-                <div class="comment-author">
+                <header class="comment-author">
                     {{ comment.imgHtml()|raw }}
-                    <span class="author-name">{{ comment.displayName }}</span>
-                </div>
+                    <h4 class="author-name">{{ comment.displayName }}</h4>
+                </header>
 
                 <time>{{ comment.date }}</time>
 
@@ -38,29 +38,28 @@
                         {% include 'partials/child-comment.twig' with {'child': childComment, 'parent': comment} %}
                     {% endfor %}
                 </div> <!-- .replies -->
-            </div> <!-- .comment -->
+            </article> <!-- .comment -->
         {% endfor %}
     </div>
 
-    <div id="comment-template" style="display: none;">
-        <div class="comment" data-comment-id="0" data-root-comment-id="0">
+    <template id="comment-template">
+        <article class="comment" data-comment-id="0" data-root-comment-id="0">
 
-            <div class="comment-author">
+            <header class="comment-author">
                 <!-- img will be added via JS -->
-                <span class="author-name"></span>
-            </div>
+                <h4 class="author-name">Author</h4>
+            </header>
 
             <time></time>
 
-            <div class="comment-content">
-            </div>
+            <div class="comment-content"></div>
 
-            <a class="reply-button" href="#">
+            <a class="reply-button" href="javascript:void(0)">
                 {% include 'svg/comment.twig' %}
             </a>
 
             <div class="replies"></div>
-        </div> <!-- .comment -->
-    </div> <!-- #comment-template -->
-</div> <!-- .comments -->
+        </article> <!-- .comment -->
+    </template>
+</sectiion> <!-- .comments -->
 

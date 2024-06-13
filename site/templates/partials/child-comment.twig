@@ -1,9 +1,11 @@
-<div class="comment" data-comment-id="{{ child.id }}" data-root-comment-id="{{ parent.id }}">
-    <div class="comment-author">
+<article class="comment" data-comment-id="{{ child.id }}" data-root-comment-id="{{ parent.id }}">
+    <header class="comment-author">
         {{ comment.imgHtml()|raw }}
-        <span class="author-name">{{ child.displayName }}</span>
-    </div>
-    <time>{{ child.date }}</time>
+        <h4 class="author-name">{{ child.displayName }}</h4>
+    </header>
+
+    <time datetime="{{ child.date|date('c') }}">{{ child.date }}</time>
+
     <div class="comment-content">
         {{ child.content|striptags('<br>')|raw }}
     </div>
@@ -11,5 +13,4 @@
     <a class="reply-button" href="javascript:void(0)">
         {% include 'svg/comment.twig' %}
     </a>
-</div> <!-- .comment -->
-
+</article> <!-- .comment -->
