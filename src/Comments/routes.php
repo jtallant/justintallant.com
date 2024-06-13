@@ -23,4 +23,4 @@ $router->group(['prefix' => 'comments/email-verification'], function () use ($ro
 
 });
 
-$router->get('/populate-comments', 'JustinTallant\Comments\PopulateController@show');
+// $router->get('/populate-comments', 'JustinTallant\Comments\PopulateController@show');
