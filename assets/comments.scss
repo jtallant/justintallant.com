@@ -51,11 +51,15 @@
     max-width: 680px;
 
     .comments-header {
-        display: flex;
-        gap: 20px;
-        align-items: center;
+        margin-bottom: 40px;
+
+        .disclaimer {
+            display: block;
+            line-height: 1.75;
+        }
 
         h4 {
+            display: block;
             font-size: 18px;
             line-height: 1;
             margin: 0;
