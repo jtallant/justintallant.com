@@ -3,4 +3,4 @@
 ## Run
 * `composer serve`
 * `npm run watch`
-* `npm build` - for compiling minified sass
+* `npm run prod` - for compiling minified sass

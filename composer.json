@@ -14,7 +14,7 @@
         "serve": "./serve.sh",
         "test": "./vendor/bin/phpunit",
         "watch": "npm run watch",
-        "compile": "npm run sass"
+        "prod": "npm run prod"
     },
     "keywords": [
         "cms",
