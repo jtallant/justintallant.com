@@ -23,8 +23,8 @@ class EmailVerificationControllerTest extends TestCase
     public function it_shows_success_page_if_token_is_valid(): void
     {
         $email = new Email('Justin Tallant', 'test@test.com', 'example-entry-uri');
-        $this->em->persist($email);
-        $this->em->flush();
+        $this->commentsManager->persist($email);
+        $this->commentsManager->flush();
 
         $this->assertFalse($email->verified());
 

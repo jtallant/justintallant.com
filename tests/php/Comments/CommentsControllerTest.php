@@ -29,10 +29,10 @@ class CommentsControllerTest extends TestCase
                 $data['author'],
                 $data['content']
             );
-            $this->em->persist($comment);
+            $this->commentsManager->persist($comment);
         }
 
-        $this->em->flush();
+        $this->commentsManager->flush();
 
         $response = $this->get('/api/comments?entry_uri=example-uri');
 

@@ -7,8 +7,9 @@ use Laravel\Lumen\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-    protected $em;
+    protected $commentsManager;
     protected $comments;
+    protected $defaultManager;
 
     public function createApplication()
     {
@@ -19,26 +20,34 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->em = app('registry')->getManager('comments');
-        $this->comments = $this->em->getRepository(Comment::class);
+        $this->commentsManager = app('registry')->getManager('comments');
+        $this->comments = $this->commentsManager->getRepository(Comment::class);
+        $this->defaultManager = app('registry')->getManager();
 
         $this->rebuildDatabase();
     }
 
     protected function rebuildDatabase()
     {
-        # Truncate the database
-        $connection = $this->em->getConnection();
-        $schemaManager = $connection->getSchemaManager();
-        $schemaTool = new \Doctrine\ORM\Tools\SchemaTool($this->em);
-        $classes = $this->em->getMetadataFactory()->getAllMetadata();
+        # Truncate the databases
+        $managers = [
+            'comments' => $this->commentsManager,
+            'default' => $this->defaultManager
+        ];
 
-        foreach ($schemaManager->listTableNames() as $tableName) {
-            $schemaManager->dropTable($tableName);
+        foreach ($managers as $manager) {
+            $connection = $manager->getConnection();
+            $schemaManager = $connection->getSchemaManager();
+            $schemaTool = new \Doctrine\ORM\Tools\SchemaTool($manager);
+            $classes = $manager->getMetadataFactory()->getAllMetadata();
+
+            foreach ($schemaManager->listTableNames() as $tableName) {
+                $schemaManager->dropTable($tableName);
+            }
+
+            # Recreate the schema
+            $schemaTool->createSchema($classes);
         }
-
-        # Recreate the schema
-        $schemaTool->createSchema($classes);
     }
 }
 

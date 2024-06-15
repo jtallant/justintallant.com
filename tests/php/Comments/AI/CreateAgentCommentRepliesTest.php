@@ -3,30 +3,41 @@
 namespace Tests\Comments\AI;
 
 use Mockery;
+use Skimpy\Repo\Entries;
+use Skimpy\CMS\ContentItem;
 use JustinTallant\Tests\TestCase;
 use Illuminate\Console\OutputStyle;
 use JustinTallant\Comments\Entities\Comment;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\StringInput;
-use JustinTallant\Comments\AI\CreateAgentComments;
 use Symfony\Component\Console\Output\BufferedOutput;
 use JustinTallant\Comments\AI\CommentWriterInterface;
+use JustinTallant\Comments\AI\CreateAgentCommentReplies;
 
-class CreateAgentCommentsTest extends TestCase
+class CreateAgentCommentRepliesTest extends TestCase
 {
     /** @test */
     public function it_creates_agent_comments_for_a_specified_comment_id()
     {
-        $registry = $this->app->make('registry');
+        $entry = new ContentItem(
+            'the-uri',
+            'The Title',
+            new \DateTime(),
+            'entry',
+            'The Content'
+        );
+
+        $this->defaultManager->persist($entry);
+        $this->defaultManager->flush();
 
         $comment = new Comment(
-            'entryUri',
-            'authorName',
+            'the-uri',
+            'NiceGuy17',
             'This is a generated comment'
         );
 
-        $this->em->persist($comment);
-        $this->em->flush();
+        $this->commentsManager->persist($comment);
+        $this->commentsManager->flush();
 
         $prompts = [
             'Roaster1' => 'You are an intellectual with a sharp wit...',
@@ -37,7 +48,7 @@ class CreateAgentCommentsTest extends TestCase
         $commentWriter->shouldReceive('write')
             ->andReturn('Generated comment content');
 
-        $createAgentComments = new CreateAgentComments($registry, $prompts);
+        $createAgentComments = new CreateAgentCommentReplies(app('registry'), $prompts);
 
         $input = new ArrayInput([
             'commentId' => $comment->id()
@@ -51,7 +62,7 @@ class CreateAgentCommentsTest extends TestCase
 
         $createAgentComments->handle($commentWriter);
 
-        $reply = $this->em->getRepository(Comment::class)->findOneBy(['repliesTo' => $comment]);
+        $reply = $this->comments->findOneBy(['repliesTo' => $comment]);
 
         $this->assertNotEmpty($reply, 'The comment should have replies.');
         $this->assertEquals($comment->id(), $reply->repliesTo()->id(), 'The reply should be linked to the original comment.');

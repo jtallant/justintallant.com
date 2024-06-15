@@ -9,12 +9,12 @@ use JustinTallant\Comments\Entities\Comment;
 use JustinTallant\Comments\AI\CommentWriterInterface;
 use LaravelDoctrine\ORM\IlluminateRegistry as Registry;
 
-class CreateAgentComments extends Command
+class CreateAgentCommentReplies extends Command
 {
-    protected $signature = 'comments:create-agent-comments {commentId?}';
+    protected $signature = 'comments:create-agent-comment-replies {commentId?}';
     protected $description = 'Respond to a random number of new comments with AI';
 
-    private $em;
+    private $commentsManager;
     private $comments;
     private $prompts;
 
@@ -22,14 +22,19 @@ class CreateAgentComments extends Command
     {
         parent::__construct();
 
-        $em = $registry->getManager('comments');
+        $commentsManager = $registry->getManager('comments');
 
-        $this->em = $em;
-        $this->comments = $em->getRepository(Comment::class);
+        $this->commentsManager = $commentsManager;
+        $this->comments = $commentsManager->getRepository(Comment::class);
         $this->prompts = $prompts;
     }
 
     public function handle(CommentWriterInterface $commentWriter): void
+    {
+        $this->respondToComments($commentWriter);
+    }
+
+    private function respondToComments(CommentWriterInterface $commentWriter): void
     {
         $commentId = $this->argument('commentId');
         $forReply = $this->commentsForReply($commentId);
@@ -47,12 +52,12 @@ class CreateAgentComments extends Command
 
             $reply->setRepliesTo($comment);
 
-            $this->em->persist($reply);
-            $this->em->flush();
+            $this->commentsManager->persist($reply);
+            $this->commentsManager->flush();
         }
     }
 
-    private function commentsForReply(?int $commentId = null, ?string $timeAgo = '-10 minutes'): array
+    private function commentsForReply($commentId = null, ?string $timeAgo = '-10 minutes'): array
     {
         if (!empty($commentId)) {
             return [$this->singleComment($commentId)];
@@ -70,7 +75,7 @@ class CreateAgentComments extends Command
         return $queryBuilder->getQuery()->getResult();
     }
 
-    private function singleComment(int $commentId): Comment
+    private function singleComment($commentId): Comment
     {
         $comment = $this->comments->findOneBy(['id' => $commentId]);
 
