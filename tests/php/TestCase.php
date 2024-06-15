@@ -18,6 +18,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         $this->em = app('registry')->getManager('comments');
+        $this->comments = $this->em->getRepository(Comment::class);
 
         $this->rebuildDatabase();
     }

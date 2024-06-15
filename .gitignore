@@ -7,3 +7,4 @@ storage/
 database/comments.sqlite
 node_modules/
 .deployment
+docs/
