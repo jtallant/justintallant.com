@@ -10,12 +10,10 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use JustinTallant\Comments\AI\CommentWriterProvider;
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
-    dirname(__DIR__)
+    __DIR__
 ))->bootstrap();
 
-$app = new Skimpy\Application(
-    dirname(__DIR__) . '/justintallant.com'
-);
+$app = new Skimpy\Application(__DIR__);
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
