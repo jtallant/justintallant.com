@@ -2,11 +2,13 @@
 
 namespace JustinTallant\Tests;
 
+use JustinTallant\Comments\Entities\Comment;
 use Laravel\Lumen\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
     protected $em;
+    protected $comments;
 
     public function createApplication()
     {

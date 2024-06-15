@@ -28,7 +28,8 @@
         "skimpy/engine": "dev-master",
         "mailgun/mailgun-php": "^4.2",
         "nyholm/psr7": "^1.8@dev",
-        "symfony/http-client": "7.2.x-dev"
+        "symfony/http-client": "7.2.x-dev",
+        "openai-php/client": "dev-main"
     },
     "minimum-stability": "dev",
     "autoload": {
@@ -42,7 +43,9 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^9.0",
+        "phpstan/phpstan": "2.0.x-dev",
+        "mockery/mockery": "2.0.x-dev"
     },
     "config": {
         "allow-plugins": {
