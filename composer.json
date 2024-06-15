@@ -14,7 +14,8 @@
         "serve": "./serve.sh",
         "test": "./vendor/bin/phpunit",
         "watch": "npm run watch",
-        "prod": "npm run prod"
+        "prod": "npm run prod",
+        "stan": "./vendor/bin/phpstan analyse src --level=3"
     },
     "keywords": [
         "cms",
