@@ -3,9 +3,11 @@
 namespace JustinTallant\Comments\AI;
 
 use OpenAI;
+use Skimpy\Repo\Entries;
 use Illuminate\Support\ServiceProvider;
 use JustinTallant\Comments\AI\GptCommentWriter;
 use JustinTallant\Comments\AI\CommentWriterInterface;
+use JustinTallant\Comments\AI\CreateAgentEntryComments;
 use JustinTallant\Comments\AI\CreateAgentCommentReplies;
 
 class CommentWriterProvider extends ServiceProvider
@@ -24,8 +26,13 @@ class CommentWriterProvider extends ServiceProvider
             return new CreateAgentCommentReplies($app->make('registry'), config('comments.prompts'));
         });
 
+        $this->app->singleton(CreateAgentEntryComments::class, function ($app) {
+            return new CreateAgentEntryComments($app->make('registry'), config('comments.prompts'), $app->make(Entries::class));
+        });
+
         $this->commands([
             CreateAgentCommentReplies::class,
+            CreateAgentEntryComments::class,
         ]);
     }
 }

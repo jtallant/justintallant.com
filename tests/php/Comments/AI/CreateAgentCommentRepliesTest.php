@@ -3,7 +3,6 @@
 namespace Tests\Comments\AI;
 
 use Mockery;
-use Skimpy\Repo\Entries;
 use Skimpy\CMS\ContentItem;
 use JustinTallant\Tests\TestCase;
 use Illuminate\Console\OutputStyle;
@@ -27,15 +26,14 @@ class CreateAgentCommentRepliesTest extends TestCase
             'The Content'
         );
 
-        $this->defaultManager->persist($entry);
-        $this->defaultManager->flush();
-
         $comment = new Comment(
             'the-uri',
             'NiceGuy17',
             'This is a generated comment'
         );
 
+        $this->defaultManager->persist($entry);
+        $this->defaultManager->flush();
         $this->commentsManager->persist($comment);
         $this->commentsManager->flush();
 
