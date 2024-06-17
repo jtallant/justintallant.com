@@ -26,7 +26,6 @@ class CreateAgentEntryCommentsTest extends TestCase
     public function it_creates_agent_comments_for_a_single_entry()
     {
         $registry = $this->app->make('registry');
-        $entries = $this->app->make(Entries::class);
 
         $entry = new ContentItem(
             'example-entry-uri',
@@ -48,7 +47,7 @@ class CreateAgentEntryCommentsTest extends TestCase
         $commentWriter->shouldReceive('write')
             ->andReturn('Generated comment content');
 
-        $createAgentEntryComments = new CreateAgentEntryComments($registry, $prompts, $entries);
+        $createAgentEntryComments = new CreateAgentEntryComments($registry, $prompts);
 
         $input = new ArrayInput([
             'entryId' => (string) $entry->getId()

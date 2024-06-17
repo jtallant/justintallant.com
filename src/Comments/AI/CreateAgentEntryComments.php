@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace JustinTallant\Comments\AI;
 
-use Skimpy\Repo\Entries;
 use Skimpy\CMS\ContentItem;
 use Doctrine\ORM\EntityManager;
 use Illuminate\Console\Command;
@@ -32,7 +31,6 @@ class CreateAgentEntryComments extends Command
     protected $description = 'Respond to entries with AI';
 
     private EntityManager $commentsManager;
-    private Entries $entries;
     private EntityRepository $comments;
 
     /**
@@ -40,10 +38,12 @@ class CreateAgentEntryComments extends Command
      */
     private array $prompts;
 
+    private EntityRepository $entries;
+
     /**
      * @param string[] $prompts
      */
-    public function __construct(Registry $registry, array $prompts, Entries $entries)
+    public function __construct(Registry $registry, array $prompts)
     {
         parent::__construct();
 
@@ -51,8 +51,11 @@ class CreateAgentEntryComments extends Command
         $commentsManager = $registry->getManager('comments');
 
         $this->commentsManager = $commentsManager;
-        $this->entries = $entries;
+
+        /** @phpstan-ignore-next-line */
+        $this->entries = $registry->getRepository(ContentItem::class);
         $this->comments = $commentsManager->getRepository(Comment::class);
+
         $this->prompts = $prompts;
     }
 
@@ -135,4 +138,3 @@ class CreateAgentEntryComments extends Command
         return array_keys($this->prompts);
     }
 }
-

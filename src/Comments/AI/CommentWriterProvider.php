@@ -12,6 +12,16 @@ use JustinTallant\Comments\AI\CommentWriterInterface;
 use JustinTallant\Comments\AI\CreateAgentEntryComments;
 use JustinTallant\Comments\AI\CreateAgentCommentReplies;
 
+/**
+ * Class CommentWriterProvider
+ *
+ * This service provider is responsible for registering and binding various
+ * services related to AI-driven comment writing within the application.
+ * It sets up singleton instances for GptCommentWriter, CreateAgentCommentReplies,
+ * and CreateAgentEntryComments, and binds the CommentWriterInterface to the
+ * GptCommentWriter implementation. Additionally, it registers console commands
+ * for creating agent comments and replies.
+ */
 class CommentWriterProvider extends ServiceProvider
 {
     public function register(): void
@@ -29,7 +39,7 @@ class CommentWriterProvider extends ServiceProvider
         });
 
         $this->app->singleton(CreateAgentEntryComments::class, function ($app) {
-            return new CreateAgentEntryComments($app->make('registry'), config('comments.prompts'), $app->make(Entries::class));
+            return new CreateAgentEntryComments($app->make('registry'), config('comments.prompts'));
         });
 
         $this->commands([
