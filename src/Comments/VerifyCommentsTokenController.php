@@ -3,15 +3,17 @@
 namespace JustinTallant\Comments;
 
 use Illuminate\Http\Request;
+use Doctrine\ORM\EntityManager;
 use Illuminate\Http\JsonResponse;
+use Doctrine\Persistence\ObjectRepository;
 use JustinTallant\Comments\Entities\Email;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use LaravelDoctrine\ORM\IlluminateRegistry as Registry;
 
 class VerifyCommentsTokenController extends BaseController
 {
-    private $em;
-    private $emails;
+    private EntityManager $em;
+    private ObjectRepository $emails;
 
     public function __construct(Registry $registry)
     {

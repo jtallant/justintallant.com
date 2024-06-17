@@ -23,6 +23,50 @@ class CreateAgentEntryCommentsTest extends TestCase
     }
 
     /** @test */
+    public function it_creates_agent_comments_for_a_single_entry()
+    {
+        $registry = $this->app->make('registry');
+        $entries = $this->app->make(Entries::class);
+
+        $entry = new ContentItem(
+            'example-entry-uri',
+            'Title Post',
+            new \DateTime(),
+            'entry',
+            'The Content'
+        );
+
+        $this->defaultManager->persist($entry);
+        $this->defaultManager->flush();
+
+        $prompts = [
+            'Roaster1' => 'You are an intellectual with a sharp wit...',
+            'NiceGuy17' => 'You are Mr. Nice Guy, an intelligent and incredibly kind...'
+        ];
+
+        $commentWriter = Mockery::mock(CommentWriterInterface::class);
+        $commentWriter->shouldReceive('write')
+            ->andReturn('Generated comment content');
+
+        $createAgentEntryComments = new CreateAgentEntryComments($registry, $prompts, $entries);
+
+        $input = new ArrayInput([
+            'entryId' => $entry->getId()
+        ], $createAgentEntryComments->getDefinition());
+
+        $output = new BufferedOutput();
+        $outputStyle = new OutputStyle(new StringInput(''), $output);
+
+        $createAgentEntryComments->setInput($input);
+        $createAgentEntryComments->setOutput($outputStyle);
+
+        $createAgentEntryComments->handle($commentWriter);
+
+        $commentsForEntry = $this->comments->findBy(['entryUri' => 'example-entry-uri']);
+        $this->assertCount(2, $commentsForEntry, 'Entry should have exactly two comments. One for each prompt.');
+    }
+
+    /** @test */
     public function it_creates_agent_comments_for_entries_with_no_agent_comment()
     {
         $registry = $this->app->make('registry');
@@ -68,6 +112,15 @@ class CreateAgentEntryCommentsTest extends TestCase
             ->andReturn('Generated comment content');
 
         $createAgentEntryComments = new CreateAgentEntryComments($registry, $prompts, $entries);
+
+        $input = new ArrayInput([], $createAgentEntryComments->getDefinition());
+
+        $output = new BufferedOutput();
+        $outputStyle = new OutputStyle(new StringInput(''), $output);
+
+        $createAgentEntryComments->setInput($input);
+        $createAgentEntryComments->setOutput($outputStyle);
+
         $createAgentEntryComments->handle($commentWriter);
 
         $commentsForEntry2 = $this->comments->findBy(['entryUri' => 'example-entry-uri-2']);

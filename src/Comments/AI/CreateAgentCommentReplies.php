@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace JustinTallant\Comments\AI;
 
+use Doctrine\ORM\EntityManager;
 use Illuminate\Console\Command;
+use Doctrine\Persistence\ObjectRepository;
 use JustinTallant\Comments\Entities\Comment;
 use JustinTallant\Comments\AI\CommentWriterInterface;
 use LaravelDoctrine\ORM\IlluminateRegistry as Registry;
@@ -14,9 +16,9 @@ class CreateAgentCommentReplies extends Command
     protected $signature = 'comments:create-agent-comment-replies {commentId?}';
     protected $description = 'Respond to a random number of new comments with AI';
 
-    private $commentsManager;
-    private $comments;
-    private $prompts;
+    private EntityManager $commentsManager;
+    private ObjectRepository $comments;
+    private array $prompts;
 
     public function __construct(Registry $registry, array $prompts)
     {
@@ -60,6 +62,7 @@ class CreateAgentCommentReplies extends Command
     private function commentsForReply($commentId = null, ?string $timeAgo = '-10 minutes'): array
     {
         if (!empty($commentId)) {
+            $commentId = (string) $commentId;
             return [$this->singleComment($commentId)];
         }
 
@@ -68,14 +71,14 @@ class CreateAgentCommentReplies extends Command
             ->andWhere('c.repliesTo IS NULL')
             ->andWhere('c.createdAt >= :timeAgo')
             ->andWhere('LENGTH(c.content) >= 260')
-            ->andWhere('(SELECT COUNT(r.id) FROM Comment r WHERE r.repliesTo = c.id) <= 30')
+            ->andWhere('(SELECT COUNT(r.id) FROM ' . Comment::class . ' r WHERE r.repliesTo = c.id) <= 30')
             ->setParameter('ignoredAuthors', $this->ignoredAuthors())
             ->setParameter('timeAgo', new \DateTime($timeAgo));
 
         return $queryBuilder->getQuery()->getResult();
     }
 
-    private function singleComment($commentId): Comment
+    private function singleComment(string $commentId): Comment
     {
         $comment = $this->comments->findOneBy(['id' => $commentId]);
 

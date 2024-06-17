@@ -39,17 +39,38 @@ class CreateAgentEntryComments extends Command
 
     private function respondToEntries(CommentWriterInterface $writer): void
     {
-        $excludeEntries = $this->entryUrisWithComments();
-
-        $entries = $this->entries->createQueryBuilder('e')
-            ->where('e.uri NOT IN (:excludeEntries)')
-            ->setParameter('excludeEntries', $excludeEntries)
-            ->getQuery()
-            ->getResult();
+        $entryId = $this->argument('entryId');
+        $entries = $this->entriesForComment($entryId);
 
         foreach ($this->prompts as $promptCharacter => $promptContent) {
             $this->writeComment($entries, $writer, $promptCharacter, $promptContent);
         }
+    }
+
+    private function entriesForComment($entryId = null): array
+    {
+        if (!empty($entryId)) {
+            return [$this->singleEntry($entryId)];
+        }
+
+        $excludeEntries = $this->entryUrisWithComments();
+
+        return $this->entries->createQueryBuilder('e')
+            ->where('e.uri NOT IN (:excludeEntries)')
+            ->setParameter('excludeEntries', $excludeEntries)
+            ->getQuery()
+            ->getResult();
+    }
+
+    private function singleEntry($entryId)
+    {
+        $entry = $this->entries->findOneBy(['id' => $entryId]);
+
+        if (!$entry) {
+            throw new \RuntimeException("Entry with ID $entryId not found");
+        }
+
+        return $entry;
     }
 
     private function writeComment(
