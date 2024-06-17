@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace JustinTallant\Comments\AI;
 
 use OpenAI;
-use Skimpy\Repo\Entries;
 use Illuminate\Support\ServiceProvider;
 use JustinTallant\Comments\AI\GptCommentWriter;
 use JustinTallant\Comments\AI\CommentWriterInterface;
@@ -26,7 +25,7 @@ class CommentWriterProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->singleton(GptCommentWriter::class, function ($app) {
+        $this->app->singleton(GptCommentWriter::class, function () {
             $apiKey = config('comments.openai_api_key');
             $client = new GptClient(OpenAI::client($apiKey));
             return new GptCommentWriter($client);
