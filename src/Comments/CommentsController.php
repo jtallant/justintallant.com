@@ -1,19 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustinTallant\Comments;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Factory;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectRepository;
 use JustinTallant\Comments\Entities\Comment;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use LaravelDoctrine\ORM\IlluminateRegistry as Registry;
 
 class CommentsController extends BaseController
 {
-    private $em;
-    private $comments;
-    private $validator;
+    private ObjectManager $em;
+    private ObjectRepository $comments;
+    private Factory $validator;
 
     public function __construct(Factory $validator, Registry $registry)
     {

@@ -17,11 +17,11 @@ class GptCommentWriterTest extends TestCase
         $spyGptClient = Mockery::spy(GptClient::class);
 
         $spyGptClient->shouldReceive('createChat')
-            ->andReturn([
+            ->andReturn(new \ArrayObject([
                 'choices' => [
                     ['message' => ['content' => $generatedResponse]]
                 ]
-            ]);
+            ]));
 
         $writer = new GptCommentWriter($spyGptClient);
 

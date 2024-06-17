@@ -6,8 +6,8 @@ use Mailgun\Mailgun;
 
 class MailgunMailer implements MailerInterface
 {
-    private $mailgun;
-    private $domain;
+    private Mailgun $mailgun;
+    private string $domain;
 
     public function __construct(Mailgun $mailgun, string $domain)
     {

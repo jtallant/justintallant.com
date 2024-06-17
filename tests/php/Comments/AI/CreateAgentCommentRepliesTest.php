@@ -49,7 +49,7 @@ class CreateAgentCommentRepliesTest extends TestCase
         $createAgentComments = new CreateAgentCommentReplies(app('registry'), $prompts);
 
         $input = new ArrayInput([
-            'commentId' => $comment->id()
+            'commentId' => (string) $comment->id()
         ], $createAgentComments->getDefinition());
 
         $output = new BufferedOutput();

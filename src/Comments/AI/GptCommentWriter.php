@@ -7,9 +7,20 @@ namespace JustinTallant\Comments\AI;
 use JustinTallant\Comments\AI\GptClient;
 use JustinTallant\Comments\AI\CommentWriterInterface;
 
+/**
+ * Class GptCommentWriter
+ *
+ * This class is responsible for generating comments using the GPT model.
+ * It implements the CommentWriterInterface and utilizes the GptClient to
+ * interact with the OpenAI API. The class constructs messages based on
+ * provided prompts and content, and handles the response to generate
+ * the final comment.
+ *
+ * @package JustinTallant\Comments\AI
+ */
 class GptCommentWriter implements CommentWriterInterface
 {
-    private $gptClient;
+    private GptClient $gptClient;
 
     public function __construct(GptClient $gptClient)
     {

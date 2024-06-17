@@ -16,43 +16,44 @@ class Email implements \JsonSerializable
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @phpstan-ignore-next-line
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $email;
+    private string $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $token;
+    private ?string $token;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $entryUri;
+    private string $entryUri;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $verifiedAt;
+    private ?\DateTime $verifiedAt = null;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private \DateTime $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $expiresAt;
+    private \DateTime $expiresAt;
 
     public function __construct(string $name, string $email, string $entryUri)
     {
@@ -125,6 +126,9 @@ class Email implements \JsonSerializable
         return $this->expiresAt;
     }
 
+    /**
+     * @return array{id: int, name: string, email: string, createdAt: string, expiresAt: string}
+     */
     public function jsonSerialize(): array
     {
         return [

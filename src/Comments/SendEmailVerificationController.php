@@ -3,8 +3,8 @@
 namespace JustinTallant\Comments;
 
 use Illuminate\Http\Request;
-use Doctrine\ORM\EntityManager;
 use Illuminate\Http\JsonResponse;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
 use JustinTallant\Comments\Entities\Email;
 use Illuminate\Validation\Factory as ValidatorFactory;
@@ -15,7 +15,7 @@ class SendEmailVerificationController extends BaseController
 {
     private ValidatorFactory $validator;
     private MailerInterface $mailer;
-    private EntityManager $em;
+    private ObjectManager $em;
     private ObjectRepository $emails;
 
     public function __construct(
@@ -29,7 +29,7 @@ class SendEmailVerificationController extends BaseController
         $this->emails = $this->em->getRepository(Email::class);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $validator = $this->validator->make($request->all(), [
             'name' => 'required',
@@ -66,6 +66,9 @@ class SendEmailVerificationController extends BaseController
         ], 200);
     }
 
+    /**
+     * @param array{name: string, email: string, entry_uri: string} $data
+     */
     private function getEmail(array $data): Email
     {
         $existingEmail = $this->emails->findOneBy(['email' => $data['email']]);

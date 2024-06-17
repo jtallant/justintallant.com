@@ -17,11 +17,12 @@ class CommentsServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        /** @phpstan-ignore-next-line */
         $router = $this->app->router;
         require __DIR__ . '/routes.php';
     }
 
-    private function mergeConfigs()
+    private function mergeConfigs(): void
     {
         $this->loadAndMergeConfigFrom(__DIR__ . '/config/database.php', 'database');
         $this->loadAndMergeConfigFrom(__DIR__ . '/config/doctrine.php', 'doctrine');

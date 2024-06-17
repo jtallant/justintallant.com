@@ -51,7 +51,7 @@ class CreateAgentEntryCommentsTest extends TestCase
         $createAgentEntryComments = new CreateAgentEntryComments($registry, $prompts, $entries);
 
         $input = new ArrayInput([
-            'entryId' => $entry->getId()
+            'entryId' => (string) $entry->getId()
         ], $createAgentEntryComments->getDefinition());
 
         $output = new BufferedOutput();

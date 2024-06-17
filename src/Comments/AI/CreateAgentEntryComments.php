@@ -5,25 +5,49 @@ declare(strict_types=1);
 namespace JustinTallant\Comments\AI;
 
 use Skimpy\Repo\Entries;
+use Skimpy\CMS\ContentItem;
+use Doctrine\ORM\EntityManager;
 use Illuminate\Console\Command;
+use Doctrine\ORM\EntityRepository;
 use JustinTallant\Comments\Entities\Comment;
 use JustinTallant\Comments\AI\CommentWriterInterface;
 use LaravelDoctrine\ORM\IlluminateRegistry as Registry;
 
+/**
+ * Class CreateAgentEntryComments
+ *
+ * This command class is responsible for generating AI-based comments for entries.
+ * It uses a specified set of prompts to generate responses to new entries or a specific entry.
+ * The class interacts with the Doctrine ORM to manage comment entities and uses a CommentWriterInterface
+ * implementation to generate the content of the comments.
+ *
+ * The command can be executed with an optional entryId argument to target a specific entry.
+ * If no entryId is provided, it will respond to a random number of new entries that meet certain criteria.
+ *
+ * @package JustinTallant\Comments\AI
+ */
 class CreateAgentEntryComments extends Command
 {
     protected $signature = 'comments:create-agent-entry-comments {entryId?}';
     protected $description = 'Respond to entries with AI';
 
-    private $commentsManager;
-    private $entries;
-    private $comments;
-    private $prompts;
+    private EntityManager $commentsManager;
+    private Entries $entries;
+    private EntityRepository $comments;
 
+    /**
+     * @var string[]
+     */
+    private array $prompts;
+
+    /**
+     * @param string[] $prompts
+     */
     public function __construct(Registry $registry, array $prompts, Entries $entries)
     {
         parent::__construct();
 
+        /** @var EntityManager $commentsManager */
         $commentsManager = $registry->getManager('comments');
 
         $this->commentsManager = $commentsManager;
@@ -34,45 +58,17 @@ class CreateAgentEntryComments extends Command
 
     public function handle(CommentWriterInterface $writer): void
     {
-        $this->respondToEntries($writer);
-    }
-
-    private function respondToEntries(CommentWriterInterface $writer): void
-    {
         $entryId = $this->argument('entryId');
-        $entries = $this->entriesForComment($entryId);
+        $entries = $entryId ? [$this->singleEntry($entryId)] : $this->entriesForComment();
 
         foreach ($this->prompts as $promptCharacter => $promptContent) {
             $this->writeComment($entries, $writer, $promptCharacter, $promptContent);
         }
     }
 
-    private function entriesForComment($entryId = null): array
-    {
-        if (!empty($entryId)) {
-            return [$this->singleEntry($entryId)];
-        }
-
-        $excludeEntries = $this->entryUrisWithComments();
-
-        return $this->entries->createQueryBuilder('e')
-            ->where('e.uri NOT IN (:excludeEntries)')
-            ->setParameter('excludeEntries', $excludeEntries)
-            ->getQuery()
-            ->getResult();
-    }
-
-    private function singleEntry($entryId)
-    {
-        $entry = $this->entries->findOneBy(['id' => $entryId]);
-
-        if (!$entry) {
-            throw new \RuntimeException("Entry with ID $entryId not found");
-        }
-
-        return $entry;
-    }
-
+    /**
+     * @param ContentItem[] $entries
+     */
     private function writeComment(
         array $entries,
         CommentWriterInterface $writer,
@@ -89,7 +85,34 @@ class CreateAgentEntryComments extends Command
     }
 
     /**
+     * @return ContentItem[]
+     */
+    private function entriesForComment(): array
+    {
+        $excludeEntries = $this->entryUrisWithComments();
+
+        return $this->entries->createQueryBuilder('e')
+            ->where('e.uri NOT IN (:excludeEntries)')
+            ->setParameter('excludeEntries', $excludeEntries)
+            ->getQuery()
+            ->getResult();
+    }
+
+    private function singleEntry(string $entryId): ContentItem
+    {
+        $entry = $this->entries->findOneBy(['id' => $entryId]);
+
+        if (!$entry) {
+            throw new \RuntimeException("Entry with ID $entryId not found");
+        }
+
+        return $entry;
+    }
+
+    /**
      * The URIs of entries that already have a bot comment based on the entry content
+     *
+     * @return string[]
      */
     private function entryUrisWithComments(): array
     {
@@ -104,8 +127,12 @@ class CreateAgentEntryComments extends Command
         return array_column($result, 'entryUri');
     }
 
+    /**
+     * @return string[]
+     */
     private function ignoredAuthors(): array
     {
         return array_keys($this->prompts);
     }
 }
+
