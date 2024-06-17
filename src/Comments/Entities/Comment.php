@@ -23,9 +23,8 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity="Comment")
      * @ORM\JoinColumn(name="replies_to_id", referencedColumnName="id", nullable=true)
-     * @phpstan-ignore-next-line
      */
-    private $repliesTo;
+    private ?Comment $repliesTo = null;
 
     /**
      * @ORM\Column(type="string", length=255)
