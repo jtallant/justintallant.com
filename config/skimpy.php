@@ -38,7 +38,7 @@ return [
                 'pinned' => [
                     'should-we-follow-srp-in-controllers',
                     'why-im-using-skimpy-cms-for-my-blog',
-                    'the-aggregation-of-marginal-gains',
+                    'open-closed-principle-in-laravel',
                 ]
             ],
             'articles' => [
