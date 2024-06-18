@@ -48,6 +48,10 @@
 }
 
 .work-section {
+
+    border-radius: 20px;
+    padding: 30px 20px 0;
+
     h2 {
         display: flex;
         gap: 10px;
@@ -62,10 +66,6 @@
             width: 24px;
         }
     }
-
-    border-radius: 20px;
-    padding: 10px 20px 0;
-
 
     .company-img-wrapper {
         width: 44px;

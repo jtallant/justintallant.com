@@ -16,9 +16,11 @@
 
     {{ entry.content | raw }}
 
-    {% for item in entries %}
-        <article>
-            <h4><a href="{{ skimpy.url(item.uri) }}">{{ item.title }}</a></h4>
-        </article>
-    {% endfor %}
+    <div class="articles">
+        {% for item in entries %}
+            <article class="article">
+                <h4><a href="{{ skimpy.url(item.uri) }}">{{ item.title }}</a></h4>
+            </article>
+        {% endfor %}
+    </div>
 {% endblock content %}

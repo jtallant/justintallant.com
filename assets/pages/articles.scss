@@ -1,0 +1,10 @@
+#articles {
+    max-width: 600px;
+    margin: 0 auto;
+
+    .article {
+        &:first-child {
+            margin-top: 60px;
+        }
+    }
+}

@@ -1,11 +1,15 @@
 {% extends 'layouts/master' %}
 
 {% block content %}
-    <h1>Articles</h1>
+    <div id="articles">
+        <header>
+            <h1>Articles</h1>
+        </header>
 
-    {% for item in entries %}
-        <article>
-            <h4><a href="{{ skimpy.url(item.uri) }}">{{ item.title }}</a></h4>
-        </article>
-    {% endfor %}
+        <div class="articles">
+            {% for entry in entries %}
+                {% include 'partials/article' %}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock content %}
