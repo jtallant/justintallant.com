@@ -69,6 +69,14 @@ html img.light {
         h2,h3,h4,h5,h6 {
             margin-top: 25px;
         }
+
+        pre+h4 {
+            margin-top: 60px;
+        }
+
+        h4+pre {
+            margin-top: 15px;
+        }
     }
 
 }
@@ -143,3 +151,5 @@ html img.light {
     margin-right: 10px;
     font-weight: 700;
 }
+
+
