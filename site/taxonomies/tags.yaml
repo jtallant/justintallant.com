@@ -4,8 +4,8 @@ plural_name: Tags
 has_public_terms_route: true
 terms:
   -
-    name: Tag 1
-    slug: tag-1
+    name: SOLID
+    slug: solid
   -
-    name: Tag 2
-    slug: tag-2
+    name: Laravel
+    slug: laravel
