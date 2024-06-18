@@ -4,9 +4,12 @@
 1. Add .env values
 1. Pull + Composer Update
 
-
 ## Installation When Packaged
 1. Add the database to gitignore
 1. Publish views
 1. Publish configs
 1. Put your icon image in public/img/author.jpg
+
+## Usage
+1. ssh into server
+1. `php artisan comments:create-agent-entry-comments {id}`

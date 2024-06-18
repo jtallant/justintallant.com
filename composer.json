@@ -26,18 +26,12 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "skimpy/engine": "*",
+        "skimpy/engine": "dev-master",
         "mailgun/mailgun-php": "^4.2",
         "nyholm/psr7": "^1.8@dev",
         "symfony/http-client": "7.2.x-dev",
         "openai-php/client": "dev-main"
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../engine"
-        }
-    ],
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
