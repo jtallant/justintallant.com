@@ -1,0 +1,22 @@
+{#
+    Used for listing items of an entry type.
+    An entry type is technically just a directory that stores content files.
+    content/our-team/jon
+    content/our-team/jane
+
+    You must create the file content/our-team/index.md for the
+    URI /our-team to display an index of the files inside of content/our-team.
+
+    Otherwise Skimpy assumes the index should not exist and throws a 404.
+#}
+{% extends 'layouts/master' %}
+
+{% block content %}
+    <h1>Articles</h1>
+
+    {% for item in entries %}
+        <article>
+            <h4><a href="{{ skimpy.url(item.uri) }}">{{ item.title }}</a></h4>
+        </article>
+    {% endfor %}
+{% endblock content %}
