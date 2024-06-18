@@ -6,26 +6,23 @@ namespace JustinTallant\Comments;
 
 use Doctrine\ORM\Tools\SchemaTool;
 use Illuminate\Support\ServiceProvider;
-use JustinTallant\Comments\Entities\Comment;
-use JustinTallant\Comments\CommentViewDecorator;
 
 class CommentsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
         $this->mergeConfigs();
-        $this->loadCommentTemplates();
-        $this->addCommentsTwigFunctions();
         $this->setupCommentsDatabase();
     }
 
     public function boot(): void
     {
+        /** @phpstan-ignore-next-line */
         $router = $this->app->router;
         require __DIR__ . '/routes.php';
     }
 
-    private function mergeConfigs()
+    private function mergeConfigs(): void
     {
         $this->loadAndMergeConfigFrom(__DIR__ . '/config/database.php', 'database');
         $this->loadAndMergeConfigFrom(__DIR__ . '/config/doctrine.php', 'doctrine');
@@ -42,7 +39,7 @@ class CommentsServiceProvider extends ServiceProvider
 
     private function setupCommentsDatabase(): void
     {
-        if (! file_exists(base_path('database/comments.sqlite'))) {
+        if (php_sapi_name() !== 'cli' && ! file_exists(base_path('database/comments.sqlite'))) {
             touch(base_path('database/comments.sqlite'));
         }
 
@@ -56,46 +53,5 @@ class CommentsServiceProvider extends ServiceProvider
         if (['comments', 'emails'] != $tables) {
             $schemaTool->createSchema($classes);
         }
-    }
-
-    private function addCommentsTwigFunctions(): void
-    {
-        $twig = $this->app->get('twig');
-
-        $commentsRepo = $this->app->make('registry')
-            ->getManager('comments')
-            ->getRepository(Comment::class);
-
-        $config = $this->app->make('config');
-        $siteOwnerSecret = $config->get('comments.site_owner_secret');
-        $siteOwnerName = $config->get('comments.site_owner_name');
-
-        $getComments = function ($entryUri) use ($commentsRepo, $siteOwnerSecret, $siteOwnerName) {
-            $comments = $commentsRepo->findBy([
-                'entryUri' => $entryUri,
-                'repliesTo' => null,
-            ], ['createdAt' => 'DESC']);
-
-            return array_map(function ($comment) use ($siteOwnerSecret, $siteOwnerName) {
-                return new CommentViewDecorator($comment, $siteOwnerSecret, $siteOwnerName);
-            }, $comments);
-        };
-
-        $getChildren = function ($repliesToId) use ($commentsRepo, $siteOwnerSecret, $siteOwnerName) {
-            $comments =  $commentsRepo->findBy(['repliesTo' => $repliesToId,], ['createdAt' => 'ASC']);
-
-            return array_map(function ($comment) use ($siteOwnerSecret, $siteOwnerName) {
-                return new CommentViewDecorator($comment, $siteOwnerSecret, $siteOwnerName);
-            }, $comments);
-        };
-
-        $twig->addFunction(new \Twig\TwigFunction('comments', $getComments));
-        $twig->addFunction(new \Twig\TwigFunction('childComments', $getChildren));
-    }
-
-    private function loadCommentTemplates(): void
-    {
-        $viewFactory = $this->app->get('view');
-        $viewFactory->addLocation(base_path('src/Comments/templates'));
     }
 }

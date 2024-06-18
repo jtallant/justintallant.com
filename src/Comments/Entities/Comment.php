@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="comments", schema="")
+ * @ORM\Table(name="comments")
  */
 class Comment
 {
@@ -16,34 +16,35 @@ class Comment
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @phpstan-ignore-next-line
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="Comment")
      * @ORM\JoinColumn(name="replies_to_id", referencedColumnName="id", nullable=true)
      */
-    private $repliesTo;
+    private ?Comment $repliesTo = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $entryUri;
+    private string $entryUri;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $author;
+    private string $author;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $content;
+    private string $content;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private \DateTime $createdAt;
 
     public function __construct(
         string $entryUri,
@@ -89,5 +90,10 @@ class Comment
     public function createdAt(): \DateTime
     {
         return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTime $createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 }

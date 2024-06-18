@@ -4,22 +4,24 @@ namespace JustinTallant\Comments;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectRepository;
 use JustinTallant\Comments\Entities\Email;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use LaravelDoctrine\ORM\IlluminateRegistry as Registry;
 
 class VerifyCommentsTokenController extends BaseController
 {
-    private $em;
-    private $emails;
+    private ObjectManager $om;
+    private ObjectRepository $emails;
 
     public function __construct(Registry $registry)
     {
-        $this->em = $registry->getManager('comments');
-        $this->emails = $this->em->getRepository(Email::class);
+        $this->om = $registry->getManager('comments');
+        $this->emails = $this->om->getRepository(Email::class);
     }
 
-    public function show(Request $request)
+    public function show(Request $request): JsonResponse
     {
         $token = $request->input('token');
 

@@ -29,6 +29,9 @@ class CommentViewDecorator implements \JsonSerializable
         $this->siteOwnerName = $siteOwnerName;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function jsonSerialize(): array
     {
         return [
@@ -43,7 +46,11 @@ class CommentViewDecorator implements \JsonSerializable
         ];
     }
 
-    public function __call($method, $arguments)
+
+    /**
+     * @phpstan-ignore-next-line
+     */
+    public function __call(string $method, array $arguments): mixed
     {
         return $this->comment->$method(...$arguments);
     }
@@ -96,3 +103,4 @@ class CommentViewDecorator implements \JsonSerializable
             : '<div class="author-img"></div>';
     }
 }
+

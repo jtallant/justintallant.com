@@ -1,17 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JustinTallant\Comments;
 
+use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectRepository;
 use JustinTallant\Comments\Entities\Email;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use LaravelDoctrine\ORM\IlluminateRegistry as Registry;
 
 class EmailVerificationController extends BaseController
 {
-    private $em;
-    private $emails;
+    private ObjectManager $em;
+    private ObjectRepository $emails;
 
     public function __construct(Registry $registry)
     {
@@ -19,7 +23,7 @@ class EmailVerificationController extends BaseController
         $this->emails = $this->em->getRepository(Email::class);
     }
 
-    public function show(Request $request)
+    public function show(Request $request): View
     {
         $token = $request->input('token');
 

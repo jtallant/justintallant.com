@@ -2,8 +2,8 @@
 
 namespace JustinTallant\Comments;
 
-use Illuminate\Support\ServiceProvider;
 use Mailgun\Mailgun;
+use Illuminate\Support\ServiceProvider;
 
 class CommentsMailerProvider extends ServiceProvider
 {
