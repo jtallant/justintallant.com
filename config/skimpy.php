@@ -35,6 +35,11 @@ return [
                 'template' => 'home',
                 'limit' => 3,
                 'seotitle' => 'Home',
+                'pinned' => [
+                    'should-we-follow-srp-in-controllers',
+                    'why-im-using-skimpy-cms-for-my-blog',
+                    'the-aggregation-of-marginal-gains',
+                ]
             ],
             'articles' => [
                 'template' => 'articles',
