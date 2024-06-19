@@ -38,7 +38,7 @@ return [
                 'pinned' => [
                     'should-we-follow-srp-in-controllers',
                     'why-im-using-skimpy-cms-for-my-blog',
-                    'open-closed-principle-in-laravel',
+                    'how-should-we-structure-our-laravel-apps',
                 ]
             ],
             'articles' => [
