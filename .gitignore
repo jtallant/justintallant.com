@@ -8,3 +8,4 @@ database/comments.sqlite
 node_modules/
 .deployment
 docs/
+site/cooking
