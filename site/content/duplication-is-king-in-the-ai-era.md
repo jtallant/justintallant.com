@@ -72,8 +72,6 @@ Duplicate freely. Couple reluctantly.
 
 When duplicated code needs to change, you change it.
 
-When shared code needs to change, you schedule a meeting to discuss what might break.
-
 The industry default is abstraction first, duplication as a last resort.
 
 Flip that.
