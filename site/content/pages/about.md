@@ -1,12 +1,12 @@
-title: "I'm Justin Tallant, a Web App and AI Solutions Engineer"
+title: "I'm Justin Tallant, a Senior Staff Engineer"
 ---
-Throughout my career, I’ve honed my skills in frameworks like Laravel and Vue.js, building robust and scalable solutions for a diverse range of clients. Recognizing the growing importance of AI as an essential tool, I am now expanding my expertise to include AI integration, exploring how intelligent systems can enhance productivity and drive business success. Programming has always fascinated me due to its inherent focus on automation. Recent advances in LLM APIs have opened up exciting new possibilities in this realm, providing us with unprecedented opportunities to push the boundaries of automation.
+I’m a senior-level software engineer focused on application architecture and building systems that scale without unnecessary complexity. Most of my work centers on code organization, module boundaries, and keeping large codebases maintainable over time.
 
-In addition to my technical expertise, I have a unique blend of skills and experiences that set me apart. I’m an independent thinker with a strong sense of discipline and self-motivation. Whether tackling complex coding challenges or exploring the latest technological advancements, I bring creativity and precision to every task. I have guided projects from conception to completion, gaining a comprehensive understanding of end-to-end project management. This makes me a versatile asset in any tech-driven environment.
+I favor modular monoliths over microservices. I'm skeptical of distributed systems when a well-structured application will do. Infrastructure should be boring. The interesting problems are at the application layer: domain modeling, data flow, and designing systems that other engineers can understand and extend.
 
-Beyond the digital realm, I’ve ventured into the hospitality industry with great success. I own two short-term rentals in West Texas, including a popular off-grid cabin in Terlingua. This hands-on experience has provided me with valuable insights into construction, property management, customer service, and the growing trend of sustainable living. My initial fascination with AI began when I created an "AI Assistant" to manage my properties, including real-time communication with guests.
+I've spent over a decade building web applications at companies ranging from early-stage startups to established teams. The constant has been a focus on clean architecture and pragmatic engineering.
 
-I believe in the power of innovation and adaptability. As I pivot towards new opportunities in AI and web development, I’m eager to collaborate with like-minded individuals and organizations. Whether developing cutting-edge AI tools, enhancing existing web applications, or integrating AI into business operations, I’m committed to delivering excellence and driving impactful results.
+Outside of software, I own two short-term rentals in West Texas, including an off-grid cabin in Terlingua. Building and managing these properties taught me a lot about construction, hospitality, and sustainable living. It's a good counterbalance to screen work.
 
 <h4 style="margin-top: 25px; margin-bottom: -10px;">By the way&hellip;</h4>
 This site was created with <a href="/why-im-using-skimpy-cms-for-my-blog">my own open source cms called Skimpy</a>. If you want to write your blog posts in markdown without having to generate them, and you're a fan of Laravel or Twig &ndash; you might like it.
