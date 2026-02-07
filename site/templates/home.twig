@@ -108,7 +108,7 @@ set companies = [
                                     {% if company.img != '' %}
                                         <img alt="{{ company.name }}" loading="lazy" width="32" height="32" decoding="async" data-nimg="1" class="company-img" src="{{ company.img }}" />
                                     {% else %}
-                                        <div class="company-img-placeholder"></div>
+                                        <div class="company-img-placeholder" style="background: white; color: #1a1a1a; font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 14px;">Au</div>
                                     {% endif %}
                                 </div>
                                 <div class="company-info">
