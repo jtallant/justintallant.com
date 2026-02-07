@@ -9,3 +9,4 @@ node_modules/
 .deployment
 docs/
 site/cooking
+package-lock.json
