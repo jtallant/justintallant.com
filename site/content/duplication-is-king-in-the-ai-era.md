@@ -27,13 +27,13 @@ The problem that doesn't exist: updating code in multiple places.
 
 ## Examples
 
-**The formatting helper.** You format dates in a few places. DRY instinct says make a shared `formatDate` function. A year later, it handles timestamps, durations, relative times, timezones, and locales. The function signature is a paragraph. Half the codebase imports it.
+**The formatting helper.** You format dates in a few places. DRY instinct says make a shared `formatDate` function. A year later, it handles timestamps, durations, timezones, and locales. The function signature is a paragraph. Half the codebase imports it.
 
 Duplicate version: each place formats its own date. One line each. You change one without thinking about the others.
 
 **The API endpoint.** Multiple screens need user data. DRY instinct says one endpoint, one source of truth. Now that endpoint returns forty fields because different screens need different things. Every consumer over-fetches. The response payload is a contract you can never simplify.
 
-Duplicate version: each screen has its own endpoint. Each returns exactly what it needs. You change one without a meeting.
+Duplicate version: each screen has its own endpoint. Each returns exactly what it needs. You change one without fear.
 
 ## This Was Always True
 
@@ -41,11 +41,11 @@ Bad abstractions cost more than duplicated code ever will.
 
 Once you create a bad abstraction, people build on top of it. They work around its quirks. They add to it. Unwinding it becomes a project. Duplicated code that turns out to be wrong? You just delete it.
 
-And here's the thing: two pieces of code that look similar aren't the same code. They might look alike today but need to evolve differently tomorrow. DRY forces conceptually different things into lockstep because they happen to be textually similar. That's a category error.
+And here's the thing: two pieces of code that look similar aren't the same code. They might look alike today but need to evolve differently tomorrow. DRY forces conceptually different things into lockstep because they happen to be textually similar.
 
 Grep has existed for fifty years. Finding duplicated code was never the problem. The problem with shared code was never "how do I find it?" It was "what breaks when I touch it?"
 
-The costs were always asymmetric. Duplication's cost is visible—more lines of code. Coupling's cost is hidden—fear, coordination, bugs in unrelated features, meetings. We overweighted what we could count and ignored what we couldn't.
+The cost of duplication is visible. More lines of code. The cost of coupling is hidden. Fear, coordination, bugs in unrelated features, meetings. We overweighted what we could count and ignored what we couldn't.
 
 Duplicated code is also deletable. You remove a feature, you delete its code. Done. Shared code? You check dependencies, find orphaned utilities, wonder if something else might need it someday. Deletion becomes archaeology.
 
@@ -63,9 +63,7 @@ AI solved duplication. Coupling is still undefeated.
 
 ## The Shift
 
-Shared code is architectural complexity. It's runtime dependency. It's fear of change.
-
-Duplicated code is just text.
+Shared code is architectural complexity and fear of change. Duplicated code is just text.
 
 One requires careful human reasoning and coordination.
 The other is find and replace.
@@ -84,7 +82,7 @@ Duplicate first.
 Let the differences emerge.
 Extract the abstraction only when the duplication actually hurts. Most of the time, it won't.
 
-Until then:
+Until then
 
 - Don't reach for inheritance just because two classes look similar.
 - Don't hide behavior in traits to avoid copy-paste.

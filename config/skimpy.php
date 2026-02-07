@@ -36,8 +36,8 @@ return [
                 'limit' => 3,
                 'seotitle' => 'Home',
                 'pinned' => [
+                    'duplication-is-king-in-the-ai-era',
                     'should-we-follow-srp-in-controllers',
-                    'why-im-using-skimpy-cms-for-my-blog',
                     'how-should-we-structure-our-laravel-apps',
                 ]
             ],
