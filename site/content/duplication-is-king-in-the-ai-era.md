@@ -1,4 +1,3 @@
----
 title: Duplication is King in the AI Era
 date: 2026-02-06
 category: Programming
