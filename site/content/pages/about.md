@@ -4,8 +4,6 @@ I’m a senior-level software engineer focused on application architecture and b
 
 I favor modular monoliths over microservices. I'm skeptical of distributed systems when a well-structured application will do. Infrastructure should be boring. The interesting problems are at the application layer: domain modeling, data flow, and designing systems that other engineers can understand and extend.
 
-I've spent over a decade building web applications at companies ranging from early-stage startups to established teams. The constant has been a focus on clean architecture and pragmatic engineering.
-
 Outside of software, I own two short-term rentals in West Texas, including an off-grid cabin in Terlingua. Building and managing these properties taught me a lot about construction, hospitality, and sustainable living. It's a good counterbalance to screen work.
 
 <h4 style="margin-top: 25px; margin-bottom: -10px;">By the way&hellip;</h4>
