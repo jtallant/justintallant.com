@@ -4,11 +4,11 @@ plural_name: Categories # Used in HTML
 has_public_terms_route: false
 terms:
   -
-    name: Web Development
-    slug: web-development
-  -
     name: Unix
     slug: unix
   -
     name: Reflections
     slug: reflections
+  -
+    name: Software Architecture
+    slug: software-architecture

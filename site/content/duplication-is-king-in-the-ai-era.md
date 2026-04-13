@@ -1,6 +1,6 @@
 title: Duplication is King in the AI Era
 date: "2026-02-06"
-category: Programming
+category: Software Architecture
 ---
 
 DRY is dogma. Don't Repeat Yourself. Nobody remembers learning it, but everyone believes it. See two similar things? Extract them. Share them. Reuse them.
