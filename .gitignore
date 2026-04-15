@@ -10,3 +10,4 @@ node_modules/
 docs/
 site/cooking
 package-lock.json
+deploy.sh

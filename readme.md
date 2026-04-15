@@ -15,6 +15,9 @@ Personal website https://justintallant.com
 1. `npm run watch`
 
 ## Deploy
-1. Set up a Git action for your server that does the following
-    1. `git pull`
-    1. `npm run prod` - compile minified css
+
+Requires SSH key access to the production server.
+
+```
+./deploy.sh
+```
