@@ -2,8 +2,6 @@ title: The AI Debacle
 date: "2026-04-15"
 category: AI
 ---
-# The AI Debacle
-
 AI is here. Not in the "coming soon" sense that people have been saying for a decade. It's here in the sense that I use it every day to do work that would have taken me significantly longer just two years ago. I have direct experience with the productivity gains, and it's apparent to anyone using AI daily — the output per person has increased dramatically in a very short time. That kind of shift isn't a gimmick. It's structural.
 
 I'm a software engineer, and I'm telling you — the displacement has already started. It's small right now, hard to measure, easy to dismiss. But the trajectory is obvious if you're paying attention. The same tools I use daily mean companies need fewer engineers to ship the same output. Multiply that across legal, finance, marketing, customer support, data analysis — basically any job that involves sitting at a computer and processing information — and you're looking at a wave that's going to reshape the labor market in ways we've never seen before.
