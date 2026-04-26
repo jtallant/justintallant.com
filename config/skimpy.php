@@ -37,8 +37,8 @@ return [
                 'seotitle' => 'Home',
                 'pinned' => [
                     'duplication-is-king-in-the-ai-era',
-                    'should-we-follow-srp-in-controllers',
-                    'how-should-we-structure-our-laravel-apps',
+                    'near-zero-maintenance-web-apps',
+                    'the-ai-debacle',
                 ]
             ],
             'articles' => [
