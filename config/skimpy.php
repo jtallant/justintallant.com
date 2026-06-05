@@ -38,7 +38,7 @@ return [
                 'pinned' => [
                     'duplication-is-king-in-the-ai-era',
                     'near-zero-maintenance-web-apps',
-                    'the-ai-debacle',
+                    'open-closed-principle-in-laravel',
                 ]
             ],
             'articles' => [
