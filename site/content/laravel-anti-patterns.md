@@ -174,14 +174,14 @@ Each module owns a slice of the application's behavior. The files inside tell yo
 
 Once you abandon repositories, a question remains. Where do queries live?
 
-Query classes. One class, one query, one public method.
+Query classes. One class, one read, one public method.
 
 <pre><code class="language-php">
 class GetBoardIssues
 {
     public function __construct(private readonly PDO $pdo) {}
 
-    /** @return list&lt;array&lt;string, mixed&gt;&gt; */
+    /** @return list&lt;IssueCardDto&gt; */
     public function execute(int $teamId, string $cycleId): array
     {
         $sql = '
@@ -199,7 +199,7 @@ class GetBoardIssues
                 (SELECT COUNT(*) FROM comments c WHERE c.issue_id = i.id) AS comment_count
             FROM issues i
             LEFT JOIN users u ON u.id = i.assignee_id
-            WHERE i.team_id  = :team_id
+            WHERE i.team_id   = :team_id
               AND i.cycle_id  = :cycle_id
               AND i.deleted_at IS NULL
             ORDER BY i.sort_order ASC
@@ -207,13 +207,60 @@ class GetBoardIssues
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['team_id' => $teamId, 'cycle_id' => $cycleId]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $labels = $this->labelsByIssue(array_column($rows, 'id'));
+
+        return array_map(
+            fn (array $row): IssueCardDto => new IssueCardDto(
+                id:             (int) $row['id'],
+                identifier:     $row['identifier'],
+                title:          $row['title'],
+                status:         $row['status'],
+                priority:       $row['priority'],
+                assigneeId:     $row['assignee_id'] !== null ? (int) $row['assignee_id'] : null,
+                assigneeName:   $row['assignee_name'],
+                assigneeAvatar: $row['assignee_avatar'],
+                commentCount:   (int) $row['comment_count'],
+                labels:         $labels[$row['id']] ?? [],
+            ),
+            $rows,
+        );
+    }
+
+    /**
+     * @param  list&lt;int&gt;  $issueIds
+     * @return array&lt;int, list&lt;string&gt;&gt;
+     */
+    private function labelsByIssue(array $issueIds): array
+    {
+        if ($issueIds === []) {
+            return [];
+        }
+
+        $placeholders = implode(',', array_fill(0, count($issueIds), '?'));
+
+        $stmt = $this->pdo->prepare("
+            SELECT il.issue_id, l.name
+            FROM issue_label il
+            JOIN labels l ON l.id = il.label_id
+            WHERE il.issue_id IN ({$placeholders})
+        ");
+        $stmt->execute($issueIds);
+
+        $byIssue = [];
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            $byIssue[$row['issue_id']][] = $row['name'];
+        }
+
+        return $byIssue;
     }
 }
 </code></pre>
 
 This is it. The class name describes exactly what it does. There's no ambiguity about scope. It can't grow into a dumping ground because there's nothing to dump into. It does one thing.
+
+It returns a list of `IssueCardDto`, not raw rows. The class owns the whole read. The scalar fields and the comment count come back in the main query, and the labels come back in a second query batched across every issue with `WHERE issue_id IN (...)`. A many-to-many can't ride along in a single row, so it gets its own query and gets grouped by issue in PHP. That's two queries, flat no matter how many issues are on the board, and the caller gets back typed objects instead of associative arrays. The `IssueCardDto` itself comes in section 7.
 
 **On duplication.** If you need a similar query for a different context, say `GetBacklogIssues` which skips the cycle filter and sorts differently, don't reach for a shared `IssueQueryBuilder` with a `$cycleId = null` parameter and branching logic inside. Copy the query, change what differs. Two files, two queries, zero coupling.
 
@@ -348,7 +395,7 @@ class IssueResource extends JsonResource
 
 Load a board view with fifty issues and you've just fired 151 queries without writing a single loop. The framework hid it from you.
 
-The alternative is simple. Write the queries explicitly, pull what the card needs in a fixed, predictable number of them, and map each row into a DTO with a `toArray()` method.
+The alternative is simple. Pull what the card needs in a fixed, predictable number of queries and return typed DTOs with a `toArray()` method. That's exactly what `GetBoardIssues` in section 5 already does.
 
 <pre><code class="language-php">
 readonly class IssueCardDto
@@ -387,7 +434,7 @@ readonly class IssueCardDto
 }
 </code></pre>
 
-Your controller calls `GetBoardIssues`, maps each row into an `IssueCardDto`, and returns `array_map(fn($dto) => $dto->toArray(), $dtos)`. The scalar fields, including the comment count, come back in that one query. Labels are a many-to-many relationship, so they can't collapse into a single row. They get their own query, batched across every issue on the board with `WHERE issue_id IN (...)` and grouped by issue in PHP. That's two queries total, and the count stays flat whether the board has five issues or five hundred. The villain above fired 151 for fifty.
+Your controller calls `GetBoardIssues`, gets back a list of `IssueCardDto`, and returns `array_map(fn($dto) => $dto->toArray(), $issues)`. The query class already did the work in two queries, flat whether the board has five issues or five hundred. The villain above fired 151 for fifty.
 
 You can also read the exact API contract straight from the DTO constructor without running the app.
 
