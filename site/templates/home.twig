@@ -1,39 +1,3 @@
-{%
-
-set companies = [
-    {
-        'name': 'Auctic',
-        'start_year': 2024,
-        'end_year': 'current',
-        'title': 'Senior Staff Engineer',
-        'img': ''
-    },
-    {
-        'name': 'CCI.live',
-        'start_year': 2020,
-        'end_year': 2023,
-        'title': 'Senior Software Engineer',
-        'img': '/img/cci-live.jpg'
-    },
-    {
-        'name': 'Carbon Better',
-        'start_year': 2019,
-        'end_year': 2020,
-        'title': 'Senior Software Engineer',
-        'img': '/img/carbon-better.jpg'
-    },
-    {
-        'name': 'NYCDA',
-        'start_year': 2016,
-        'end_year': 2017,
-        'title': 'Instructor',
-        'img': '/img/nycda.jpg'
-    }
-]
-
-%}
-
-
 {% extends 'layouts/master' %}
 
 {% block title %}
@@ -62,7 +26,7 @@ set companies = [
             </h1>
 
             <p>
-                I'm Justin, a senior staff engineer focused on application architecture and code organization at scale. I build modular monoliths. Systems that stay maintainable without distributed complexity. Currently at Auctic.
+                I'm Justin, a senior staff engineer focused on application architecture and code organization.
             </p>
         </div>
 
@@ -92,39 +56,6 @@ set companies = [
                     {% include 'partials/article' %}
                 {% endfor %}
             </div>
-
-            {# WORK #}
-            <div class="sidebar">
-                <div class="work-section">
-                    <h2>
-                        {% include 'svg/suitcase.twig' %}
-                        <span>Work</span>
-                    </h2>
-
-                    <div class="work-list">
-                        {% for company in companies %}
-                            <div class="work-list-item">
-                                <div class="company-img-wrapper">
-                                    {% if company.img != '' %}
-                                        <img alt="{{ company.name }}" loading="lazy" width="32" height="32" decoding="async" data-nimg="1" class="company-img" src="{{ company.img }}" />
-                                    {% else %}
-                                        <div class="company-img-placeholder" style="background: white; color: #1a1a1a; font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 14px;">Au</div>
-                                    {% endif %}
-                                </div>
-                                <div class="company-info">
-                                    <div>
-                                        <div class="company-name">{{ company.name }}</div>
-                                        <div class="company-role">{{ company.title }}</div>
-                                    </div>
-                                </div>
-                                <div class="company-dates">
-                                    <time>{{ company.start_year }}</time> <span aria-hidden="true">—</span> <time>{{ company.end_year }}</time>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div> <!-- .work-list -->
-                </div> <!-- .work-section -->
-            </div> <!-- .sidebar -->
         </div> <!-- #home-bottom -->
     </div> <!-- #home -->
 {% endblock content %}

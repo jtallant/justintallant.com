@@ -36,9 +36,9 @@ return [
                 'limit' => 3,
                 'seotitle' => 'Home',
                 'pinned' => [
+                    'laravel-anti-patterns',
                     'duplication-is-king-in-the-ai-era',
                     'near-zero-maintenance-web-apps',
-                    'open-closed-principle-in-laravel',
                 ]
             ],
             'articles' => [

@@ -9,32 +9,22 @@
                 </header>
 
                 {{ entry.content | raw }}
+
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/justintallant" target="_blank" aria-label="LinkedIn">
+                        {% include 'svg/linkedin.twig' %}
+                    </a>
+                    <a href="https://github.com/jtallant" target="_blank" aria-label="GitHub">
+                        {% include 'svg/github.twig' %}
+                    </a>
+                    <a href="https://x.com/tallantdev" target="_blank" aria-label="Twitter">
+                        {% include 'svg/twitter.twig' %}
+                    </a>
+                </div>
             </div>
             <div class="child-2">
                 <img class="light justin" src="/img/justin.jpg" alt="Justin Tallant" />
                 <img class="dark justin" src="/img/justin-bw.jpg" alt="Justin Tallant" />
-
-                <div class="social-icons">
-                    <div class="social-icon">
-                        <a href="https://www.linkedin.com/in/justintallant" target="_blank" aria-label="LinkedIn">
-                            {% include 'svg/linkedin.twig' %}
-                            <span style="margin-left: 8px;">Follow on LinkedIn</span>
-                        </a>
-                    </div>
-                    <div class="social-icon">
-                        <a href="https://github.com/jtallant" target="_blank" aria-label="GitHub">
-                            {% include 'svg/github.twig' %}
-                            <span style="margin-left: 8px;">Follow on GitHub</span>
-                        </a>
-                    </div>
-                    <div class="social-icon">
-                        <a href="https://x.com/tallantdev" target="_blank" aria-label="Twitter">
-                            {% include 'svg/twitter.twig' %}
-                            <span style="margin-left: 8px;">Follow on Twitter</span>
-                        </a>
-                    </div>
-                </div>
-
             </div>
         </div>
 
@@ -55,14 +45,14 @@
 
             <div class="project">
                 <h3><a href="https://jtallant.github.io/cookindex" target="_blank">AI Cook Index</a></h3>
-                <p>An economic monitoring tool that tracks whether AI-driven labor displacement is triggering a demand crisis. Calculates a composite score from seven indicators using free FRED and BLS APIs.</p>
+                <p>An economic monitoring tool that tracks whether AI-driven labor displacement is triggering a demand crisis. Calculates a composite score from seven indicators using free FRED and BLS APIs. I don't actually think this is happening. It's just fun to track.</p>
                 <a href="https://jtallant.github.io/cookindex" target="_blank" style="display: block; margin-top: 10px; margin-bottom: 40px; font-size: 14px;">jtallant.github.io/cookindex</a>
             </div>
 
 
             <div class="project">
                 <h3><a href="https://airbnb.com/h/dustypickle" target="_blank">The Huckleberry</a></h3>
-                <p>An off-grid cabin in Terlingua, Texas. Solar-powered, spring-fed, with a wood-fired hot tub and private pickleball court.</p>
+                <p>An off-grid cabin in Terlingua, Texas. Solar-powered, with a wood-fired hot tub and private pickleball court.</p>
                 <div class="project-photos">
                     <a href="https://airbnb.com/h/dustypickle" target="_blank"><img src="/img/cabin-exterior.jpg" alt="Cabin Exterior" loading="lazy" /></a>
                     <a href="https://airbnb.com/h/dustypickle" target="_blank"><img src="/img/cabin-interior.jpg" alt="Cabin Interior" loading="lazy" /></a>

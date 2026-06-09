@@ -26,37 +26,19 @@
 
     .social-icons {
         display: flex;
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
         margin-top: 40px;
     }
 
-    .social-icon {
-        display: flex;
-        align-items: center;
-    }
-
-    .social-icon a {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        margin-top: 20px;
-    }
-
-    .social-icon a:hover {
+    .social-icons a:hover {
         opacity: 0.8;
     }
 
-    .social-icon svg {
+    .social-icons svg {
         width: 24px;
         height: 24px;
-    }
-
-    .social-icon span {
-        margin-left: 30px;
-    }
-
-    .child-2 svg {
         fill: black;
     }
 
