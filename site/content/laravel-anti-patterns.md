@@ -450,4 +450,6 @@ All of these anti-patterns share the same root. Laravel optimizes for the first 
 
 The discipline required is just this. When the framework hands you something convenient, ask what it's hiding from you and what it'll cost you later. Usually the answer is "more than it's worth."
 
+If any of this hit close to home, or you think I'm completely wrong about it, I'd genuinely like to hear about it. I like looking at real Laravel codebases and talking through the tradeoffs people are actually living with. Head over to my [about page](/pages/about). My socials are there, so reach out and tell me what you're working on.
+
 More patterns to come.
