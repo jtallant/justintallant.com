@@ -18,14 +18,14 @@ return [
             'meta'       => env('DOCTRINE_METADATA', 'annotations'),
             'connection' => 'comments',
             'namespaces' => [
-                'JustinTallant\Comments\Entities'
+                'Skimpy\Comments\Entities'
             ],
             'paths'      => [
-                base_path('src/Comments/Entities')
+                base_path('vendor/skimpy/ai-comments/src/Entities')
             ],
             'proxies'       => [
                 'namespace'     => false,
-                'path'          => __DIR__ . '/../cache/doctrine-proxy',
+                'path'          => base_path('database/cache/doctrine-proxy'),
                 'auto_generate' => env('DOCTRINE_PROXY_AUTOGENERATE', true)
             ],
         ],

@@ -9,10 +9,10 @@ $app = $site->bootstrap();
 
 # Register your own service providers here
 $app->register(\JustinTallant\HelloWorldProvider::class);
-$app->register(\JustinTallant\Comments\CommentsServiceProvider::class);
-$app->register(\JustinTallant\Comments\TwigFunctionsProvider::class);
-$app->register(\JustinTallant\Comments\CommentsMailerProvider::class);
-$app->register(\JustinTallant\Comments\AI\CommentWriterProvider::class);
+$app->register(\Skimpy\Comments\Provider\CommentsServiceProvider::class);
+$app->register(\Skimpy\Comments\Provider\TwigFunctionsProvider::class);
+$app->register(\Skimpy\Comments\Provider\CommentsMailerProvider::class);
+$app->register(\Skimpy\Comments\Provider\CommentWriterProvider::class);
 
 # This has to come last because of the greedy routes
 $app->register(\Skimpy\Lumen\Providers\SkimpyRouteProvider::class);

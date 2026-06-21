@@ -4,7 +4,7 @@ return [
     'connections' => [
         'comments' => [
             'paths' => [
-                base_path('src/Comments/Entities')
+                base_path('vendor/skimpy/ai-comments/src/Entities')
             ],
             'dev' => env('APP_ENV') !== 'production',
             'driver' => 'sqlite',
